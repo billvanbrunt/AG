@@ -1,0 +1,58 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+/// <summary>
+/// Summary description for SunbeltPage
+/// </summary>
+public class MasterPageCode : System.Web.UI.MasterPage
+{
+    public MasterPageCode()
+	{}
+
+    protected override void OnInit(EventArgs e)
+    {
+        this.CurrentUser = new GCSUser();
+        base.OnInit(e);
+    }
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+    }
+
+    protected override void OnUnload(EventArgs e)
+    {
+        this.CurrentUser.SaveUserCookie();
+
+        base.OnUnload(e);
+    }
+
+    public static void AddMetaTag(string name, string content)
+    {
+        if (HttpContext.Current.Handler is Page)
+        {
+            Page thisPage = (Page)(HttpContext.Current.Handler);
+
+            HtmlMeta tag = new HtmlMeta();
+            tag.Name = name;
+            tag.Content = HttpContext.Current.Server.UrlEncode(content);
+
+            thisPage.Header.Controls.Add(tag);
+        }
+    }
+
+    private GCSUser _currentUser = null;
+    public GCSUser CurrentUser
+    {
+        get { return _currentUser; }
+        set { _currentUser = value; }
+    }
+ 
+}
