@@ -74,8 +74,8 @@
         </fieldset>
     </div>
 
-    <div id="divAddAchievmentTest" style="width:730px;border: 5px solid #000000;border-radius:5px;display:none; background-color:#C0C0C0;">
-        <table style="border: 3px solid white; background-color: #C0C0C0; vertical-align: middle; border-spacing: -1px;">
+    <div id="divAddAchievmentTest" style="width:720px;border: 5px solid #000000;border-radius:5px;display:none; background-color:#C0C0C0;">
+        <table style="background-color: #C0C0C0; vertical-align: middle; border-spacing: -1px;">
             <tr>
                 <td style="width:250px;text-align:left;">
                     <obout:OboutDropDownList ID="ddlTestName" runat="server" 
@@ -85,14 +85,14 @@
                                              AppendDataBoundItems="true" 
                                              Font-Size="X-Small"
                                              MenuWidth="350"
-                                             Width="250">
+                                             Width="300">
                         <asp:ListItem>Test Name....</asp:ListItem>
                     </obout:OboutDropDownList>
 
                 </td>
                 <td style="width:127px;">
                     &nbsp;&nbsp;
-                    <input type="text" readonly="readonly" ID="txtAchTestDate" name="txtAchTestDate"
+                    <input type="text" readonly="readonly" ID="txtAchTestDate" name="txtAchTestDate"  placeholder="Test Date" 
                            Style="font-size: x-small;border-radius:5px;Width:72px;height:12px; Border Width:1px solid #C0C0C0;"
                            />
                     <obout:Calendar ID="calAchTestDate" 
@@ -119,11 +119,11 @@
                         <asp:ListItem>Subject....</asp:ListItem>
                     </obout:OboutDropDownList>
                 </td>
-                <td style="width:73px;">
-                    <input type="text"  ID="txtAchScore" name="txtAchScore" Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" />
+                <td style="width:65px;">
+                    <input type="text"  ID="txtAchScore" name="txtAchScore" Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Score" />
                 </td>
-                <td style="width:73px;">
-                    <input type="text" ID="txtAchScaleScore" name="txtAchScaleScore"  Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" />
+                <td style="width:75px;display:none;">
+                    <input type="text" ID="txtAchScaleScore" name="txtAchScaleScore"  Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Sacle Score" />
                 </td>
                 <td>
                     <obout:OboutDropDownList ID="ddlUseForEligibility" runat="server" 
@@ -152,106 +152,51 @@
                     <input type="button" ID="btnCancelAchevment" Style="border-style: none; border-width: 0px; font-size: x-small; border-top-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-left-color: transparent; color: #FFFFFF; font-family: Verdana; background-color: transparent;outline:none;display:none;" value="cancel" onclick="btnCancelAchevment_Click()" />
                 </td>
             </tr>
+
         </table>
-        <asp:GridView ID="grdActiveData" runat="server"
-                      AutoGenerateColumns="false" 
-                      HeaderStyle-Font-Bold="false"
-                      HeaderStyle-Font-Size="X-Small"
-                      HeaderStyle-ForeColor="#295b8b"
-                      AllowPaging="true"
-                      PageSize="25"
-                      HeaderStyle-BackColor="#A6BCD7" 
-                      EditRowStyle-BackColor="#99BFFF" 
-                      RowStyle-BackColor="#D4D4D4"
-                      HeaderStyle-BorderStyle="solid"
-                      BackImageUrl="~/images/summary.gif" 
-                      BorderWidth="2px" 
-                      BorderColor="#ffffff" 
-                      HeaderStyle-HorizontalAlign="Left" 
-                      PagerSettings-FirstPageImageUrl="~/images/first_normal.gif" 
-                      PagerSettings-LastPageImageUrl="~/images/last_normal.gif" 
-                      PagerSettings-NextPageImageUrl="~/images/next_normal.gif" 
-                      PagerSettings-PreviousPageImageUrl="~/images/previous_normal.gif" 
-                      ShowHeaderWhenEmpty="True"
-                      ShowFooter="false" 
-                      ShowEmptyDetails="true"
-                      >
+        <obout:Grid ID="grdActiveData" runat="server"
+                        AutoGenerateColumns="false"
+                        AllowAddingRecords="true"
+                        ShowFooter="true"
+                        PageSize="20"
+                        AllowManualPaging="false"
+                        AllowRecordSelection="true"
+                        EnableRecordHover="true"
+                        Serialize="true"
+                        CallbackMode="true"
+                        AutoPostBackOnSelect="true"
+                        KeepSelectedRecords="true"
+                        AllowSorting="true"
+                        ShowHeader="true"
+                >
+                <Columns>
+                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="300" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="125" runat="server"  ></obout:Column>
+                    <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
+                    <obout:Column DataField="Score"     HeaderText="Test Score"   Width="75" runat="server" >
+                          <TemplateSettings HeaderTemplateId="tempTestScore" />
+                    </obout:Column>
+                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
+                        <TemplateSettings HeaderTemplateId="tempUseForEligibility" />
+                    </obout:Column>
+                </Columns>
+           
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempUseForEligibility">
+                    <Template>Use For<br />Eligibility</Template>
+                </obout:GridTemplate>
+            </Templates>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempTestScore">
+                    <Template>Test<br />Score</Template>
+                </obout:GridTemplate>
+            </Templates>
+         
+        </obout:Grid>
 
-            <pagertemplate>
-
-            </pagertemplate>
-
-            <Columns>
-                <asp:TemplateField HeaderText="Test Name" ItemStyle-Width="235" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate >
-                        <asp:Label ID="txtstorid" runat="server" CssClass="gridData"  Text='<%#Eval("TestName") %>' SortExpression='<%#Eval("TestName") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:Label ID="lblstorid" runat="server" width="42px" CssClass="gridData" Text='<%#Eval("TestName") %>' SortExpression='<%#Eval("TestName") %>'/>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Test Date" ItemStyle-Width="127" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" CssClass="gridData" Text='<%#Eval("TestDatet") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="72px"  runat="server" CssClass="gridData" Text='<%#Eval("TestDatet") %>'/>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Subject" ItemStyle-Width="100" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" CssClass="gridData" Text='<%#Eval("Subject") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="50px"  runat="server" CssClass="gridData" Text='<%#Eval("Subject") %>'/>
-                    </EditItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Score" ItemStyle-Width="73" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small"  CssClass="gridData" Text='<%#Eval("Score") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="50px"  runat="server" CssClass="gridData" Text='<%#Eval("Score") %>'/>
-                    </EditItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Scale Score" ItemStyle-Width="73" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" CssClass="gridData" Text='<%#Eval("ScaleScore") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="50px"  runat="server" CssClass="gridData" Text='<%#Eval("ScaleScore") %>'/>
-                    </EditItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Use For<br />Eligibility"  ItemStyle-Width="100" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" Text='<%#Eval("UseForEligibility") %>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="70px"  runat="server" Text='<%#Eval("UseForEligibility") %>' CssClass="gridData"/>
-                    </EditItemTemplate>
-                    <FooterTemplate>
-
-                    </FooterTemplate>
-                </asp:TemplateField>
-            <%--<asp:TemplateField HeaderText="***FieldNameGoesHere"  ItemStyle-Width="XXX" HeaderStyle-CssClass="gridRowTitle">
-            <ItemTemplate>
-            <asp:Label ID="lblname" runat="server" Font-Size="X-Small" Text='***FieldNameGoesHere'%> CssClass="gridData" />
-            </ItemTemplate>
-            <EditItemTemplate>
-            <asp:TextBox ID="txtname" width="70px"  runat="server" Text='<%#Eval("***FieldNameGoesHere") %>' CssClass="gridData"/>
-            </EditItemTemplate>
-            <FooterTemplate>
-            
-            </FooterTemplate>
-            </asp:TemplateField>--%>
-            </Columns>
-        </asp:GridView>
     </div>
 
-    <div id="divAdditionalAchievmentTest" style="width:730px;border: 5px solid #000000;border-radius:5px;display:none; background-color:#C0C0C0;">
+    <div id="divAdditionalAchievmentTest" style="width:720px;border: 5px solid #000000;border-radius:5px;display:none; background-color:#C0C0C0;">
         <table style="border: 3px solid white; background-color: #C0C0C0; vertical-align: middle; border-spacing: -1px;">
             <tr>
                 <td style="width:250px;text-align:left;">
@@ -269,7 +214,7 @@
                 </td>
                 <td style="width:127px;">
                     &nbsp;&nbsp;
-                    <input type="text" readonly="readonly" ID="txtAddAdditionalAchievementTestDate" name="txtAddAdditionalAchievementTestDate"
+                    <input type="text" readonly="readonly" ID="txtAddAdditionalAchievementTestDate" name="txtAddAdditionalAchievementTestDate" placeholder="Date"
                            Style="font-size: x-small;border-radius:5px;Width:72px;height:12px; Border Width:1px solid #C0C0C0;"
                            />
                     <obout:Calendar ID="calAddAdditionalAchievementTestDate" 
@@ -297,10 +242,10 @@
                     </obout:OboutDropDownList>
                 </td>
                 <td style="width:73px;">
-                    <input type="text"  ID="txtAddAdditionalAchievementTestScore" name="txtAddAdditionalAchievementTestScore" Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" />
+                    <input type="text"  ID="txtAddAdditionalAchievementTestScore" name="txtAddAdditionalAchievementTestScore" Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Score" />
                 </td>
                 <td style="width:73px;">
-                    <input type="text" ID="txtAddAdditionalAchievementTestScaleScore" name="txtAddAdditionalAchievementTestScaleScore"  Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" />
+                    <input type="text" ID="txtAddAdditionalAchievementTestScaleScore" name="txtAddAdditionalAchievementTestScaleScore"  Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Scale Score" />
                 </td>
                 <td>
                     <obout:OboutDropDownList ID="ddlAddAdditionalAchievementUseForEligibility" runat="server" 
@@ -330,91 +275,52 @@
                 </td>
             </tr>
         </table>
-        <asp:GridView ID="grdAddAdditionalAchievmentTest" runat="server"
-                      AutoGenerateColumns="false" 
-                      HeaderStyle-Font-Bold="false"
-                      HeaderStyle-Font-Size="X-Small"
-                      HeaderStyle-ForeColor="#295b8b"
-                      AllowPaging="true"
-                      PageSize="25"
-                      HeaderStyle-BackColor="#A6BCD7" 
-                      EditRowStyle-BackColor="#99BFFF" 
-                      RowStyle-BackColor="#D4D4D4"
-                      HeaderStyle-BorderStyle="solid"
-                      BackImageUrl="~/images/summary.gif" 
-                      BorderWidth="2px" 
-                      BorderColor="#ffffff" 
-                      HeaderStyle-HorizontalAlign="Left" 
-                      PagerSettings-FirstPageImageUrl="~/images/first_normal.gif" 
-                      PagerSettings-LastPageImageUrl="~/images/last_normal.gif" 
-                      PagerSettings-NextPageImageUrl="~/images/next_normal.gif" 
-                      PagerSettings-PreviousPageImageUrl="~/images/previous_normal.gif" 
-                      ShowHeaderWhenEmpty="True"
-                      ShowFooter="false" 
-                      ShowEmptyDetails="true"
-                      >
-
-            <pagertemplate>
-
-            </pagertemplate>
-
-            <Columns>
-                <asp:TemplateField HeaderText="Test Name" ItemStyle-Width="235" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate >
-                        <asp:Label ID="txtstorid" runat="server" CssClass="gridData"  Text='<%#Eval("TestName") %>' SortExpression='<%#Eval("TestName") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:Label ID="lblstorid" runat="server" width="42px" CssClass="gridData" Text='<%#Eval("TestName") %>' SortExpression='<%#Eval("TestName") %>'/>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Test Date" ItemStyle-Width="127" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" CssClass="gridData" Text='<%#Eval("TestDatet") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="72px"  runat="server" CssClass="gridData" Text='<%#Eval("TestDatet") %>'/>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Subject" ItemStyle-Width="100" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" CssClass="gridData" Text='<%#Eval("Subject") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="50px"  runat="server" CssClass="gridData" Text='<%#Eval("Subject") %>'/>
-                    </EditItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Score" ItemStyle-Width="73" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small"  CssClass="gridData" Text='<%#Eval("Score") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="50px"  runat="server" CssClass="gridData" Text='<%#Eval("Score") %>'/>
-                    </EditItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Scale Score" ItemStyle-Width="73" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" CssClass="gridData" Text='<%#Eval("ScaleScore") %>'/>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="50px"  runat="server" CssClass="gridData" Text='<%#Eval("ScaleScore") %>'/>
-                    </EditItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Use For<br />Eligibility"  ItemStyle-Width="100" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblname" runat="server" Font-Size="X-Small" Text='<%#Eval("UseForEligibility") %>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="70px"  runat="server" Text='<%#Eval("UseForEligibility") %>' CssClass="gridData"/>
-                    </EditItemTemplate>
-                    <FooterTemplate>
-
-                    </FooterTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
+        <obout:Grid ID="grdAddAdditionalAchievmentTest" runat="server"
+                      AutoGenerateColumns="false"
+                        AllowAddingRecords="true"
+                        ShowFooter="true"
+                        PageSize="20"
+                        AllowManualPaging="false"
+                        AllowRecordSelection="true"
+                        EnableRecordHover="true"
+                        Serialize="true"
+                        CallbackMode="true"
+                        AutoPostBackOnSelect="true"
+                        KeepSelectedRecords="true"
+                        AllowSorting="true"
+                        ShowHeader="true"
+                >
+              <Columns>
+                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="250" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="105" runat="server"  ></obout:Column>
+                    <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
+                    <obout:Column DataField="Score"     HeaderText=""   Width="70" runat="server" >
+                          <TemplateSettings HeaderTemplateId="tempACHTestScore" />
+                    </obout:Column>
+                   <obout:Column DataField="ScaleScore"     HeaderText=""   Width="75" runat="server" >
+                          <TemplateSettings HeaderTemplateId="tempScaleScore" />
+                    </obout:Column>
+                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
+                        <TemplateSettings HeaderTemplateId="tempACHUseForEligibility" />
+                    </obout:Column>
+                </Columns>
+           
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempACHTestScore">
+                    <Template>Score</Template>
+                </obout:GridTemplate>
+            </Templates>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempScaleScore">
+                    <Template>Scale<br />Score</Template>
+                </obout:GridTemplate>
+            </Templates>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempACHUseForEligibility">
+                    <Template>Use For<br />Eligibility</Template>
+                </obout:GridTemplate>
+            </Templates>
+        </obout:Grid>
     </div>
 
     <div id="divAddAptitudeTest" style="width:720px; border: 5px solid #000000; border-radius: 5px; display: none; background-color: #C0C0C0;">
@@ -433,7 +339,7 @@
                     </obout:OboutDropDownList>
                 </td>
                 <td style="width: 245px; text-align: left;">
-                    <input type="text" readonly="readonly" id="txtAppTestDate" name="txtAppTestDate" style="font-size: x-small; border-radius: 5px; width: 75px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" />
+                    <input type="text" readonly="readonly" id="txtAppTestDate" name="txtAppTestDate" style="font-size: x-small; border-radius: 5px; width: 75px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" placeholder="date" />
                     <obout:Calendar ID="calAppTestDate" runat="server"
                                     TextBoxId="txtAppTestDate"
                                     StyleFolder="~\Obout_styles\calendar\default"
@@ -450,7 +356,7 @@
                     </obout:Calendar>
                 </td>
                 <td style="width: 85px; text-align: left;">
-                    <obout:OboutTextBox ID="txtAppTestScore" font="x-small" runat="server" Width="45px" MaxLength="3"></obout:OboutTextBox>
+                    <obout:OboutTextBox ID="txtAppTestScore" font="x-small" runat="server" Width="75px" MaxLength="3" WatermarkText="Score"></obout:OboutTextBox>
                 </td>
             </tr>
         </table>
@@ -469,60 +375,31 @@
                 </td>
             </tr>
         </table>
-        <asp:GridView ID="grdAptitudeData" runat="server"
-                      AutoGenerateColumns="false"
-                      HeaderStyle-Font-Bold="false"
-                      HeaderStyle-Font-Size="X-Small"
-                      HeaderStyle-ForeColor="#295b8b"
-                      AllowPaging="true"
-                      PageSize="25"
-                      HeaderStyle-BackColor="#A6BCD7"
-                      EditRowStyle-BackColor="#99BFFF"
-                      RowStyle-BackColor="#D4D4D4"
-                      HeaderStyle-BorderStyle="solid"
-                      BackImageUrl="~/images/summary.gif"
-                      BorderWidth="2px"
-                      BorderColor="#ffffff"
-                      HeaderStyle-HorizontalAlign="Left"
-                      PagerSettings-FirstPageImageUrl="~/images/first_normal.gif"
-                      PagerSettings-LastPageImageUrl="~/images/last_normal.gif"
-                      PagerSettings-NextPageImageUrl="~/images/next_normal.gif"
-                      PagerSettings-PreviousPageImageUrl="~/images/previous_normal.gif"
-                      ShowHeaderWhenEmpty="True"
-                      ShowFooter="false"
-                      ShowEmptyDetails="true">
-            <Columns>
-                <asp:TemplateField HeaderText="Test Name" ItemStyle-Width="400" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblTestName" runat="server" Font-Size="X-Small" Text='<%#Eval("TestName")%>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname"  runat="server" Text='<%#Eval("TestName")%>' CssClass="gridData" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="TestDate" ItemStyle-Width="245" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblTestDate" runat="server" Font-Size="X-Small" Text='<%#Eval("TestDate")%>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtDate" Font-Size="X-Small" runat="server" Text='<%#Eval("TestDate")%>' CssClass="gridData" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Overall Percentile" ItemStyle-Width="85" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblScore" runat="server" Font-Size="X-Small" Text='<%#Eval("Score")%>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtScore"  runat="server" Text='<%#Eval("Score")%>' CssClass="gridData" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
-            </Columns>
-        </asp:GridView>
+        <obout:Grid ID="grdAptitudeData" runat="server"
+                        AutoGenerateColumns="false"
+                        AllowAddingRecords="true"
+                        ShowFooter="true"
+                        PageSize="20"
+                        AllowManualPaging="false"
+                        AllowRecordSelection="true"
+                        EnableRecordHover="true"
+                        Serialize="true"
+                        CallbackMode="true"
+                        AutoPostBackOnSelect="true"
+                        KeepSelectedRecords="true"
+                        AllowSorting="true"
+                        ShowHeader="true"
+                >
+                <Columns>
+                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="200" runat="server"  ></obout:Column>
+                    <obout:Column DataField="Score"  HeaderText="Score"  Width="180" runat="server" ></obout:Column>
+                </Columns>
+        </obout:Grid>
     </div>
 
     <div id="divAdditionalAptitudeTest" style="width:720px; border: 5px solid #000000; border-radius: 5px; display: none; background-color: #C0C0C0;">
-        <table style="border: 3px solid white; background-color: #C0C0C0; vertical-align: middle; ">
+        <table style="border: 2px solid white; background-color: #C0C0C0; vertical-align: middle; ">
             <tr>
                 <td style="width: 425px; text-align: left;">
                     <obout:OboutDropDownList ID="ddlAdditionalAptTestName" runat="server"
@@ -537,7 +414,7 @@
                     </obout:OboutDropDownList>
                 </td>
                 <td style="width: 245px; text-align: left;">
-                    <input type="text" readonly="readonly" id="txtAdditionalAptTestDate" name="txtAdditionalAptTestDate" style="font-size: x-small; border-radius: 5px; width: 75px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" />
+                    <input type="text" readonly="readonly" id="txtAdditionalAptTestDate" name="txtAdditionalAptTestDate" style="font-size: x-small; border-radius: 5px; width: 95px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" placeholder="Date" />
                     <obout:Calendar ID="calAdditionalApttTestDate" runat="server"
                                     TextBoxId="txtAdditionalAptTestDate"
                                     StyleFolder="~\Obout_styles\calendar\default"
@@ -553,8 +430,8 @@
                                     TitleText=" ">
                     </obout:Calendar>
                 </td>
-                <td style="width: 85px; text-align: left;">
-                    <obout:OboutTextBox ID="txtAdditionalAptTestScore" font="x-small" runat="server" Width="45px" MaxLength="3"></obout:OboutTextBox>
+                <td style="width: 100px; text-align: left;">
+                    <obout:OboutTextBox ID="txtAdditionalAptTestScore" font="x-small" runat="server" Width="85px" MaxLength="3" WatermarkText="Score"></obout:OboutTextBox>
                 </td>
             </tr>
         </table>
@@ -574,56 +451,28 @@
                 </td>
             </tr>
         </table>
-        <asp:GridView ID="grdAdditionalAptitudeData" runat="server"
-                      AutoGenerateColumns="false"
-                      HeaderStyle-Font-Bold="false"
-                      HeaderStyle-Font-Size="X-Small"
-                      HeaderStyle-ForeColor="#295b8b"
-                      AllowPaging="true"
-                      PageSize="25"
-                      HeaderStyle-BackColor="#A6BCD7"
-                      EditRowStyle-BackColor="#99BFFF"
-                      RowStyle-BackColor="#D4D4D4"
-                      HeaderStyle-BorderStyle="solid"
-                      BackImageUrl="~/images/summary.gif"
-                      BorderWidth="2px"
-                      BorderColor="#ffffff"
-                      HeaderStyle-HorizontalAlign="Left"
-                      PagerSettings-FirstPageImageUrl="~/images/first_normal.gif"
-                      PagerSettings-LastPageImageUrl="~/images/last_normal.gif"
-                      PagerSettings-NextPageImageUrl="~/images/next_normal.gif"
-                      PagerSettings-PreviousPageImageUrl="~/images/previous_normal.gif"
-                      ShowHeaderWhenEmpty="True"
-                      ShowFooter="false"
-                      ShowEmptyDetails="true">
+        <obout:Grid ID="grdAdditionalAptitudeData" runat="server"
+                     AutoGenerateColumns="false"
+                        AllowAddingRecords="true"
+                        ShowFooter="true"
+                        PageSize="20"
+                        AllowManualPaging="false"
+                        AllowRecordSelection="true"
+                        EnableRecordHover="true"
+                        Serialize="true"
+                        CallbackMode="true"
+                        AutoPostBackOnSelect="true"
+                        KeepSelectedRecords="true"
+                        AllowSorting="true"
+                        ShowHeader="true"
+            >
             <Columns>
-                <asp:TemplateField HeaderText="Test Name" ItemStyle-Width="400" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblAdditionalTestName" runat="server" Font-Size="X-Small" Text='<%#Eval("TestName")%>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtAdditionalname"  runat="server" Text='<%#Eval("TestName")%>' CssClass="gridData" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="TestDate" ItemStyle-Width="245" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblAdditionalTestDate" runat="server" Font-Size="X-Small" Text='<%#Eval("TestDate")%>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtAdditionalDate" Font-Size="X-Small" runat="server" Text='<%#Eval("TestDate")%>' CssClass="gridData" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Overall Percentile" ItemStyle-Width="85" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblAdditionalScore" runat="server" Font-Size="X-Small" Text='<%#Eval("Score")%>' CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtAdditionalScore"  runat="server" Text='<%#Eval("Score")%>' CssClass="gridData" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-
+                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="200" runat="server"  ></obout:Column>
+                    <obout:Column DataField="Score"  HeaderText="Score"   Width="180px" runat="server" ></obout:Column>
             </Columns>
-        </asp:GridView>
+
+        </obout:Grid>
     </div>
 
     <div id="divAddNewTeacherInfo" style="width:720px; border: 5px solid #000000; border-radius: 5px; display: none; background-color: #C0C0C0;">
@@ -632,8 +481,10 @@
                 <td style="width: 150px; text-align: left;">
                     <obout:OboutTextBox ID="txtTeacherScore" font="x-small" width="200px"  runat="server" ></obout:OboutTextBox>
                 </td>
-                <td style="width: 635px; text-align: left;">
-                    <input type="text" readonly="readonly" ID="txtTeacherDate" name="txtTeacherDate"
+                <td style="width: 635px; text-align: right;">
+                   
+                   
+                    <input type="text" readonly="readonly" ID="txtTeacherDate" name="txtTeacherDate" placeholder="Date"
                            Style="font-size: x-small;border-radius:5px;Width:72px;height:12px; Border Width:1px solid #C0C0C0;"
                            />
                     <obout:Calendar ID="CalTeacherInfo" runat="server"
@@ -650,6 +501,7 @@
                                     TextArrowRight="&amp;gt;"
                                     TitleText=" ">
                     </obout:Calendar>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
         </table>
@@ -668,57 +520,28 @@
                 </td>
             </tr>
         </table>
-        <asp:gridview ID="grdTeacherInput" runat="server"
-                      AutoGenerateColumns="false" 
-                      HeaderStyle-Font-Bold="false"
-                      HeaderStyle-Font-Size="X-Small"
-                      HeaderStyle-ForeColor="#295b8b"
-                      AllowPaging="true"
-                      PageSize="5"
-                      HeaderStyle-BackColor="#A6BCD7" 
-                      EditRowStyle-BackColor="#99BFFF" 
-                      RowStyle-BackColor="#D4D4D4"
-                      HeaderStyle-BorderStyle="solid"
-                      BackImageUrl="~/images/summary.gif" 
-                      BorderWidth="2px" 
-                      BorderColor="#ffffff" 
-                      HeaderStyle-HorizontalAlign="Left" 
-                      PagerSettings-FirstPageImageUrl="~/images/first_normal.gif" 
-                      PagerSettings-LastPageImageUrl="~/images/last_normal.gif" 
-                      PagerSettings-NextPageImageUrl="~/images/next_normal.gif" 
-                      PagerSettings-PreviousPageImageUrl="~/images/previous_normal.gif" 
-                      ShowHeaderWhenEmpty="True"
-                      ShowFooter="true"
-                      ShowEmptyDetails="true">
-            <pagertemplate>
-            </pagertemplate>
+        <obout:grid ID="grdTeacherInput" runat="server"
+                     AutoGenerateColumns="false"
+                        AllowAddingRecords="true"
+                        ShowFooter="true"
+                        PageSize="20"
+                        AllowManualPaging="false"
+                        AllowRecordSelection="true"
+                        EnableRecordHover="true"
+                        Serialize="true"
+                        CallbackMode="true"
+                        AutoPostBackOnSelect="true"
+                        KeepSelectedRecords="true"
+                        AllowSorting="true"
+                        ShowHeader="true"
+            >
+          
             <Columns>
-
-                <asp:TemplateField HeaderText="Teacher's Input"  ItemStyle-Width="100" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblScore" runat="server" Font-Size="X-Small" Text=<%#Eval("Score") %> CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtname" width="70px"  runat="server" Text='<%#Eval("Score") %>' CssClass="gridData"/>
-                    </EditItemTemplate>
-                    <FooterTemplate>
-
-                    </FooterTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Date"  ItemStyle-Width="635" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblDate" runat="server" Font-Size="X-Small" Text=<%#Eval("TestDate")%> CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtdate" width="70px"  runat="server" Text='<%#Eval("TestDate") %>' CssClass="gridData"/>
-                    </EditItemTemplate>
-                    <FooterTemplate>
-
-                    </FooterTemplate>
-                </asp:TemplateField>
-
+                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="575" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="155" runat="server"  ></obout:Column>
+          
             </Columns>
-        </asp:gridview>
+        </obout:grid>
     </div>
 
     <div id="divAddNewStudentInfo" style="width:720px; border: 5px solid #000000; border-radius: 5px; display: none; background-color: #C0C0C0;">
@@ -727,8 +550,9 @@
                 <td style="width: 150px; text-align: left;">
                     <obout:oboutTextBox ID="txtStudentInput" width="200px"  runat="server" CssClass="gridData" Text='<%#Eval("Score") %>'/>
                 </td>
-                <td style="width: 635px; text-align: left;">
-                    <input type="text" readonly="readonly" id="txtStudentDate" name="txtStudentDate" style="font-size: x-small; border-radius: 5px; width: 75px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" />
+                <td style="width: 635px; text-align: right;">
+                  
+                    <input type="text" readonly="readonly" id="txtStudentDate" name="txtStudentDate" style="font-size: x-small; border-radius: 5px; width: 75px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" placeholder="Date" />
                     <obout:Calendar ID="calStudentInput" runat="server"
                                     TextBoxId="txtStudentDate"
                                     StyleFolder="~\Obout_styles\calendar\default"
@@ -743,6 +567,8 @@
                                     TextArrowRight="&amp;gt;"
                                     TitleText=" ">
                     </obout:Calendar>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
                 </td>
             </tr>
         </table>
@@ -761,60 +587,28 @@
                 </td>
             </tr>
         </table>
-        <asp:Gridview ID="grdStudentInput" runat="server"
-                      AutoGenerateColumns="false" 
-                      HeaderStyle-Font-Bold="false"
-                      HeaderStyle-Font-Size="X-Small"
-                      HeaderStyle-ForeColor="#295b8b"
-                      AllowPaging="true"
-                      PageSize="10"
-                      HeaderStyle-BackColor="#A6BCD7" 
-                      EditRowStyle-BackColor="#99BFFF" 
-                      RowStyle-BackColor="#D4D4D4"
-                      HeaderStyle-BorderStyle="solid"
-                      BackImageUrl="~/images/summary.gif" 
-                      BorderWidth="2px" 
-                      BorderColor="#ffffff" 
-                      HeaderStyle-HorizontalAlign="left" 
-                      PagerSettings-FirstPageImageUrl="~/images/first_normal.gif" 
-                      PagerSettings-LastPageImageUrl="~/images/last_normal.gif" 
-                      PagerSettings-NextPageImageUrl="~/images/next_normal.gif" 
-                      PagerSettings-PreviousPageImageUrl="~/images/previous_normal.gif" 
-                      ShowHeaderWhenEmpty="true"
-                      ShowFooter="true"
-                      ShowEmptyDetails="true"
-                      >
-
+       <Obout:Grid ID="grdStudentInput" runat="server"
+                     AutoGenerateColumns="false"
+                        AllowAddingRecords="true"
+                        ShowFooter="true"
+                        PageSize="20"
+                        AllowManualPaging="false"
+                        AllowRecordSelection="true"
+                        EnableRecordHover="true"
+                        Serialize="true"
+                        CallbackMode="true"
+                        AutoPostBackOnSelect="true"
+                        KeepSelectedRecords="true"
+                        AllowSorting="true"
+                        ShowHeader="true"
+            >
+          
             <Columns>
-
-                <asp:TemplateField HeaderText="Student Input"  ItemStyle-Width="100" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblStudentScore" runat="server" Font-Size="X-Small" Text=<%#Eval("Rating") %> CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtStudentScore" width="70px"  runat="server" Text='<%#Eval("Rating") %>' CssClass="gridData"/>
-                    </EditItemTemplate>
-
-                    <FooterTemplate>
-
-                    </FooterTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Date"  ItemStyle-Width="635" HeaderStyle-CssClass="gridRowTitle">
-                    <ItemTemplate>
-                        <asp:Label ID="lblDate" runat="server" Font-Size="X-Small" Text=<%#Eval("RatingDate")%> CssClass="gridData" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtdate" width="70px"  runat="server" Text='<%#Eval("RatingDate") %>' CssClass="gridData"/>
-                    </EditItemTemplate>
-                    <FooterTemplate>
-
-                    </FooterTemplate>
-                </asp:TemplateField>
+                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="575" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="155" runat="server"  ></obout:Column>
             </Columns>
-            <asp:EmptyDataTemplate>
-                <asp:Label ID = "lblEmptyMessage" Text="No Data Found" runat="server" />
-            </asp:EmptyDataTemplate>
-        </asp:Gridview>
+           
+        </obout:Grid>
     </div>
 
     <asp:SqlDataSource runat="server" ID="sdsAchTestTests" SelectCommand="usp_GetAchevementTests"
@@ -823,14 +617,14 @@
     <asp:SqlDataSource runat="server" ID="sdsAppTests" SelectCommand="usp_GetAptitudeTests"
                        ConnectionString="<%$ ConnectionStrings:con%>" SelectCommandType="StoredProcedure"
                        ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
-   <asp:SqlDataSource runat="server" ID="sdsAdditionalAchTestTests" SelectCommand="usp_GetAdditionalAchevementTests"
+    <asp:SqlDataSource runat="server" ID="sdsAdditionalAchTestTests" SelectCommand="usp_GetAdditionalAchevementTests"
                        ConnectionString="<%$ ConnectionStrings:con%>" SelectCommandType="StoredProcedure"
                        ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
     <asp:SqlDataSource runat="server" ID="sdsAdditionalAppTests" SelectCommand="usp_GetAdditionalAptitudeTests"
                        ConnectionString="<%$ ConnectionStrings:con%>" SelectCommandType="StoredProcedure"
                        ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
-    
-     <asp:SqlDataSource runat="server" ID="sdsSubject" SelectCommand="usp_GetSubject"
+
+    <asp:SqlDataSource runat="server" ID="sdsSubject" SelectCommand="usp_GetSubject"
                        ConnectionString="<%$ ConnectionStrings:con%>" SelectCommandType="StoredProcedure"
                        ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
 
@@ -853,382 +647,378 @@
             <input type="Button" id="btnDiaMessageNo"   style="font-size:x-small;width:100px;border-radius:5px;" />
         </center>
     </owd:Dialog>
-  
-<script  type="text/javascript">
-          $(document).ready(function () {
-              ADDachTest.Attributes.Add("style", "display:none");
-              btnADDAptitude.Attributes.Add("style", "display:none");
-          });
-          function ADDAptitude_Click() {
-              document.getElementById('divAddAptitudeTest').style.display = 'block';
-              document.getElementById('btnSaveAptitude').style.display = 'inline';
-              document.getElementById('btnCancelAptitude').style.display = 'inline';
-              document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'none';
-}
-function btnCancelAptitude_Click() {
-    document.getElementById('divAddAptitudeTest').style.display = 'none';
-    document.getElementById('btnSaveAptitude').style.display = 'none';
-    document.getElementById('btnCancelAptitude').style.display = 'none';
-    document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'inline';
-}
-function btnSaveAptitude_Click() {
-    var lTestName = ddlAppTestName.value();
-    var lTestDate = txtAppTestDate.value;
-    var lScore = txtAppTestScore.value();
-    var lError = false;
-    var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
 
-    if (lTestName == "Test Name....") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-    }
-    if (lTestDate == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-    }
-    if (lScore == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-    }
-    if (lError == true) {
-        lMessage += '</font><br />Please correct the above issues and try again.';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        diaMessage.Open();
-    } else {
-        document.getElementById("<%=btnServerSaveAptitude.ClientID%>").click();
-    }
-}
+    <script  type="text/javascript">
+        $(document).ready(function () {
+            ADDachTest.Attributes.Add("style", "display:none");
+            btnADDAptitude.Attributes.Add("style", "display:none");
+        });
+        function ADDAptitude_Click() {
+            document.getElementById('divAddAptitudeTest').style.display = 'block';
+            document.getElementById('btnSaveAptitude').style.display = 'inline';
+            document.getElementById('btnCancelAptitude').style.display = 'inline';
+            document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'none';
+        }
+        function btnCancelAptitude_Click() {
+            document.getElementById('divAddAptitudeTest').style.display = 'none';
+            document.getElementById('btnSaveAptitude').style.display = 'none';
+            document.getElementById('btnCancelAptitude').style.display = 'none';
+            document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'inline';
+        }
+        function btnSaveAptitude_Click() {
+            var lTestName = ddlAppTestName.value();
+            var lTestDate = txtAppTestDate.value;
+            var lScore = txtAppTestScore.value();
+            var lError = false;
+            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
 
-function btnADDAdditionalAptitude_Click() {
-    document.getElementById('divAdditionalAptitudeTest').style.display = 'block';
-    document.getElementById('btnSaveAdditionalAptitude').style.display = 'inline';
-    document.getElementById('btnCancelAdditionalAptitude').style.display = 'inline';
-    document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'none';
-}
-function btnCancelAdditionalAptitude_Click() {
-    document.getElementById('divAdditionalAptitudeTest').style.display = 'none';
-    document.getElementById('btnSaveAdditionalAptitude').style.display = 'none';
-    document.getElementById('btnCancelAdditionalAptitude').style.display = 'none';
-    document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'inline';
-}
-function btnSaveAdditionalAptitude_Click() {
-    var lTestName = ddlAdditionalAptTestName.value();
-    var lTestDate = txtAdditionalAptTestDate.value;
-    var lScore = txtAdditionalAptTestScore.value();
+            if (lTestName == "Test Name....") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
+            }
+            if (lTestDate == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+            }
+            if (lScore == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+            }
+            if (lError == true) {
+                lMessage += '</font><br />Please correct the above issues and try again.';
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+                document.getElementById("btnDiaMessageYes").value = "OK";
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+                $("#btnDiaMessageNo").hide();
+                diaMessage.Open();
+            } else {
+                document.getElementById("<%=btnServerSaveAptitude.ClientID%>").click();
+            }
+        }
 
-    var lError = false;
-    var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+        function btnADDAdditionalAptitude_Click() {
+            document.getElementById('divAdditionalAptitudeTest').style.display = 'block';
+            document.getElementById('btnSaveAdditionalAptitude').style.display = 'inline';
+            document.getElementById('btnCancelAdditionalAptitude').style.display = 'inline';
+            document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'none';
+        }
+        function btnCancelAdditionalAptitude_Click() {
+            document.getElementById('divAdditionalAptitudeTest').style.display = 'none';
+            document.getElementById('btnSaveAdditionalAptitude').style.display = 'none';
+            document.getElementById('btnCancelAdditionalAptitude').style.display = 'none';
+            document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'inline';
+        }
+        function btnSaveAdditionalAptitude_Click() {
+            var lTestName = ddlAdditionalAptTestName.value();
+            var lTestDate = txtAdditionalAptTestDate.value;
+            var lScore = txtAdditionalAptTestScore.value();
 
-    if (lTestName == "Test Name....") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-    }
+            var lError = false;
+            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
 
-    if (lTestDate == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-    }
-    if (lScore == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-    }
+            if (lTestName == "Test Name....") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
+            }
 
-    if (lError == true) {
-        lMessage += '</font><br />Please correct the above issues and try again.';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        diaMessage.Open();
-    } else {
-        document.getElementById("<%=btnServerSaveAdditionalAptitude.ClientID%>").click();
-    }
-}
+            if (lTestDate == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+            }
+            if (lScore == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+            }
 
-function btnAddAcheivmentTest_Click() {
-    document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'none';
-    document.getElementById('divAddAchievmentTest').style.display = 'block';
-    document.getElementById('btnSaveAchevmentTest').style.display = 'inline';
-    document.getElementById('btnCancelAchevment').style.display = 'inline';
-}
-function btnCancelAchevment_Click() {
-    document.getElementById('divAddAchievmentTest').style.display = 'none';
-    document.getElementById('btnSaveAchevmentTest').style.display = 'none';
-    document.getElementById('btnCancelAchevment').style.display = 'none';
-    document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'inline';
-}
-function btnSaveAchevmentTest_Click() {
-    var lTestName = ddlTestName.value();
-    var lTestDate = txtAchTestDate.value;
-    var lSubject = ddlSubject.value();
-    var lScore = txtAchScore.value;
-    var lScaleScore = txtAchScaleScore.value;
-    var lUseForEligibility = ddlUseForEligibility.value();
-    var lError = false;
-    var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+            if (lError == true) {
+                lMessage += '</font><br />Please correct the above issues and try again.';
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+                document.getElementById("btnDiaMessageYes").value = "OK";
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+                $("#btnDiaMessageNo").hide();
+                diaMessage.Open();
+            } else {
+                document.getElementById("<%=btnServerSaveAdditionalAptitude.ClientID%>").click();
+            }
+        }
 
-    if (lTestName == "Test Name....") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-    }
+        function btnAddAcheivmentTest_Click() {
+            document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'none';
+            document.getElementById('divAddAchievmentTest').style.display = 'block';
+            document.getElementById('btnSaveAchevmentTest').style.display = 'inline';
+            document.getElementById('btnCancelAchevment').style.display = 'inline';
+        }
+        function btnCancelAchevment_Click() {
+            document.getElementById('divAddAchievmentTest').style.display = 'none';
+            document.getElementById('btnSaveAchevmentTest').style.display = 'none';
+            document.getElementById('btnCancelAchevment').style.display = 'none';
+            document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'inline';
+        }
+        function btnSaveAchevmentTest_Click() {
+            var lTestName = ddlTestName.value();
+            var lTestDate = txtAchTestDate.value;
+            var lSubject = ddlSubject.value();
+            var lScore = txtAchScore.value;
+            var lScaleScore = txtAchScaleScore.value;
+            var lUseForEligibility = ddlUseForEligibility.value();
+            var lError = false;
+            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
 
-    if (lTestDate == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-    }
+            if (lTestName == "Test Name....") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
+            }
 
-    if (lSubject == "Subject....") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for tis test must be selected from the list.<br />";
-    }
-    if (lScore == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-    }
-    if (lUseForEligibility == "-1") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
-    }
-    if (lError == true) {
-        lMessage += '</font><br />Please correct the above issues and try again.';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        diaMessage.Open();
-    } else {
-        document.getElementById("<%=btnServerSaveAchevment.ClientID%>").click();
-    }
-}
+            if (lTestDate == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+            }
 
-function btnCancelAdditionalAchievmentTest_Click() {
-    document.getElementById('divAdditionalAchievmentTest').style.display = 'none';
-    document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'none';
-    document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'none';
-    document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'inline';
-}
-function btnAddAdditionalAchievmentTest_Click() {
-    document.getElementById('divAdditionalAchievmentTest').style.display = 'block';
-    document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'inline';
-    document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'inline';
-    document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'none';
-}
-function btnSaveAdditionalAchievmentTest_Click() {
-    //ToDo: Stopped Here
+            if (lSubject == "Subject....") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for this test must be selected from the list.<br />";
+            }
+            if (lScore == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+            }
+            if (lUseForEligibility == "-1") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
+            }
+            if (lError == true) {
+                lMessage += '</font><br />Please correct the above issues and try again.';
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("btnDiaMessageYes").value = "OK";
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+                $("#btnDiaMessageNo").hide();
+                diaMessage.Open();
+            } else {
+                document.getElementById("<%=btnServerSaveAchevment.ClientID%>").click();
+            }
+        }
 
-    var lTestName = ddlAdditionalAchievmentTestName.value();
-    var lTestDate = txtAddAdditionalAchievementTestDate.value;
-    var lSubject = ddlAddAdditionalAchievementTestSubject.value();
-    var lScore = txtAddAdditionalAchievementTestScore.value;
-    var lScaleScore = txtAddAdditionalAchievementTestScaleScore.value;
-    var lUseForEligibility = ddlAddAdditionalAchievementUseForEligibility.value();
-    var lError = false;
-    var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+        function btnCancelAdditionalAchievmentTest_Click() {
+            document.getElementById('divAdditionalAchievmentTest').style.display = 'none';
+            document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'none';
+            document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'none';
+            document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'inline';
+        }
+        function btnAddAdditionalAchievmentTest_Click() {
+            document.getElementById('divAdditionalAchievmentTest').style.display = 'block';
+            document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'inline';
+            document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'inline';
+            document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'none';
+        }
+        function btnSaveAdditionalAchievmentTest_Click() {
+            //ToDo: Stopped Here
+            var lTestName = ddlAdditionalAchievmentTestName.value();
+            var lTestDate = txtAddAdditionalAchievementTestDate.value;
+            var lSubject = ddlAddAdditionalAchievementTestSubject.value();
+            var lScore = txtAddAdditionalAchievementTestScore.value;
+            var lScaleScore = txtAddAdditionalAchievementTestScaleScore.value;
+            var lUseForEligibility = ddlAddAdditionalAchievementUseForEligibility.value();
+            var lError = false;
+            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+        
+            if (lTestName == "Test Name....") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
+            }
+            if (lTestDate == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+            }
+            if (lSubject == "Subject....") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for tis test must be selected from the list.<br />";
+            }
+            if (lScore == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+            }
+            if (lUseForEligibility == "-1") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
+            }
+        
+            if (lError == true) {
+                lMessage += '</font><br />Please correct the above issues and try again.';
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("btnDiaMessageYes").value = "OK";
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+                $("#btnDiaMessageNo").hide();
+                diaMessage.Open();
+            } else {
+                document.getElementById("<%=btnServerSaveAdditionalAchievmentTest.ClientID%>").click();
+            }
+        }
+        
+        function btnCancelTeacherInfo_Click() {
+            document.getElementById('divAddNewTeacherInfo').style.display = 'none';
+            document.getElementById('btnSaveTeacherInfo').style.display = 'none';
+            document.getElementById('btnCancelTeacherInfo').style.display = 'none';
+            document.getElementById('btnAddTeacherInfo.ClientID%>').style.display = 'inline';
+        }
+        function ADDTeacherInfo_Click() {
+            document.getElementById('divAddNewTeacherInfo').style.display = 'block';
+            document.getElementById('btnSaveTeacherInfo').style.display = 'inline';
+            document.getElementById('btnCancelTeacherInfo').style.display = 'inline';
+            document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'none';
+        }
+        function btnSaveTeacherInfo_Click() {
+            var lCheckListScore = txtTeacherScore.value();
+            var lModDate = txtTeacherDate.value;
+        
+            var lError = false;
+            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+        
+            if (lCheckListScore == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
+            }
+        
+            if (lModDate == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
+            }
+        
+            if (lError == true) {
+                lMessage += '</font><br />Please correct the above issues and try again.';
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+                diaMessage.setSize(500, 240);
+                diaMessage.setTitle('Data Problem');
+                document.getElementById("btnDiaMessageYes").value = "OK";
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+                $("#btnDiaMessageNo").hide();
+                diaMessage.Open();
+            } else {
+                lMessage = "You are about to change Teacher's Input.<br /><br /> Click Yes to continue.";
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+                diaMessage.setSize(300, 150);
+                diaMessage.setTitle('Save Teacher Data');
+                document.getElementById("btnDiaMessageYes").value = "OK";
+                document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveTeacherInfo.ClientID%>').click();");
+                document.getElementById("btnDiaMessageNo").value = "cancel";
+                $("#btnDiaMessageNo").show();
+                diaMessage.Open();
+            }
+        }
+        
+        function btnCancelStudentInfo_Click() {
+            document.getElementById('divAddNewStudentInfo').style.display = 'none';
+            document.getElementById('btnSaveStudentInfo').style.display = 'none';
+            document.getElementById('btnCancelStudentInfo').style.display = 'none';
+            document.getElementById('btnAddStudentInfo').style.display = 'inline';
+        }
+        function AddStudentInfo_Click() {
+            document.getElementById('divAddNewStudentInfo').style.display = 'block';
+            document.getElementById('btnSaveStudentInfo').style.display = 'inline';
+            document.getElementById('btnCancelStudentInfo').style.display = 'inline';
+            document.getElementById('btnAddStudentInfo').style.display = 'none';
+        }
+        function btnSaveStudentInfo_Click() {
+            var lCheckListScore = txtStudentInput.value();
+            var lModDate = txtStudentDate.value;
+            var lError = false;
+            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+        
+            if (lCheckListScore == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
+            }
+        
+            if (lModDate == "") {
+                lError = true;
+                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
+            }
+        
+            if (lError == true) {
+                lMessage += '</font><br />Please correct the above issues and try again.';
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+                diaMessage.setSize(500, 240);
+                diaMessage.setTitle('Data Problem');
+                document.getElementById("btnDiaMessageYes").value = "Ok";
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+                $("#btnDiaMessageNo").hide();
+                diaMessage.Open();
+            } else {
+                lMessage = "You are about to save Student Input.<br /><br /> Click Ok to continue.";
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+                diaMessage.setSize(300, 150);
+                diaMessage.setTitle('Save Data');
+                document.getElementById("btnDiaMessageYes").value = "Ok";
+                document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveStudentInfo.ClientID%>').click();");
+                document.getElementById("btnDiaMessageNo").value = "cancel";
+                $("#btnDiaMessageNo").show();
+                diaMessage.Open();
+            }
+        }
+        
+        function OpenSaveSuccessful() {
+            txtAchTestDate.value = '';
+            lMessage += 'The test results were saves successfully';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Data Saved');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        }
+        function OpenSaveTeacherSuccessful() {
+            txtTeacherDate.value = '';
+            lMessage = 'The Teacher Input results were saves successfully';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Data Saved');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        }
+        function OpenStudentSaveSuccessful() {
+            lMessage = 'The test results were saves successfully';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Data Saved');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        }
+        function OpenSaveSuccessful() {
+            txtAchTestDate.value = '';
+            lMessage += 'The test results were saves successfully';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        }
+    </script>
 
-
-    if (lTestName == "Test Name....") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-    }
-    if (lTestDate == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-    }
-    if (lSubject == "Subject....") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for tis test must be selected from the list.<br />";
-    }
-    if (lScore == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-    }
-    if (lUseForEligibility == "-1") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
-    }
-
-    if (lError == true) {
-        lMessage += '</font><br />Please correct the above issues and try again.';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        diaMessage.Open();
-    } else {
-       document.getElementById("<%=btnServerSaveAdditionalAchievmentTest.ClientID%>").click();
-      }
-}
-
-function btnCancelTeacherInfo_Click() {
-    document.getElementById('divAddNewTeacherInfo').style.display = 'none';
-    document.getElementById('btnSaveTeacherInfo').style.display = 'none';
-    document.getElementById('btnCancelTeacherInfo').style.display = 'none';
-    document.getElementById('btnAddTeacherInfo.ClientID%>').style.display = 'inline';
-}
-function ADDTeacherInfo_Click() {
-    document.getElementById('divAddNewTeacherInfo').style.display = 'block';
-    document.getElementById('btnSaveTeacherInfo').style.display = 'inline';
-    document.getElementById('btnCancelTeacherInfo').style.display = 'inline';
-    document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'none';
-}
-function btnSaveTeacherInfo_Click() {
-    var lCheckListScore = txtTeacherScore.value();
-    var lModDate = txtTeacherDate.value;
-
-    var lError = false;
-    var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
-
-    if (lCheckListScore == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
-    }
-
-    if (lModDate == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
-    }
-
-    if (lError == true) {
-        lMessage += '</font><br />Please correct the above issues and try again.';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-        diaMessage.setSize(500, 240);
-        diaMessage.setTitle('Data Problem');
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        diaMessage.Open();
-    } else {
-        lMessage = "You are about to change Teacher's Input.<br /><br /> Click Yes to continue.";
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-        diaMessage.setSize(300, 150);
-        diaMessage.setTitle('Save Teacher Data');
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveTeacherInfo.ClientID%>').click();");
-        document.getElementById("btnDiaMessageNo").value = "cancel";
-        $("#btnDiaMessageNo").show();
-        diaMessage.Open();
-    }
-}
-
-function btnCancelStudentInfo_Click() {
-    document.getElementById('divAddNewStudentInfo').style.display = 'none';
-    document.getElementById('btnSaveStudentInfo').style.display = 'none';
-    document.getElementById('btnCancelStudentInfo').style.display = 'none';
-    document.getElementById('btnAddStudentInfo').style.display = 'inline';
-}
-function AddStudentInfo_Click() {
-    document.getElementById('divAddNewStudentInfo').style.display = 'block';
-    document.getElementById('btnSaveStudentInfo').style.display = 'inline';
-    document.getElementById('btnCancelStudentInfo').style.display = 'inline';
-    document.getElementById('btnAddStudentInfo').style.display = 'none';
-}
-function btnSaveStudentInfo_Click() {
-    var lCheckListScore = txtStudentInput.value();
-    var lModDate = txtStudentDate.value;
-    var lError = false;
-    var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
-
-    if (lCheckListScore == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
-    }
-
-    if (lModDate == "") {
-        lError = true;
-        lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
-    }
-
-    if (lError == true) {
-        lMessage += '</font><br />Please correct the above issues and try again.';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-        diaMessage.setSize(500, 240);
-        diaMessage.setTitle('Data Problem');
-        document.getElementById("btnDiaMessageYes").value = "Ok";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        diaMessage.Open();
-    } else {
-        lMessage = "You are about to save Student Input.<br /><br /> Click Ok to continue.";
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-        diaMessage.setSize(300, 150);
-        diaMessage.setTitle('Save Data');
-        document.getElementById("btnDiaMessageYes").value = "Ok";
-        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveStudentInfo.ClientID%>').click();");
-        document.getElementById("btnDiaMessageNo").value = "cancel";
-        $("#btnDiaMessageNo").show();
-        diaMessage.Open();
-    }
-}
-
-
-function OpenSaveSuccessful() {
-    txtAchTestDate.value = '';
-    lMessage += 'The test results were saves successfully';
-    $("#divErrorMsg").empty();
-    $('#divErrorMsg').append(lMessage);
-    document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-    diaMessage.setSize(300, 150);
-    diaMessage.setTitle('Data Saved');
-    document.getElementById("btnDiaMessageYes").value = "OK";
-    document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-    $("#btnDiaMessageNo").hide();
-    diaMessage.Open();
-}
-function OpenSaveTeacherSuccessful() {
-    txtTeacherDate.value = '';
-    lMessage = 'The Teacher Input results were saves successfully';
-    $("#divErrorMsg").empty();
-    $('#divErrorMsg').append(lMessage);
-    document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-    diaMessage.setSize(300, 150);
-    diaMessage.setTitle('Data Saved');
-    document.getElementById("btnDiaMessageYes").value = "OK";
-    document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-    $("#btnDiaMessageNo").hide();
-    diaMessage.Open();
-}
-function OpenStudentSaveSuccessful() {
-    lMessage = 'The test results were saves successfully';
-    $("#divErrorMsg").empty();
-    $('#divErrorMsg').append(lMessage);
-    document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-    diaMessage.setSize(300, 150);
-    diaMessage.setTitle('Data Saved');
-    document.getElementById("btnDiaMessageYes").value = "OK";
-    document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-    $("#btnDiaMessageNo").hide();
-    diaMessage.Open();
-}
-function OpenSaveSuccessful() {
-    txtAchTestDate.value = '';
-    lMessage += 'The test results were saves successfully';
-    $("#divErrorMsg").empty();
-    $('#divErrorMsg').append(lMessage);
-    document.getElementById("btnDiaMessageYes").value = "OK";
-    document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-    $("#btnDiaMessageNo").hide();
-    diaMessage.Open();
-}
-
-</script>  
-  
         
