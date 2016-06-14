@@ -85,7 +85,7 @@ public partial class masterPages_controls_Nav : System.Web.UI.UserControl
        
     }
 
-   protected string GetSiteIdAssignments(string gWhoAreYou)
+    protected string GetSiteIdAssignments(string gWhoAreYou)
     {
         string lYourSites = "";
         SqlStr = "usp_getYourSites";
@@ -116,17 +116,14 @@ public partial class masterPages_controls_Nav : System.Web.UI.UserControl
     protected void btnAddNewStudent_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/defaultAddStudent.aspx");
-
     }
     protected void btnReports_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/DefaultReports.aspx");
-
     }
     protected void btnAdmin_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/defaultAdmin.aspx");
-
     }
     protected void btnLogout_Click(object sender, EventArgs e)
     {
@@ -137,5 +134,8 @@ public partial class masterPages_controls_Nav : System.Web.UI.UserControl
     {
         Response.Redirect("~/default.aspx");
     }
-
+    protected void btnAppData_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DefaultAppData.aspx");
     }
+}

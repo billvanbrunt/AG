@@ -71,7 +71,6 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         cboEthnicity.DataBind(); 
 
     }
-
     protected void PrintReports()
     {
         //string lWhatReport =  hfSelectedReport.Text;
@@ -146,15 +145,12 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         
         }
     }   
-
     protected void btnHome_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/default.aspx");
     }
-
     protected void btnView_Click(object sender, EventArgs e)
     {
         PrintReports();
-        
     }
 }

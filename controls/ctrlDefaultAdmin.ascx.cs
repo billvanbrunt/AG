@@ -30,9 +30,8 @@ public partial class controls_ctrlDefaultAdmin : System.Web.UI.UserControl
         SqlStr = "usp_GetUsersAssignments";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-
         DataSet ds = new DataSet();
-
+       
         SqlDataAdapter da = new SqlDataAdapter();
         da.SelectCommand = cmd;
         da.Fill(ds, "myData");
@@ -43,7 +42,6 @@ public partial class controls_ctrlDefaultAdmin : System.Web.UI.UserControl
         grdAddSchool.DataBind();
     }
     protected void btnServerGetUserSearch_Click(object sender, EventArgs e)
-
     {
         LoadGridData();
     }

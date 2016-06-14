@@ -623,7 +623,6 @@
     <asp:SqlDataSource runat="server" ID="sdsAdditionalAppTests" SelectCommand="usp_GetAdditionalAptitudeTests"
                        ConnectionString="<%$ ConnectionStrings:con%>" SelectCommandType="StoredProcedure"
                        ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
-
     <asp:SqlDataSource runat="server" ID="sdsSubject" SelectCommand="usp_GetSubject"
                        ConnectionString="<%$ ConnectionStrings:con%>" SelectCommandType="StoredProcedure"
                        ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
@@ -922,11 +921,12 @@
             document.getElementById('btnCancelStudentInfo').style.display = 'none';
             document.getElementById('btnAddStudentInfo').style.display = 'inline';
         }
+        // AddStudentInfo_Click()
         function AddStudentInfo_Click() {
             document.getElementById('divAddNewStudentInfo').style.display = 'block';
             document.getElementById('btnSaveStudentInfo').style.display = 'inline';
             document.getElementById('btnCancelStudentInfo').style.display = 'inline';
-            document.getElementById('btnAddStudentInfo').style.display = 'none';
+            document.getElementById('<%=btnAddStudentInfo.ClientID%>').style.display = 'none';
         }
         function btnSaveStudentInfo_Click() {
             var lCheckListScore = txtStudentInput.value();
