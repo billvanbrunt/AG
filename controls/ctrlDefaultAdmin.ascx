@@ -374,8 +374,8 @@
             gSiteName = record.SiteName;
 
 
-            if (gGroupId == 'ADMIN') {
- 
+            if (gGroupId == 'ADMIN')
+            {
                 Delete_Clicked();
                 return;
             }
