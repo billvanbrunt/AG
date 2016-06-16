@@ -110,4 +110,12 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
 
         base.CreateChildControls();
     }
+
+    protected void btnServerSaveEditTest_Click(object sender, EventArgs e)
+    {
+
+
+
+        //diaEditTest.Close();
+    }
 }

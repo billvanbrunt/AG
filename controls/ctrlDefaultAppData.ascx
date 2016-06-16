@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ctrlDefaultAppData.ascx.cs" Inherits="ctrlDefaultAppData" %>
+<%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="obout" %>
 <%@ Register Assembly="obout_Window_NET" Namespace="OboutInc.Window" TagPrefix="owd" %>
 <%@ Register Assembly="obout_Grid_NET" Namespace="Obout.Grid" TagPrefix="obout" %>
 <%@ Register Assembly="obout_Splitter2_Net" Namespace="OboutInc.Splitter2" TagPrefix="obout" %>
@@ -9,6 +10,10 @@
     {
         font: 11px Verdana;
         color: #333333;
+    }
+    .HiddenField
+    {
+        display:none;
     }
 </style>
 
@@ -31,29 +36,32 @@
                         </div>
                         <div id="divInactiveTest" style="display: inline;text-align:center;">
                             <center>
-                            <obout:Grid ID="grdInactiveTests" runat="server"
-                                        AutoGenerateColumns="false"
-                                        AllowAddingRecords="true"
-                                        ShowFooter="true"
-                                        PageSize="16"
-                                        AllowManualPaging="false"
-                                        AllowRecordSelection="true"
-                                        EnableRecordHover="true"
-                                        Serialize="true"
-                                        CallbackMode="true"
-                                        KeepSelectedRecords="true"
-                                        AllowSorting="false"
-                                        ShowHeader="true"
-                                        >
-                                <Columns>
-                                    <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
-                                    <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                    <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                    <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
-                                    <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
-                                </Columns>
+                                <obout:Grid ID="grdInactiveTests" runat="server"
+                                            AutoGenerateColumns="false"
+                                            AllowAddingRecords="false"
+                                            ShowFooter="true"
+                                            PageSize="16"
+                                            AllowManualPaging="false"
+                                            AllowRecordSelection="true"
+                                            EnableRecordHover="true"
+                                            Serialize="true"
+                                            CallbackMode="true"
+                                            KeepSelectedRecords="true"
+                                            AllowSorting="false"
+                                            ShowHeader="true"
+                                            AllowPageSizeSelection="false"
+                                            AllowMultiRecordSelection="false"
+                                          >  
+                                    <ClientSideEvents OnClientSelect="SetUpForEditInactive" />
+                                    <Columns>
+                                        <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
+                                        <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                        <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                        <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
+                                        <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
+                                    </Columns>
 
-                            </obout:Grid>
+                                </obout:Grid>
                             </center>
                         </div>
 
@@ -65,93 +73,212 @@
                             Active
                         </div>
                         <Center>
-                          <div id="divActiveTest" style="display: inline;text-align:center;">
-                            <obout:Grid ID="grdActiveTests" runat="server"
-                                        AutoGenerateColumns="false"
-                                        AllowAddingRecords="true"
-                                        ShowFooter="true"
-                                        PageSize="16"
-                                        AllowManualPaging="false"
-                                        AllowRecordSelection="true"
-                                        EnableRecordHover="true"
-                                        Serialize="true"
-                                        CallbackMode="true"
-                                        KeepSelectedRecords="true"
-                                        AllowSorting="false"
-                                        ShowHeader="true"
+                            <div id="divActiveTest" style="display: inline;text-align:center;">
+                                <obout:Grid ID="grdActiveTests" runat="server"
+                                            AutoGenerateColumns="false"
+                                            AllowAddingRecords="false"
+                                            ShowFooter="true"
+                                            PageSize="16"
+                                            AllowManualPaging="false"
+                                            AllowRecordSelection="true"
+                                            EnableRecordHover="true"
+                                            Serialize="true"
+                                            CallbackMode="true"
+                                            KeepSelectedRecords="true"
+                                            AllowSorting="false"
+                                            ShowHeader="true"
+                                            AllowPageSizeSelection="false"
+                                            AllowMultiRecordSelection="false"
                                         
-                                        >
-                                <ClientSideEvents OnClientSelect="SetUpForEdit" />
-                                <Columns>
-                                    <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
-                                    <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                    <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                    <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
-                                    <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
-                                </Columns>
+                                            >
+                                    <ClientSideEvents OnClientSelect="SetUpForEditActive" />
+                                    <Columns>
+                                        <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
+                                        <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                        <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                        <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
+                                        <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
+                                    </Columns>
 
-            </obout:Grid>
-                            </center>
-                        </div>
-
+                                </obout:Grid>
+                            </div>
+                        </center>
                     </Content>
                 </RightPanel>
             </obout:Splitter>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+        </div>
+    </ContentTemplate>
+</asp:UpdatePanel>
 
+
+<div id="divOfHiddenThings" class="HiddenField">
+    <obout:oboutTextbox runat="server" id="gTestName" ></obout:oboutTextbox> 
+    <obout:oboutTextbox runat="server" id="gTestID" ></obout:oboutTextbox> 
+    <obout:oboutTextbox runat="server" id="gDescription" ></obout:oboutTextbox> 
+    <obout:oboutTextbox runat="server" id="gActive" ></obout:oboutTextbox> 
+
+</div>
 
 <owd:Dialog ID="diaEditTest" runat="server"
-                 title="Make Test Changes"
-                ShowCloseButton="true" 
-                IsModal="true"
-                StyleFolder="~/obout_styles/windia/grandgray"
-                IsDraggable="true"   
-                VisibleOnLoad="false"
-                Width="600" 
-                Height="100"
-                IconPath="/images/warning.gif"
-                Position="SCREEN_CENTER"
-                >
+            title="&nbsp; Make Test Changes"
+            ShowCloseButton="true" 
+            IsModal="true"
+            StyleFolder="~/obout_styles/windia/aura"
+            IsDraggable="true"   
+            VisibleOnLoad="false"
+            Width="640" 
+            Height="150"
+            IconPath="/images/gcsGlobe.png"
+            Position="SCREEN_CENTER"
+            >
     <center>
-            
-        <div id="divEditText" style="padding:5;">
-            <br />
-            <br />   
-             <input type="text" id="txtTestId" disabled />
-             <input type="text" id="txtTestName" />
-             <input type="text" id="txDescription" />
-             <asp:DropDownList ID="ddActive" runat="server">
-             <asp:ListItem Text =""  Value ="z"></asp:ListItem>
-                <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                <asp:ListItem Text="No" Value="0"></asp:ListItem>
-            </asp:DropDownList>
-                        <input type="button" id="btnSaveEditTest" onclick ="btnSaveEditTest_Click()" value="save" />
-              <input type="button" id ="btnclose" onClick ="diaEditTest.Close();" value="close" /> 
-            
-            </div>
-
-
-   </center>
+       <div id="divEditText" style="padding:5px;" >
+            <table>
+                <tr>
+                    <td colspan="3" style="font-size:18px;text-align:center;color:#395b8b;font-weight:bolder;text-decoration:underline;">
+                       <div id="divTitle"> Active Tests </div><br />
+                    </td>
+                </tr>
+                <tr style="font-size:10px;text-align:center;">
+                    <td>
+                        Test Name
+                    </td>
+                    <td>
+                        Test Description
+                    </td>
+                    <td>
+                        Status
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <obout:OboutTextBox runat="server" id="txtTestName" Width="150px" /> 
+                        <div class ="HiddenField">
+                              <obout:OboutTextBox runat="server" id="txtTestId"  />
+                        </div>
+                    </td>
+                    <td>
+                        <obout:OboutTextBox runat="server" id="txDescription"  Width="300px"/>
+                    </td>
+                    <td>
+                        <obout:OboutDropDownList ID="ddActive" runat="server">
+                            <asp:ListItem Text =""  Value ="z"></asp:ListItem>
+                            <asp:ListItem Text="Active" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Inactive" Value="0"></asp:ListItem>
+                        </obout:OboutDropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;">
+                        <input type="button" id="btnSaveEditTest" onclick ="btnSaveEditTest_Click()" value="save" style="font-size:x-small;width:100px;border-radius:5px" />
+                        <input type="button" id="btnServerSaveEditTest" runat="server" onclick ="btnServerSaveEditTest_Click" style="display:none;" />
+                        <input type="button" id ="btnclose" onClick ="diaEditTest.Close();" value="close" style="font-size:x-small;width:100px;border-radius:5px" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
 </owd:Dialog>
-
+<owd:Dialog ID="diaMessage" runat="server"
+            title="Error Message"
+            ShowCloseButton="true" 
+            IsModal="true"
+            StyleFolder="~/obout_styles/windia/grandgray"
+            IsDraggable="true"   
+            VisibleOnLoad="false"
+            Width="500" 
+            Height="240"
+            IconPath="/images/warning.gif"
+            Position="SCREEN_CENTER"
+            >
+    <center>
+        <div ID="divErrorMsg"  style="background-color:Transparent;Border Style:None;Border Color:0px none Transparent;text-align:left;"></div>
+        <br /><br />
+        <input type="Button" id="btnDiaMessageYes"  style="font-size:x-small;width:100px;border-radius:5px;" />
+        <input type="Button" id="btnDiaMessageNo"   style="font-size:x-small;width:100px;border-radius:5px;" />
+         <input type="Button" id="btnDiaMessageThree"   style="font-size:x-small;width:100px;border-radius:5px;" />
+    </center>
+</owd:Dialog>
 <script>
     function btnSaveEditTest_Click()
     {
-      
-            var record = grdActiveMembers.SelectedRecords[1];
-            document.getElementById('txtTestId').value = record.TestId;
-            document.getElementById('txtTestName').value = record.TestName;
-            document.getElementById('txDescription').value = record.Description;
-            ddActive = record.Active;
-                
-       
-        grdActiveTests.SelectedRecords
+        var whereAreWe = $("#divTitle").html();
+        var lTestId = gTestId.value();
+        var lTestName = gTextName.value();
+
+
+        if (gTestId.value() != txtTestId.value() || gTextName.value() != txtTestName.value() || gTxtDescription.value() != txtDescription || gActive.value() != ddActive.value())
+        {
+            alert('Inside something has changed ');
+            var lMessage = '<br/><font size="5">You are about to make changes to test ' + gTestName + ',<br /> . <br />Click Ok to continue.<br /></font size>';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            diaMessage.setSize(500, 240);
+            diaMessage.setTitle('User intervention required');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
+            $("#btnDiaMessageNo").hide();
+            $("#btnDiaMessageThree").hide();
+            diaMessage.Open();
+        } 
+        else if (gTestId.value() == txtTestId.value() && gTextName.value() == txtTestName.value() && gTxtDescription.value() == txtDescription && gActive.value() == ddActive.value())
+        {
+            alert('Inside nothinghas changes');
+            diaEditTest.Close();
+        }
+        alert('about to leave changes');
     }
-    function SetUpForEdit()
+    function LoadDataToEditActive(record)
     {
+        divTitle.innerHTML = "Active Test";
+        for (var i = 0; i < grdActiveTests.SelectedRecords.length; i++)
+        { 
+            var record = grdActiveTests.SelectedRecords[i];
+            txtTestId.value(record.TestId);
+            txtTestName.value(record.TestName);
+            txDescription.value(record.Description);
+            ddActive.value(record.Active);
+
+            gTestName.value(record.TestName);
+            gTestID.value(record.TestId);
+            gDescription.value(record.Description);
+            gActive.value(record.Active);
+          
+       }
+    }
+    function LoadDataToEditInactive(record) {
+       
+       divTitle.innerHTML ="Inactive Test"; 
+        for (var i = 0; i < grdInactiveTests.SelectedRecords.length; i++) {
+            var record = grdInactiveTests.SelectedRecords[i];
+            txtTestId.value(record.TestId);
+            txtTestName.value(record.TestName);
+            txDescription.value(record.Description);
+            ddActive.value(record.Active);
+
+            gTestName.value(record.TestName);
+            gTestID.value(record.TestId);
+            gDescription.value(record.Description);
+            gActive.value(record.Active);
+           
+        }
+    }
+    function SetUpForEditInactive()
+    {
+        LoadDataToEditInactive();
         diaEditTest.Open();
     }
-
+    function SetUpForEditActive()
+    {
+        LoadDataToEditActive();
+        diaEditTest.Open();
+    }
+    function ChangeMadeToTests()
+    {
+        alert('Inside something has changed ChangeMadeToTests');
+        document.getElementById('<%=btnServerSaveEditTest.ClientID%>').click();
+    }
 </script>
 
+    
