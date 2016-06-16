@@ -28,18 +28,22 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
 
     protected void btnAchievementTest_Click(object sender, EventArgs e)
     {
+        gTestType.Text= "1";
         getTestData("1");
     }
     protected void btnAdditionalAchievement_Click(object sender, EventArgs e)
     {
+        gTestType.Text = "2";
         getTestData("2");
     }
     protected void btnAptitudeTest_Click(object sender, EventArgs e)
     {
+        gTestType.Text = "3";
         getTestData("3");
     }
     protected void btnAdditionalAptitudeTest_Click(object sender, EventArgs e)
     {
+        gTestType.Text = "4";
         getTestData("4");
     }
 

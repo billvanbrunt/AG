@@ -94,6 +94,7 @@
                                     <ClientSideEvents OnClientSelect="SetUpForEditActive" />
                                     <Columns>
                                         <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
+                                        <obout:Column DataField="TestType" Width="1" runat="server" Visible="false"  ></obout:Column>
                                         <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
                                         <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
                                         <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
@@ -112,8 +113,10 @@
 
 
 <div id="divOfHiddenThings" class="HiddenField">
+    
+    <obout:oboutTextbox runat="server" id="gTestId" ></obout:oboutTextbox> 
+    <obout:oboutTextbox runat="server" id="gTestType" ></obout:oboutTextbox>
     <obout:oboutTextbox runat="server" id="gTestName" ></obout:oboutTextbox> 
-    <obout:oboutTextbox runat="server" id="gTestID" ></obout:oboutTextbox> 
     <obout:oboutTextbox runat="server" id="gDescription" ></obout:oboutTextbox> 
     <obout:oboutTextbox runat="server" id="gActive" ></obout:oboutTextbox> 
 
@@ -158,7 +161,7 @@
                         </div>
                     </td>
                     <td>
-                        <obout:OboutTextBox runat="server" id="txDescription"  Width="300px"/>
+                        <obout:OboutTextBox runat="server" id="txtDescription"  Width="300px"/>
                     </td>
                     <td>
                         <obout:OboutDropDownList ID="ddActive" runat="server">
@@ -171,7 +174,7 @@
                 <tr>
                     <td colspan="3" style="text-align:center;">
                         <input type="button" id="btnSaveEditTest" onclick ="btnSaveEditTest_Click()" value="save" style="font-size:x-small;width:100px;border-radius:5px" />
-                        <input type="button" id="btnServerSaveEditTest" runat="server" onclick ="btnServerSaveEditTest_Click" style="display:none;" />
+                        <input type="button" id="btnServerSaveEditTest" runat="server" onServerclick ="btnServerSaveEditTest_Click" style="display:none;" />
                         <input type="button" id ="btnclose" onClick ="diaEditTest.Close();" value="close" style="font-size:x-small;width:100px;border-radius:5px" />
                     </td>
                 </tr>
@@ -202,15 +205,26 @@
 <script>
     function btnSaveEditTest_Click()
     {
-        var whereAreWe = $("#divTitle").html();
-        var lTestId = gTestId.value();
-        var lTestName = gTextName.value();
+        var whereAreWe = $("#divTitle").html(); 
+        var lTestName = txtTestName.value(); 
+        var lTestId = txtTestId.value();
+        var lDescription = txtDescription.value();
+        var lActive = ddActive.value();
+
+        var vTestName = gTestName.value(); 
+        var vTestId = gTestId.value();
+        var vDescription = gDescription.value();
+        var vActive = gActive.value();
+      // alert('Values for local Var   TestName = ' + lTestName + ', description = ' + lDescription + ', Active = ' + lActive + ' Values for Global Var TestName = ' + vTestName + ', description = ' + vDescription + ', Active = ' + vActive);
+        //alert('Values for local Var TestId = ' + lTestId + ' TestName = ' + lTestName + ' description = ' + lDescription + ' Active = ' + lActive);
+        //alert('Values for Global Var TestId = ' + vTestId + ' TestName = ' + vTestName + ' description = ' + vDescription + ' Active = ' + vActive);
 
 
-        if (gTestId.value() != txtTestId.value() || gTextName.value() != txtTestName.value() || gTxtDescription.value() != txtDescription || gActive.value() != ddActive.value())
+      
+        if(vTestName !== lTestName || vDescription !== lDescription || vActive !== lActive)
         {
-            alert('Inside something has changed ');
-            var lMessage = '<br/><font size="5">You are about to make changes to test ' + gTestName + ',<br /> . <br />Click Ok to continue.<br /></font size>';
+            //alert('Inside Somethinghas Changed');
+            var lMessage = '<br/><font size="5">You are about to make changes to test ' + lTestName + ',<br /> . <br />Click Ok to continue.<br /></font size>';
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
@@ -218,16 +232,17 @@
             diaMessage.setTitle('User intervention required');
             document.getElementById("btnDiaMessageYes").value = "OK";
             document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
-            $("#btnDiaMessageNo").hide();
+            document.getElementById("btnDiaMessageNo").value = "Cancel";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").show();
             $("#btnDiaMessageThree").hide();
             diaMessage.Open();
-        } 
-        else if (gTestId.value() == txtTestId.value() && gTextName.value() == txtTestName.value() && gTxtDescription.value() == txtDescription && gActive.value() == ddActive.value())
-        {
-            alert('Inside nothinghas changes');
-            diaEditTest.Close();
         }
-        alert('about to leave changes');
+        else if (vTestName === lTestName && vDescription === lDescription && vActive === lActive)
+        {
+           diaEditTest.Close();
+        } 
+        //alert('about to leave changes');
     }
     function LoadDataToEditActive(record)
     {
@@ -237,15 +252,14 @@
             var record = grdActiveTests.SelectedRecords[i];
             txtTestId.value(record.TestId);
             txtTestName.value(record.TestName);
-            txDescription.value(record.Description);
+            txtDescription.value(record.Description);
             ddActive.value(record.Active);
 
             gTestName.value(record.TestName);
-            gTestID.value(record.TestId);
+            gTestId.value(record.TestId);
             gDescription.value(record.Description);
             gActive.value(record.Active);
-          
-       }
+        }
     }
     function LoadDataToEditInactive(record) {
        
@@ -254,14 +268,13 @@
             var record = grdInactiveTests.SelectedRecords[i];
             txtTestId.value(record.TestId);
             txtTestName.value(record.TestName);
-            txDescription.value(record.Description);
+            txtDescription.value(record.Description);
             ddActive.value(record.Active);
-
-            gTestName.value(record.TestName);
-            gTestID.value(record.TestId);
-            gDescription.value(record.Description);
-            gActive.value(record.Active);
            
+            gTestName.value(record.TestName);
+            gTestId.value(record.TestId);
+            gDescription.value(record.Description); 
+            gActive.value(record.Active);
         }
     }
     function SetUpForEditInactive()
@@ -276,8 +289,8 @@
     }
     function ChangeMadeToTests()
     {
-        alert('Inside something has changed ChangeMadeToTests');
-        document.getElementById('<%=btnServerSaveEditTest.ClientID%>').click();
+      
+        $('#<%= btnServerSaveEditTest.ClientID%>').click();
     }
 </script>
 
