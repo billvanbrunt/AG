@@ -20,13 +20,12 @@
 <div id="divButtons" style="vertical-align:top;" >
     <asp:button id="btnAchievementTest" runat="server" CommandArgument="A" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Achievement Test" onclick="btnAchievementTest_Click" />
     <asp:button id="btnAdditionalAchievement" runat="server" CommandArgument="B" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Achievement Test" onclick="btnAdditionalAchievement_Click"  />
-    <asp:button id="btnAptitudeTest" runat="server" CommandArgument="C" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Aptitude Test" onclick="btnAptitudeTest_Click"/>
+    <asp:button id="btnAptitudeTest" runat="server" CommandArgument="C" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" text="Aptitude Test" onclick="btnAptitudeTest_Click"/>
     <asp:button id="btnAdditionalAptitudeTest" runat="server" CommandArgument="D" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Aptitude Test" onclick="btnAdditionalAptitudeTest_Click"/>
+    <input type="button" id="btnAddNewTest" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" value="Add New Test" onclick="btnAddNewTest_Click()"/>
 </div>
 <hr style="color:#395b8b"  />
 
-<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-    <ContentTemplate>
         <div id="divPanel" style="width:740px;height:500px;" >
             <obout:Splitter ID="Splitter1" runat="server">
                 <LeftPanel WidthMin="369" WidthMax="370">
@@ -108,8 +107,8 @@
                 </RightPanel>
             </obout:Splitter>
         </div>
-    </ContentTemplate>
-</asp:UpdatePanel>
+<%--    </ContentTemplate>--%>
+<%--<asp:UpdatePanel>--%>
 
 
 <div id="divOfHiddenThings" class="HiddenField">
@@ -121,7 +120,67 @@
     <obout:oboutTextbox runat="server" id="gActive" ></obout:oboutTextbox> 
 
 </div>
-
+<owd:Dialog ID="diaNewTest" runat="server"
+            title="&nbsp; Add New Test"
+            ShowCloseButton="true" 
+            IsModal="true"
+            StyleFolder="~/obout_styles/windia/aura"
+            IsDraggable="true"   
+            VisibleOnLoad="false"
+            Width="640" 
+            Height="150"
+            IconPath="/images/gcsGlobe.png"
+            Position="SCREEN_CENTER"
+            >
+    <center>
+       <div id="divNewText" style="padding:5px;" >
+            <table>
+                <tr>
+                    <td colspan="3" style="font-size:18px;text-align:center;color:#395b8b;font-weight:bolder;text-decoration:underline;">
+                       <div id="divNewTitle"> Add New Tests </div><br />
+                    </td>
+                </tr>
+                <tr style="font-size:10px;text-align:center;">
+                    <td>
+                        Test Name
+                    </td>
+                    <td>
+                        Test Description
+                    </td>
+                    <td>
+                        Test Type
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <obout:OboutTextBox runat="server" id="txtTestNameNew" Width="150px" WatermarkText="Enter Test Name..." /> 
+                      
+                    </td>
+                    <td>
+                        <obout:OboutTextBox runat="server" id="TxtTestDescriptionNew"  Width="300px" WatermarkText="Enter Test Description..."/>
+                    </td>
+                    <td>
+                        <obout:OboutDropDownList ID="ddTestTypeNew" runat="server"
+                                                     DataTextField="Description" 
+                                                     datavalueField="TestTypeId"
+                                                     AppendDataBoundItems="true"  >                          
+                             <Items>
+		                        <asp:ListItem>Select a Test Type ...</asp:ListItem>
+		                    </Items>
+                        </obout:OboutDropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;">
+                        <input type="button" id="btnSaveNewTest" onclick ="btnSaveNewTest_Click()" value="save" style="font-size:x-small;width:100px;border-radius:5px" />
+                        <input type="button" id="btnServerSaveNewTest" runat="server" onServerclick ="btnServerSaveNewTest_Click" style="display:none;" />
+                        <input type="button" id ="btnNewclose" onClick ="diaNewTest.Close();" value="close" style="font-size:x-small;width:100px;border-radius:5px" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</owd:Dialog>
 <owd:Dialog ID="diaEditTest" runat="server"
             title="&nbsp; Make Test Changes"
             ShowCloseButton="true" 
@@ -158,6 +217,7 @@
                         <obout:OboutTextBox runat="server" id="txtTestName" Width="150px" /> 
                         <div class ="HiddenField">
                               <obout:OboutTextBox runat="server" id="txtTestId"  />
+                            <obout:OboutTextBox runat="server" id="txtTestType"  />
                         </div>
                     </td>
                     <td>
@@ -273,7 +333,7 @@
            
             gTestName.value(record.TestName);
             gTestId.value(record.TestId);
-            gDescription.value(record.Description); 
+           gDescription.value(record.Description); 
             gActive.value(record.Active);
         }
     }
@@ -289,8 +349,136 @@
     }
     function ChangeMadeToTests()
     {
-      
         $('#<%= btnServerSaveEditTest.ClientID%>').click();
+    }
+    function AddNewTest() {
+        $('#<%= btnServerSaveNewTest.ClientID%>').click();
+    }
+    function DidNotSAveUpdate()
+    {
+        var lMessage = '<br/><font size="5">There was a problem saving test ' + gTestName.value() + ',<br /> . <br />Click Ok and try again.<br /></font size>';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+        diaMessage.setSize(500, 240);
+        diaMessage.setTitle('User intervention required');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
+        $("#btnDiaMessageNo").hide();
+        $("#btnDiaMessageThree").hide();
+        diaMessage.Open();
+    }
+    function SavedUpdate()
+    {
+        var lMessage = '<br/><font size="5">Test ' + gTestName.value() + ' saved. <br />Click Ok to continue.<br /></font size>';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+        diaMessage.setSize(500, 240);
+        diaMessage.setTitle('User intervention required');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
+        document.getElementById("btnDiaMessageNo").value = "Cancel";
+        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+        $("#btnDiaMessageNo").hide();
+        $("#btnDiaMessageThree").hide();
+        diaMessage.Open();
+    }
+    function btnAddNewTest_Click()
+    {
+        diaNewTest.Open();
+    }
+    function btnSaveNewTest_Click()
+    {
+        var lTestName = txtTestName.value();
+        var lDescription = txtDescription.value();
+        var lTestType = ddTestType.value();
+        var ErrorFlag = true;
+        var ErrorMsg = "There was an issue with the data entered please correct issues stated below:";
+
+        if(lTestName != "" && lDescription != "" && lTesstType != "" )
+        {
+            ErrorFlag = false;
+            var lMessage = '<br/><font size="5">You are about save a new test named ' + lTestName + ',<br /> . <br />Click Ok to continue.<br /></font size>';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            diaMessage.setSize(500, 240);
+            diaMessage.setTitle('User intervention required');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "AddNewTest();");
+            document.getElementById("btnDiaMessageNo").value = "Cancel";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").show();
+            $("#btnDiaMessageThree").hide();
+            diaMessage.Open();
+        }
+        else
+        {
+            if(lTestName != "")
+            {
+                ErrorFlag = true;
+                ErrorMsg = ErrorMsg + "/n A test name must be entered"; 
+            }
+            else if ( lDescription != "")
+            {
+                ErrorFlag = true;
+                ErrorMsg = ErrorMsg + "/n A description of the test must be entered";
+            }
+            else If(lTesstType != "") 
+            {
+                ErrorFlag = true; 
+                ErrorMsg = ErrorMsg + "/n A test type must be entered";
+            }
+        }
+        if (ErrorFlag)
+        {
+            ErrorFlag = false;
+            var lMessage = ErrorMsg + '/n>Correct errors and Click Ok to continue.<br /></font size>';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            diaMessage.setSize(500, 240);
+            diaMessage.setTitle('User intervention required');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            document.getElementById("btnDiaMessageNo").value = "Cancel";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            $("#btnDiaMessageThree").hide();
+            diaMessage.Open();
+        }
+
+    }
+
+    function SavedNew() {
+        var lMessage = '<br/><font size="5">New Test has been saved. <br />Click Ok to continue.<br /></font size>';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+        diaMessage.setSize(500, 240);
+        diaMessage.setTitle('User intervention required');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
+        document.getElementById("btnDiaMessageNo").value = "Cancel";
+        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+        $("#btnDiaMessageNo").hide();
+        $("#btnDiaMessageThree").hide();
+        diaMessage.Open();
+    }
+    function DidNotSavedNew()
+    {
+        var lMessage = '<br/><font size="5">There was a problem saving New test, <br />Click Ok and try saving again.<br /></font size>';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+        diaMessage.setSize(500, 240);
+        diaMessage.setTitle('User intervention required');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
+        $("#btnDiaMessageNo").hide();
+        $("#btnDiaMessageThree").hide();
+        diaMessage.Open();
     }
 </script>
 
