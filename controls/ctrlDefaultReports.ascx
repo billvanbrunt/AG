@@ -5,7 +5,7 @@
 <%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="obout" %>
 
 <div id="divMain">
-  
+
     <div id="divReportTitle">
         <table width="735px" >
             <tr>
@@ -29,12 +29,12 @@
                         School:
                     </td>
                     <td colspan="4" style="text-align:left">
-                        <obout:ComboBox ID="ddlSites" runat="server" SelectionMode="Multiple" DataTextField="SiteName" DataValueField="SiteId" Width="215px" Height="200px" ></obout:ComboBox>
+                        <obout:OboutDropDownList ID="ddlSites" runat="server" SelectionMode="Multiple" DataTextField="SiteName" DataValueField="SiteId" Width="215px" Height="200px" AppendDataBoundItems="true" ></obout:OboutDropDownList>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align:right">
-                        Desision:
+                        Decision:
                     </td>
                     <td colspan="2" style="text-align:left">
                         <obout:OboutDropDownList ID="ddlDecision" runat="server" DataValueField="DecisionCode"   DataTextField="Decisions" AppendDataBoundItems="true" ></obout:OboutDropDownList>
@@ -43,41 +43,46 @@
                         Grade:
                     </td>
                     <td style=" text-align:left">
-                        <obout:combobox ID="cboGrade" runat="server" SelectionMode="Multiple" AppendDataBoundItems="true"  DataTextField="" DataValueField="">
-                            <obout:ComboBoxItem runat="server" Text="" />
-                            <obout:ComboBoxItem runat="server" Text="PK" />
-                            <obout:ComboBoxItem runat="server" Text="KI" />
-                            <obout:ComboBoxItem runat="server" Text="01" />
-                            <obout:ComboBoxItem runat="server" Text="02" />
-                            <obout:ComboBoxItem runat="server" Text="03" />
-                            <obout:ComboBoxItem runat="server" Text="04" />
-                            <obout:ComboBoxItem runat="server" Text="05" />
-                            <obout:ComboBoxItem runat="server" Text="06" />
-                            <obout:ComboBoxItem runat="server" Text="07" />
-                            <obout:ComboBoxItem runat="server" Text="08" />
-                            <obout:ComboBoxItem runat="server" Text="09" />
-                            <obout:ComboBoxItem runat="server" Text="10" />
-                            <obout:ComboBoxItem runat="server" Text="11" />
-                            <obout:ComboBoxItem runat="server" Text="12" />
-                        </obout:combobox>
+                        <obout:OboutDropDownList ID="cboGrade" runat="server" SelectionMode="Multiple" AppendDataBoundItems="true"  DataTextField="" DataValueField="">
+                            <items>
+                                <asp:ListItem Value="0" Text="" />
+                                <asp:ListItem Value="PK" Text="PK" />
+                                <asp:ListItem Value="KI" Text="KI" />
+                                <asp:ListItem Value="01" Text="01" />
+                                <asp:ListItem Value="02" Text="02" />
+                                <asp:ListItem Value="03" Text="03" />
+                                <asp:ListItem Value="04" Text="04" />
+                                <asp:ListItem Value="05" Text="05" />
+                                <asp:ListItem Value="06" Text="06" />
+                                <asp:ListItem Value="07" Text="07" />
+                                <asp:ListItem Value="08" Text="08" />
+                                <asp:ListItem Value="09" Text="09" />
+                                <asp:ListItem Value="10" Text="10" />
+                                <asp:ListItem Value="11" Text="11" />
+                                <asp:ListItem Value="12" Text="12" />
+                            </items>
+                        </obout:OboutDropDownList>
+
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align:right">
                         Gender:
                     </td>
-                    <td colspan="2" style=" text-align:left">
-                        <obout:OboutDropDownList ID="ddlGender" runat="server" >
-                            <asp:ListItem Text="" Value=""></asp:ListItem>
-                            <asp:ListItem Text="Male" Value="M"></asp:ListItem>
-                            <asp:ListItem Text="Female" Value="F"></asp:ListItem>
+                    <td colspan="2" style="text-align:left">
+                        <obout:OboutDropDownList  ID="ddlGender" runat="server" AppendDataBoundItems="true" >
+                            <items>
+                                <asp:ListItem Value="0" Text="" />
+                                <asp:ListItem Value="M" Text="Male" />
+                                <asp:ListItem Value="F" Text="Female" />
+                            </items>
                         </obout:OboutDropDownList>
                     </td>
                     <td style="text-align:right">
                         Ethnicity:
                     </td>
                     <td style=" text-align:left">
-                        <obout:combobox ID="cboEthnicity" runat="server" SelectionMode="Multiple" AppendDataBoundItems="true" DataTextField="EthnicityDescription" DataValueField="EthnicityCode" FolderStyle="~/obout_style/combobox/grand_gray">
+                        <obout:combobox ID="cboEthnicity" runat="server" SelectionMode="Multiple" AppendDataBoundItems="true" DataTextField="EthnicityDescription" DataValueField="EthnicityCode">
                             <obout:ComboBoxItem runat="server" Text="" />
                         </obout:combobox>
                     </td>
@@ -138,43 +143,38 @@
                 VisibleOnLoad="false"
                 IconPath="../images/information.png"
                 Position="SCREEN_CENTER">
-            <div id="divErrorWindow" style="width:99%; HEIGHT:95%; text-align:center;">
-                <center><div id="divErrorMsg" style="width:90%; HEIGHT:55%; text-align:left; padding:20px;" runat="server" ></div></center>
-               <br /> <input type="button" id="btnCloseErrorDialog" value="  ok  " onclick="diaMessage.Close()" style="font-size:x-small;width:100px;border-radius:5px;" />
-            </div>
+        <div id="divErrorWindow" style="width:99%; HEIGHT:95%; text-align:center;">
+            <center>
+                <div id="divErrorMsg" style="width:90%; HEIGHT:55%; text-align:left; padding:20px;" runat="server" ></div>
+            </center>
+            <br />
+            <input type="button" id="btnCloseErrorDialog" value="  ok  " onclick="diaMessage.Close()" style="font-size:x-small;width:100px;border-radius:5px;" />
+        </div>
     </owd:Dialog>
 
 </div>
 
 <script type="text/javascript" >
 
-    function ClearForm_Click()
-    {
+    function ClearForm_Click() {
         ddlSite.selectedValue = 0;
     }
     
     function btnView_Click() {
         var ddlVal = ddlReportNames.value();
-        
+    
         var ltxt = 'Oops,<br /> No resport has been selected. <br /> Click <font color="#295b8b"><b>ok</b></font> and select a report to print.';
         var lName = document.getElementById("<%=divErrorMsg.ClientID %>").id;
     
-        if (ddlVal == 0)
-        {
+        if (ddlVal == 0) {
             diaMessage.setTitle("Data Missing!");
             diaMessage.setSize(300, 175);
     
             document.getElementById(lName).innerHTML = ltxt;
             diaMessage.Open();
-        }
-        else
-        {
+        } else {
             lbtn = document.getElementById('<%=btnServerView.ClientID%>');
             lbtn.click();
         }
-    }
-
-    
-
-   
+    }   
 </script>

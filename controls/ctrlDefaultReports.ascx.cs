@@ -45,7 +45,8 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         ddlMathLOS.Items.Add(new ListItem("", ""));
         ddlSCILOS.Items.Add(new ListItem("", ""));
         ddlSSLOS.Items.Add(new ListItem("", ""));
-       
+        ddlSites.Items.Add(new ListItem("", "0"));
+
         ddlReportNames.DataSource = ds.Tables[0];
         ddlReportNames.DataBind();
 

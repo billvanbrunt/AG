@@ -152,7 +152,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         catch (Exception) { 
       
             txtDecision.Text = ds.Tables[0].Rows[0]["Decision"].ToString();
-            ddlDecision.SelectedItem.Text = ds.Tables[0].Rows[0]["Decision"].ToString();
+            ddlDecision.SelectedItem.Value = ds.Tables[0].Rows[0]["Decision"].ToString();
         }
         try
         {
@@ -191,7 +191,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         }
         
         txtComments.Text = ds.Tables[0].Rows[0]["Comments"].ToString();
-        txtCommentsEdit.Text = ds.Tables[0].Rows[0]["Comments"].ToString();
+        txtCommentsEdit.Text = "";
 
 
     }
@@ -256,8 +256,12 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
 
          cmd.ExecuteNonQuery();
 
+        LoadLevelofService();
+        LoadDecisions();
+        OpenStudentInformation(lStudentId);
+        LoadStudentHistory(lStudentId);
 
-      
+
 
     }
 }

@@ -4,13 +4,10 @@
 <%@ Register Assembly="obout_Calendar2_Net" Namespace="OboutInc.Calendar2" TagPrefix="obout" %>
 <%@ Register Assembly="obout_Window_NET" Namespace="OboutInc.Window" TagPrefix="owd" %>
 
-
-
-
 <div id="divButtons">
     <input type="button" id="btnGoBack" runat="server" style="font-size:x-small;width:125px;border-radius:5px;" onclick="GoBack_Click()" value="Student Info"  />
     <input type="button" id="btnTest" runat="server" style="font-size:x-small;width:125px;border-radius:5px;" onserverclick="btnTest_Click" value="Data Evidence"  />
-    <input type="button" id="btnStudentEligibilityRecord" runat="server" style="font-size:x-small;width:125px;border-radius:5px;" onserverclick="btnStudentEligibilityRecord_Click" value="Student Eligibility Record"  />        
+    <input type="button" id="btnStudentEligibilityRecord" runat="server" style="font-size:x-small;width:125px;border-radius:5px;" onserverclick="btnStudentEligibilityRecord_Click" value="Student Eligibility Record"  />
     <input type="button" id="btnNewSearch" runat="server" style="font-size:x-small;width:125px;border-radius:5px;"  onServerclick="ShowSearchWindowAgain_Click" value="New Search"  />
 </div>
 
@@ -56,39 +53,40 @@
             <div id="divReadEligibility" >
                 <table style="width: 700px;" border="0">
                     <tr>
-                        <td style="text-align: right; font-size: small; width: 25%; font-weight: bold;">Initial Screening Date:
-                        </td>
+                        <td style="text-align: right; font-size: small; width: 25%; font-weight: bold;">Initial Screening Date: </td>
                         <td style="text-align: left">
                             <asp:Label ID="txtInitialScreeningDate" runat="server" Style="font-size: small;" />
                         </td>
                         <td colspan="4"></td>
                     </tr>
                     <tr>
-                        <td style="text-align: right; font-size: small; width: 25%; font-weight: bold;" rowspan ="2">Decision:
-                        </td>
+                        <td style="text-align: right; font-size: small; width: 25%; font-weight: bold;" rowspan ="2">Decision: </td>
                         <td style="text-align: left" rowspan ="2">
                             <asp:Label ID="txtDecision" runat="server" Style="font-size: small;" />
                         </td>
-                        
+
                         <td style="text-align: right;font-size: small;font-weight: bold;" colspan="1" rowspan ="2" >
-                             Traditional:<br />Nontraditional:
+                            Traditional:<br />Nontraditional:
                         </td>
-                        
+
                         <td style="text-align: left;vertical-align:top;" colspan="2">
-                                <asp:label id="txtTraditional" runat="server"></asp:label><br /><asp:label id="txtNonTraditional" runat="server"></asp:label>
-                         </td>
-                    
+                            <asp:label id="txtTraditional" runat="server"></asp:label><br />
+                            <asp:label id="txtNonTraditional" runat="server"></asp:label>
+                        </td>
+
                     </tr>
                     <tr>
-                     
+
                     </tr>
-                  
-                      <tr>
-                          <td colspan="8">
-                                <div style="font-size: small; font-weight: bolder; color: #295B8B">Service Info<hr /> </div>
-                          </td>
-                      </tr>
-                     <tr>
+                    <tr>
+                        <td colspan="8">
+                            <div style="font-size: small; font-weight: bolder; color: #295B8B">
+                                Service Info
+                                <hr />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="text-align: right; font-size: small; width: 25%; font-weight: bold;">Reading: </td>
                         <td style="text-align: left">
                             <asp:Label ID="txtReading" runat="server" Style="font-size: small;" />
@@ -120,8 +118,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>&nbsp;
-                        </td>
+                        <td>&nbsp; </td>
                         <td>
                             <obout:OboutCheckBox ID="chkSupportPlanResolvedReadOnly" runat="server" Text="Support Plan Resolved" Enabled="false" Font-Bold="True"></obout:OboutCheckBox>
                         </td>
@@ -147,23 +144,22 @@
             <div id="divUpdateEligibility" style="display:none; background-color: #CCCCCC;" >
                 <table style="width: 725px;" border="0">
                     <tr>
-                        <td style="text-align: right; font-size: small; font-weight: bold;"  >Initial Screening Date:
-                        </td>
+                        <td style="text-align: right; font-size: small; font-weight: bold;"  >Initial Screening Date: </td>
                         <td style="text-align: left">
-                           <asp:Label ID="txtInitialScreeningDate2" runat="server" Style="font-size: small;" />
+                            <asp:Label ID="txtInitialScreeningDate2" runat="server" Style="font-size: small;" />
                         </td>
-                         <td style="text-align: left" colspan="3">&nbsp;</td>
+                        <td style="text-align: left" colspan="3">&nbsp;</td>
                     </tr>
                     <tr>
                         <td  style="text-align: right; font-size: small;  font-weight: bold;" rowspan="2">Decision:</td>
                         <td style="text-align: left;font-size: small;  font-weight: bold;" rowspan="2">
-                                <obout:OboutDropDownList ID="ddlDecision" runat="server" Width="150px" Font-Size="small" DataTextField="Decisions" DataValueField="DecisionCode" AppendDataBoundItems="true"></obout:OboutDropDownList>
+                            <obout:OboutDropDownList ID="ddlDecision" runat="server" Width="150px" Font-Size="small" DataTextField="Decisions" DataValueField="DecisionCode" AppendDataBoundItems="true"></obout:OboutDropDownList>
                         </td>
                         <td rowspan="2">&nbsp; </td>
                         <td style="text-align: right;font-size: small;font-weight: bold;" colspan="1" rowspan ="2" >
-                             Traditional:<br />Nontraditional:
+                            Traditional:<br />Nontraditional:
                         </td>
-                        
+
                         <td style="text-align: left" colspan="1" rowspan ="2">
                             <obout:OboutDropDownList ID="ddlTraditional" runat="server" Width="150px" Font-Size="small" >
                                 <asp:ListItem Text="" Value="0" ></asp:ListItem>
@@ -172,20 +168,23 @@
                                 <asp:ListItem Text="Both" Value="Both"></asp:ListItem>
                             </obout:OboutDropDownList>
                             <br />
-                        
+
                             <obout:OboutDropDownList ID="ddlNonTraditional" runat="server" Width="150px" Font-Size="small">
                                 <asp:ListItem Text="" Value="" ></asp:ListItem>
                                 <asp:ListItem Text="Reading only" Value="Reading" ></asp:ListItem>
                                 <asp:ListItem Text="Math only" Value="Math"></asp:ListItem>
                                 <asp:ListItem Text="Both" Value="Both"></asp:ListItem>
                             </obout:OboutDropDownList>
-                         </td>
+                        </td>
                     </tr>
                     <tr>
                     </tr>
                     <tr>
                         <td colspan="8">
-                            <div style="font-size: small; font-weight: bolder; color: #295B8B">Service Info <hr /></div>
+                            <div style="font-size: small; font-weight: bolder; color: #295B8B">
+                                Service Info
+                                <hr />
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -204,7 +203,7 @@
                         <td style="text-align: left">
                             <obout:OboutDropDownList ID="ddlScience" runat="server" Width="175px" Font-Size="small"  DataTextField="LOSDescription" DataValueField="LOSCode"  AppendDataBoundItems="true"></obout:OboutDropDownList>
                         </td>
-                         <td style="text-align: left">&nbsp;</td>
+                        <td style="text-align: left">&nbsp;</td>
                         <td style="text-align: right; font-size: small;  font-weight: bold;">Social Studies: </td>
                         <td style="text-align: left">
                             <obout:OboutDropDownList ID="ddlSocialStudies" runat="server" Width="175px" Font-Size="small"  DataTextField="LOSDescription" DataValueField="LOSCode"  AppendDataBoundItems="true"></obout:OboutDropDownList>
@@ -214,54 +213,53 @@
                         <td style="text-align: right; font-size:small;  font-weight: bold;">AIG Support Plan: </td>
                         <td style="text-align: left">
                             <obout:OboutCheckBox ID="chkSupportPlanStart" runat="server" Text="Support Plan Initiated" FolderStyle="/obout_styles/premiere_blue/OboutCheckBox">
-                              
+
                             </obout:OboutCheckBox>
                         </td>
-                       
-                         <td id="tdStartDate" style="text-align: right; font-size:small; font-weight: bold;">Date: </td>
-                         <td id="tdStarttxt" style="text-align:left;" colspan="5">
-                             <input type="text" id="txtSupportPlasnStart" name="txtSupportPlasnStart" Style="font-size:small;width:100px;border-radius:5px;" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" />
-                             <obout:Calendar ID="calSupportStartDate" runat="server"
-                                TextBoxId="txtSupportPlasnStart"
-                                StyleFolder="~\Obout_styles\calendar\default"
-                                Columns="1"
-                                DatePickerMode="true"
-                                ShowYearSelector="false"
-                                DatePickerImagePath="~\images\icon2.gif"
-                                ShowHourSelector="False"
-                                ShowMinuteSelector="False"
-                                ShowOtherMonthDays="False"
-                                TextArrowLeft="&amp;lt;"
-                                TextArrowRight="&amp;gt;"
-                                TitleText=" ">
-       
+
+                        <td id="tdStartDate" style="text-align: right; font-size:small; font-weight: bold;">Date: </td>
+                        <td id="tdStarttxt" style="text-align:left;" colspan="5">
+                            <input type="text" id="txtSupportPlasnStart" name="txtSupportPlasnStart" Style="font-size:small;width:100px;border-radius:5px;" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" />
+                            <obout:Calendar ID="calSupportStartDate" runat="server"
+                                            TextBoxId="txtSupportPlasnStart"
+                                            StyleFolder="~\Obout_styles\calendar\default"
+                                            Columns="1"
+                                            DatePickerMode="true"
+                                            ShowYearSelector="false"
+                                            DatePickerImagePath="~\images\icon2.gif"
+                                            ShowHourSelector="False"
+                                            ShowMinuteSelector="False"
+                                            ShowOtherMonthDays="False"
+                                            TextArrowLeft="&amp;lt;"
+                                            TextArrowRight="&amp;gt;"
+                                            TitleText=" ">
+
                             </obout:Calendar>
                         </td>
                     </tr>
                     <tr>
-                        <td>&nbsp;
-                        </td>
+                        <td>&nbsp; </td>
                         <td>
                             <obout:OboutCheckBox ID="chkSupportPlanResolved" runat="server" Text="Support Plan Resolved" FolderStyle="/obout_styles/premiere_blue/OboutCheckBox">
-                                
+
                             </obout:OboutCheckBox>
                         </td>
                         <td  id="tdEndDate" style="text-align: right; font-size:small; width:100px; font-weight: bold;">Date: </td>
                         <td id="tdEndtxt" colspan="2" >
-                            <input type="text" ID="txtSupportPlanResolved" Name="txtSupportPlanResolved""  Style="width:100px;border-radius:5px;" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"  />
-                             <obout:Calendar ID="calPlanResolvedDate" runat="server"
-                                TextBoxId="txtSupportPlanResolved"
-                                StyleFolder="~\Obout_styles\calendar\default"
-                                Columns="1"
-                                DatePickerMode="true"
-                                ShowYearSelector="false"
-                                DatePickerImagePath="~\images\icon2.gif"
-                                ShowHourSelector="False"
-                                ShowMinuteSelector="False"
-                                ShowOtherMonthDays="False"
-                                TextArrowLeft="&amp;lt;"
-                                TextArrowRight="&amp;gt;"
-                                TitleText=" ">
+                            <input type="text" ID="txtSupportPlanResolved" Name="txtSupportPlanResolved"  Style="width:100px;border-radius:5px;" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"  />
+                            <obout:Calendar ID="calPlanResolvedDate" runat="server"
+                                            TextBoxId="txtSupportPlanResolved"
+                                            StyleFolder="~\Obout_styles\calendar\default"
+                                            Columns="1"
+                                            DatePickerMode="true"
+                                            ShowYearSelector="false"
+                                            DatePickerImagePath="~\images\icon2.gif"
+                                            ShowHourSelector="False"
+                                            ShowMinuteSelector="False"
+                                            ShowOtherMonthDays="False"
+                                            TextArrowLeft="&amp;lt;"
+                                            TextArrowRight="&amp;gt;"
+                                            TitleText=" ">
                             </obout:Calendar>
                         </td>
                     </tr>
@@ -274,19 +272,15 @@
                     </tr>
                     <tr>
                         <td colspan="6" style="text-align: center;">
-                             <input type="button" id="btnSaveData" value="Save Changes" style="font-size: x-small; width: 145px; border-radius: 5px;" onclick="btnSaveData_Click()" />
-                             <input type="button" id="btnServerSaveData" runat="server" value="Save Changes" style="font-size: x-small; width: 145px; border-radius: 5px;display:none;" onserverclick="btnServerSaveData_Click" />
+                            <input type="button" id="btnSaveData" value="Save Changes" style="font-size: x-small; width: 145px; border-radius: 5px;" onclick="btnSaveData_Click()" />
+                            <input type="button" id="btnServerSaveData" runat="server" value="Save Changes" style="font-size: x-small; width: 145px; border-radius: 5px;display:none;" onserverclick="btnServerSaveData_Click" />
                             <input type="button" id="btnCancelSave" value="Cancel" style="font-size: x-small; width: 145px; border-radius: 5px;" onclick="btnCancelSaveData_Click()" />
                         </td>
                     </tr>
                 </table>
 
-                 
             </div>
             <br />
-
-
-
 
             <div id="divHistory">
                 <obout:Grid ID="grdHistory" runat="server"
@@ -308,26 +302,24 @@
                             <TemplateSettings HeaderTemplateId="tempDecision" />
                         </obout:Column>
                         <obout:Column DataField="Reading" HeaderText="Reading" Width="75" runat="server" >
-                              <TemplateSettings HeaderTemplateId="tempReading" />
+                            <TemplateSettings HeaderTemplateId="tempReading" />
                         </obout:Column>
                         <obout:Column DataField="Math"     HeaderText="Math"   Width="65" runat="server" >
-                              <TemplateSettings HeaderTemplateId="tempMath" />
+                            <TemplateSettings HeaderTemplateId="tempMath" />
                         </obout:Column>
                         <obout:Column DataField="Science"    HeaderText="Science"  Width="75" runat="server" >
                             <TemplateSettings HeaderTemplateId="tempScience" />
                         </obout:Column>
                         <obout:Column DataField="SocialStudies"     HeaderText="Social Studies"   Width="75" runat="server" >
-                              <TemplateSettings HeaderTemplateId="tempSocial" />
+                            <TemplateSettings HeaderTemplateId="tempSocial" />
                         </obout:Column>
-                        <obout:Column DataField="LOSInfromationEnteredDate"    HeaderText="Changed Date" width="100"  runat="server" >
-                             <TemplateSettings HeaderTemplateId="tempChangeDate" />
-                        </obout:Column>        
+                        <obout:Column DataField="LOSInfromationEnteredDate1"    HeaderText="Changed Date" width="100"  runat="server" >
+                            <TemplateSettings HeaderTemplateId="tempChangeDate" />
+                        </obout:Column>
                         <obout:Column DataField="ChangeType"    HeaderText="Comments"  Width="235" runat="server" >
-                             <TemplateSettings HeaderTemplateId="tempComments" />
+                            <TemplateSettings HeaderTemplateId="tempComments" />
                         </obout:Column>
                         <obout:Column DataField="LOSInformationEnterBy"     HeaderText="Last Entered by"   visible="false" runat="server" ></obout:Column>
-
-                        
 
                     </Columns>
                     <TemplateSettings HeadingTemplateId="Active" />
@@ -346,7 +338,7 @@
                             </Template>
                         </obout:GridTemplate>
                     </Templates>
-                     <Templates>
+                    <Templates>
                         <obout:GridTemplate runat="server" ID="tempReading">
                             <Template><%--[2]--%>
                                 <font size="-2">
@@ -355,7 +347,7 @@
                             </Template>
                         </obout:GridTemplate>
                     </Templates>
-                     <Templates>
+                    <Templates>
                         <obout:GridTemplate runat="server" ID="tempMath">
                             <Template><%--[3]--%>
                                 <font size="-2">
@@ -364,7 +356,7 @@
                             </Template>
                         </obout:GridTemplate>
                     </Templates>
-                     <Templates>
+                    <Templates>
                         <obout:GridTemplate runat="server" ID="tempScience">
                             <Template><%--[4]--%>
                                 <font size="-2">
@@ -382,8 +374,8 @@
                             </Template>
                         </obout:GridTemplate>
                     </Templates>
-               
-                 <Templates>
+
+                    <Templates>
                         <obout:GridTemplate runat="server" ID="tempChangeDate">
                             <Template><%--[6]--%>
                                 <font size="-2">
@@ -396,7 +388,7 @@
                         <obout:GridTemplate runat="server" ID="tempComments">
                             <Template><%--[7]--%>
                                 <font size="-2">
-                                  Comments
+                                    Comments
                                 </font>
                             </Template>
                         </obout:GridTemplate>
@@ -442,6 +434,8 @@
 
     function btnSaveData_Click() {
         var lDecision = ddlDecision.value();
+        alert('THis is lDecision = ' + lDecision);
+
         var lddlTraditional = ddlTraditional.value();
         var lddlNonTraditional = ddlNonTraditional.value();
         var lddlReading = ddlReading.value();
@@ -457,8 +451,7 @@
  
         if (lDecision == "" && lddlReading == "" && lddlMath == "" && (lddlScience == "" || lddlScience == "NE") && (lddlSocialStudies == "" || lddlSocialStudies == "NE") && lchkStart == false && lchkEnd == false) {
             document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('btnCancelSaveData').click();");
-        }
-        else {
+        } else {
             if (lDecision == "") {
                 lError = true;
                 lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select a Decision from dropdown<br />";
@@ -502,8 +495,7 @@
                 document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
                 $("#btnDiaMessageNo").hide();
                 diaMessage.Open();
-            }
-            else {
+            } else {
                 lMessage = "You are about to save Eligibility Information.<br /><br /> Click Ok to continue.";
                 $("#divErrorMsg").empty();
                 $('#divErrorMsg').append(lMessage);
@@ -519,14 +511,10 @@
             }
         }
     }
-
-    function DoSaveEligibility()
-    {
-
-          document.getElementById('<%=btnServerSaveData.ClientID%>').click(); 
-        diaMessage.Close();
-
-    }
- 
     
+    function DoSaveEligibility() {
+        document.getElementById('<%=btnServerSaveData.ClientID%>').click(); 
+        diaMessage.Close();
+    }    
 </script>
+    
