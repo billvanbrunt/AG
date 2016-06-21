@@ -37,7 +37,14 @@
                         Decision:
                     </td>
                     <td colspan="2" style="text-align:left">
-                        <obout:OboutDropDownList ID="ddlDecision" runat="server" DataValueField="DecisionCode"   DataTextField="Decisions" AppendDataBoundItems="true" ></obout:OboutDropDownList>
+                        <obout:combobox ID="ddlDecision" runat="server" 
+                                                     DataTextField="Decisions"   
+                                                     DataValueField="DecisionId"  
+                                                     AppendDataBoundItems="true"
+                                                     SelectionMode="Multiple" 
+                                                     >
+                                 <obout:ComboBoxItem runat="server" Text="" />
+                        </obout:combobox>
                     </td>
                     <td style="text-align:right">
                         Grade:
@@ -156,7 +163,8 @@
 
 <script type="text/javascript" >
 
-    function ClearForm_Click() {
+    function ClearForm_Click()
+    {
         ddlSite.selectedValue = 0;
     }
     

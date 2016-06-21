@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using GcsExportTools;
+using Obout.ComboBox;
 
 
 
@@ -40,7 +41,6 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         da.Fill(ds, "myData");
 
         ddlReportNames.Items.Add(new ListItem("", "0"));
-        ddlDecision.Items.Add(new ListItem("", ""));
         ddlReadingLOS.Items.Add(new ListItem("", ""));
         ddlMathLOS.Items.Add(new ListItem("", ""));
         ddlSCILOS.Items.Add(new ListItem("", ""));
@@ -85,10 +85,40 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
             lStoredProcName = cmd.ExecuteScalar().ToString();
             cmd.Cancel();
 
-            string vStudentId = "1";
 
+
+
+            string details = "'";
+            int lCounter = 0;
+            bool hasSelectedItems = false;
+
+            foreach (ComboBoxItem item in ddlDecision.Items)
+            {
+                if (item.Selected)
+                {
+                    if (!hasSelectedItems)
+                    {
+                        if (lCounter >= 1)
+                        {
+                            details += "', '" + item.Value;
+                            
+                        }
+                        else
+                        {
+                            details += "'" + item.Value;
+                            hasSelectedItems = true;
+                        }
+                    }
+
+                    lCounter = lCounter + 1;
+                    details += "'";
+                }
+            }
+
+            
+            string vStudentId = "1";
             string vSite = ddlSites.SelectedValue;
-            string vDecision = ddlDecision.SelectedValue;
+            string vDecision = details;
             string vGrade = cboGrade.SelectedValue;
             string vGender = ddlGender.SelectedValue;
             string vEthincity = cboEthnicity.SelectedValue;

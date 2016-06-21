@@ -146,13 +146,14 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         }
         try
         {
-            ddlDecision.SelectedItem.Text = ds.Tables[0].Rows[0]["Decision"].ToString();
-            txtDecision.Text = ds.Tables[0].Rows[0]["Decision"].ToString();
+            ddlDecision.SelectedValue = ds.Tables[0].Rows[0]["DecisionId"].ToString();
+            txtDecision.Text = ds.Tables[0].Rows[0][4].ToString();
         }
-        catch (Exception) { 
+        catch (Exception)
+        { 
       
             txtDecision.Text = ds.Tables[0].Rows[0]["Decision"].ToString();
-            ddlDecision.SelectedItem.Value = ds.Tables[0].Rows[0]["Decision"].ToString();
+            ddlDecision.SelectedItem.Value = ds.Tables[0].Rows[0]["DecisionId"].ToString();
         }
         try
         {
@@ -176,7 +177,6 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
             chkSupportPlanStartReadOnly.Enabled = false;
             chkSupportPlanStart.Checked = false;
             chkSupportPlanStart.Enabled = true;
-         //   txtSupportPlanStartDate.Text = lSDS;
             txtSupportPlanStartDateReadOnly.Text = lSDS;
         }
         if (lSPRD != "01/01/1900")
@@ -185,7 +185,6 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
             chkSupportPlanResolvedReadOnly.Enabled = false;
             chkSupportPlanResolved.Checked = false;
             chkSupportPlanResolved.Enabled = true;
-          //  txtSupportPlanResolved.Text = lSPRD;
             txtSupportPlanResolvedDateReadOnly.Text=lSPRD;
                
         }
@@ -210,7 +209,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     protected void btnServerSaveData_Click(object sender, EventArgs e)
     {
         string lUserId = HttpContext.Current.User.Identity.Name.ToString();
-        string lDecision = ddlDecision.SelectedItem.ToString().Trim();
+        string lDecision = ddlDecision.SelectedValue;
         string lTradit = ddlTraditional.SelectedValue.ToString();
         string lNTradit = ddlNonTraditional.SelectedValue.ToString();
         string lReading = ddlReading.SelectedValue.ToString();

@@ -153,7 +153,11 @@
                     <tr>
                         <td  style="text-align: right; font-size: small;  font-weight: bold;" rowspan="2">Decision:</td>
                         <td style="text-align: left;font-size: small;  font-weight: bold;" rowspan="2">
-                            <obout:OboutDropDownList ID="ddlDecision" runat="server" Width="150px" Font-Size="small" DataTextField="Decisions" DataValueField="DecisionCode" AppendDataBoundItems="true"></obout:OboutDropDownList>
+                            <obout:OboutDropDownList id="ddlDecision" runat="server" Width="150px" Font-Size="small"
+                                                     DataTextField="Decisions"   
+                                                     DataValueField="DecisionId" 
+                                                     AppendDataBoundItems="true">
+                            </obout:OboutDropDownList>
                         </td>
                         <td rowspan="2">&nbsp; </td>
                         <td style="text-align: right;font-size: small;font-weight: bold;" colspan="1" rowspan ="2" >
