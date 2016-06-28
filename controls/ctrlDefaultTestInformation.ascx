@@ -290,20 +290,20 @@
                         AllowSorting="true"
                         ShowHeader="true"
                 >
-              <Columns>
-                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="250" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="105" runat="server"  ></obout:Column>
-                    <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
-                    <obout:Column DataField="Score"     HeaderText=""   Width="70" runat="server" >
-                          <TemplateSettings HeaderTemplateId="tempACHTestScore" />
-                    </obout:Column>
-                   <obout:Column DataField="ScaleScore"     HeaderText=""   Width="75" runat="server" >
-                          <TemplateSettings HeaderTemplateId="tempScaleScore" />
-                    </obout:Column>
-                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
-                        <TemplateSettings HeaderTemplateId="tempACHUseForEligibility" />
-                    </obout:Column>
-                </Columns>
+            <Columns>
+                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="250" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="105" runat="server"  ></obout:Column>
+                <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
+                <obout:Column DataField="Score"     HeaderText=""   Width="70" runat="server" >
+                        <TemplateSettings HeaderTemplateId="tempACHTestScore" />
+                </obout:Column>
+                <obout:Column DataField="ScaleScore"     HeaderText=""   Width="75" runat="server" >
+                        <TemplateSettings HeaderTemplateId="tempScaleScore" />
+                </obout:Column>
+                <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
+                    <TemplateSettings HeaderTemplateId="tempACHUseForEligibility" />
+                </obout:Column>
+            </Columns>
            
             <Templates>
                 <obout:GridTemplate runat="server" ID="tempACHTestScore">
@@ -646,7 +646,7 @@
             <input type="Button" id="btnDiaMessageNo"   style="font-size:x-small;width:100px;border-radius:5px;" />
         </center>
     </owd:Dialog>
-
+</div>
     <script  type="text/javascript">
         $(document).ready(function () {
             ADDachTest.Attributes.Add("style", "display:none");

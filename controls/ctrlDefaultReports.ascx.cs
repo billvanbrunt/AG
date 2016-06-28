@@ -13,7 +13,7 @@ using Obout.ComboBox;
 
 public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
 {
-  
+
     public SqlConnection con;
     public SqlDataReader dr;
     public String SqlStr;
@@ -26,14 +26,14 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         {
             loadDropDowns();
         }
-       
+
     }
     protected void loadDropDowns()
     {
         SqlStr = "usp_GetDropDownInfo";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-       
+
         DataSet ds = new DataSet();
 
         SqlDataAdapter da = new SqlDataAdapter();
@@ -52,13 +52,13 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
 
         ddlDecision.DataSource = ds.Tables[1];
         ddlDecision.DataBind();
-        
+
         ddlSites.DataSource = ds.Tables[2];
         ddlSites.DataBind();
 
         ddlReadingLOS.DataSource = ds.Tables[3];
         ddlReadingLOS.DataBind();
-         
+
         ddlMathLOS.DataSource = ds.Tables[3];
         ddlMathLOS.DataBind();
 
@@ -69,7 +69,7 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         ddlSSLOS.DataBind();
 
         cboEthnicity.DataSource = ds.Tables[4];
-        cboEthnicity.DataBind(); 
+        cboEthnicity.DataBind();
 
     }
     protected void PrintReports()
@@ -84,54 +84,77 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
 
             lStoredProcName = cmd.ExecuteScalar().ToString();
             cmd.Cancel();
-
-
-
-
-            string details = "'";
+            cmd.Dispose();
+            string details="";
             int lCounter = 0;
             bool hasSelectedItems = false;
 
-            foreach (ComboBoxItem item in ddlDecision.Items)
-            {
-                if (item.Selected)
-                {
-                    if (!hasSelectedItems)
-                    {
-                        if (lCounter >= 1)
-                        {
-                            details += "', '" + item.Value;
-                            
-                        }
-                        else
-                        {
-                            details += "'" + item.Value;
-                            hasSelectedItems = true;
-                        }
-                    }
 
-                    lCounter = lCounter + 1;
-                    details += "'";
-                }
+          
+
+            string vStudentId = "1";
+            string vSite = "";
+            string vDecision = "";
+            string vGrade = "";
+            string vGender = "";
+            string vEthincity = "";
+            string vReadingService = "";
+            string vMathService = "";
+            string vScienceService = "";
+            string vHistoryService = "";
+
+            if (ddlSites.SelectedValue != "0")
+            {
+                vSite = ddlSites.SelectedValue;
             }
 
-            
-            string vStudentId = "1";
-            string vSite = ddlSites.SelectedValue;
-            string vDecision = details;
-            string vGrade = cboGrade.SelectedValue;
-            string vGender = ddlGender.SelectedValue;
-            string vEthincity = cboEthnicity.SelectedValue;
-            string vReadingService = ddlReadingLOS.SelectedValue;
-            string vMathService = ddlMathLOS.SelectedValue;
-            string vScienceService = ddlSCILOS.SelectedValue;
-            string vHistoryService = ddlSSLOS.SelectedValue;
+            if(ddlDecision.SelectedValue != "0")
+            {
+                vDecision = ddlDecision.SelectedValue;
+            }
+            if (cboGrade.SelectedValue != "0")
+            {
+                vGrade = cboGrade.SelectedValue;
+            }
+            if(ddlGender.SelectedValue != "0")
+            {
+                vGender = ddlGender.SelectedValue;
+            }
+            if(cboEthnicity.SelectedValue != "0")
+            {
+                vEthincity = cboEthnicity.SelectedValue;
+            }
+            if (ddlReadingLOS.SelectedValue != "0")
+            {
+                vReadingService = ddlReadingLOS.SelectedValue;
+            }
+            if(ddlMathLOS.SelectedValue != "")
+            {
+                vMathService = ddlMathLOS.SelectedValue;
+            }
 
-            SqlStr = lStoredProcName;
+           if (ddlSCILOS.SelectedValue != "0")
+            {
+                vScienceService = ddlSCILOS.SelectedValue;
+            }            
+            if (ddlSSLOS.SelectedValue != "0")
+            {
+                vHistoryService = ddlSSLOS.SelectedValue;
+            }
+             
+           if(vDecision == "")
+            {
+                SqlStr = lStoredProcName + "WODec";
+            }   
+           else
+            {
+                SqlStr = lStoredProcName;
+            } 
+            
             cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@Site", vSite + "%"));
-            cmd.Parameters.Add(new SqlParameter("@Decision", vDecision + "%"));
+            cmd.Parameters.Add(new SqlParameter("@Decision", vDecision));
             cmd.Parameters.Add(new SqlParameter("@Grade", vGrade + "%"));
             cmd.Parameters.Add(new SqlParameter("@Gender", vGender + "%"));
             cmd.Parameters.Add(new SqlParameter("@Ethincity", vEthincity + "%"));
@@ -155,27 +178,27 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
                 }
                 else
                 {
-                    
-                    divErrorMsg.InnerHtml="No data has been found using your criteria. <br /> Click <font color='#295b8b'<b>ok</b></font>, change the criteria and try again. <br/> If the problem persists please contact department lead.";
-                    
+
+                    divErrorMsg.InnerHtml = "No data has been found using your criteria. <br /> Click <font color='#295b8b'<b>ok</b></font>, change the criteria and try again. <br/> If the problem persists please contact department lead.";
+
                     diaMessage.Title = "No Data Found";
                     diaMessage.Width = 400;
                     diaMessage.Height = 175;
                     diaMessage.VisibleOnLoad = true;
                     diaMessage.IsDraggable = true;
-                 
+
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                if (lWhatReport == "2" && e.Message.ToString() == "")
+                if (lWhatReport == "2" && ex.Message.ToString() == "")
                 {
-                    var lala = e.Message.ToString();
+                    var lala = ex.Message.ToString();
                 }
-            } 
-        
+            }
+
         }
-    }   
+    }
     protected void btnHome_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/default.aspx");
