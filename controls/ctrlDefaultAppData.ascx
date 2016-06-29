@@ -3,8 +3,8 @@
 <%@ Register Assembly="obout_Window_NET" Namespace="OboutInc.Window" TagPrefix="owd" %>
 <%@ Register Assembly="obout_Grid_NET" Namespace="Obout.Grid" TagPrefix="obout" %>
 <%@ Register Assembly="obout_Splitter2_Net" Namespace="OboutInc.Splitter2" TagPrefix="obout" %>
-
 <%@ Register TagPrefix="cc1" Namespace="System.Web.UI" Assembly="System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" %>
+
 <style type="text/css">
     .tdText
     {
@@ -24,91 +24,87 @@
     <asp:button id="btnAdditionalAptitudeTest" runat="server" CommandArgument="D" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Aptitude Test" onclick="btnAdditionalAptitudeTest_Click"/>
     <input type="button" id="btnAddNewTest" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" value="Add New Test" onclick="btnAddNewTest_Click()"/>
 </div>
+
 <hr style="color:#395b8b"  />
 
-        <div id="divPanel" style="width:740px;height:500px;" >
-            <obout:Splitter ID="Splitter1" runat="server">
-                <LeftPanel WidthMin="369" WidthMax="370">
-                    <Content>
-                        <div id="divTitleInactive" style="font-weight:bold;color:#395b8b;font-size:13pt;width:100%;text-align:center;text-decoration:underline;">
-                            Inactive
-                        </div>
-                        <div id="divInactiveTest" style="display: inline;text-align:center;">
-                            <center>
-                                <obout:Grid ID="grdInactiveTests" runat="server"
-                                            AutoGenerateColumns="false"
-                                            AllowAddingRecords="false"
-                                            ShowFooter="true"
-                                            PageSize="16"
-                                            AllowManualPaging="false"
-                                            AllowRecordSelection="true"
-                                            EnableRecordHover="true"
-                                            Serialize="true"
-                                            CallbackMode="true"
-                                            KeepSelectedRecords="true"
-                                            AllowSorting="false"
-                                            ShowHeader="true"
-                                            AllowPageSizeSelection="false"
-                                            AllowMultiRecordSelection="false"
-                                          >  
-                                    <ClientSideEvents OnClientSelect="SetUpForEditInactive" />
-                                    <Columns>
-                                        <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
-                                        <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                        <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                        <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
-                                        <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
-                                    </Columns>
+<div id="divPanel" style="width: 740px; height: 500px;">
+    <obout:Splitter ID="Splitter1" runat="server">
+        <LeftPanel WidthMin="369" WidthMax="370">
+            <Content>
+                <div id="divTitleInactive" style="font-weight: bold; color: #395b8b; font-size: 13pt; width: 100%; text-align: center; text-decoration: underline;">
+                    Inactive
+                </div>
+                <div id="divInactiveTest" style="display: inline; text-align: center;">
+                    <center>
+                        <obout:Grid ID="grdInactiveTests" runat="server"
+                                    AutoGenerateColumns="false"
+                                    AllowAddingRecords="false"
+                                    ShowFooter="true"
+                                    PageSize="16"
+                                    AllowManualPaging="false"
+                                    AllowRecordSelection="true"
+                                    EnableRecordHover="true"
+                                    Serialize="true"
+                                    CallbackMode="true"
+                                    KeepSelectedRecords="true"
+                                    AllowSorting="false"
+                                    ShowHeader="true"
+                                    AllowPageSizeSelection="false"
+                                    AllowMultiRecordSelection="false">  
+                            <ClientSideEvents OnClientSelect="SetUpForEditInactive" />
+                            <Columns>
+                                <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
+                                <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
+                                <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
+                            </Columns>
+                        </obout:Grid>
+                    </center>
+                </div>
 
-                                </obout:Grid>
-                            </center>
-                        </div>
+            </Content>
+        </LeftPanel>
+        <RightPanel WidthMin="369" WidthMax="370">
+            <Content>
+                <div id="divTitleActive" style="font-weight: bold; color: #395b8b; font-size: 13pt; width: 100%; text-align: center; text-decoration: underline;">
+                    Active
+                </div>
+                <center>
+                    <div id="divActiveTest" style="display: inline;text-align:center;">
+                        <obout:Grid ID="grdActiveTests" runat="server"
+                                    AutoGenerateColumns="false"
+                                    AllowAddingRecords="false"
+                                    ShowFooter="true"
+                                    PageSize="16"
+                                    AllowManualPaging="false"
+                                    AllowRecordSelection="true"
+                                    EnableRecordHover="true"
+                                    Serialize="true"
+                                    CallbackMode="true"
+                                    KeepSelectedRecords="true"
+                                    AllowSorting="false"
+                                    ShowHeader="true"
+                                    AllowPageSizeSelection="false"
+                                    AllowMultiRecordSelection="false">
+                            <ClientSideEvents OnClientSelect="SetUpForEditActive" />
+                            <Columns>
+                                <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
+                                <obout:Column DataField="TestType" Width="1" runat="server" Visible="false"  ></obout:Column>
+                                <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
+                                <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
+                                <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
+                            </Columns>
 
-                    </Content>
-                </LeftPanel>
-                <RightPanel WidthMin="369" WidthMax="370">
-                    <Content>
-                        <div id="divTitleActive" style="font-weight:bold;color:#395b8b;font-size:13pt;width:100%;text-align:center;text-decoration:underline;">
-                            Active
-                        </div>
-                        <Center>
-                            <div id="divActiveTest" style="display: inline;text-align:center;">
-                                <obout:Grid ID="grdActiveTests" runat="server"
-                                            AutoGenerateColumns="false"
-                                            AllowAddingRecords="false"
-                                            ShowFooter="true"
-                                            PageSize="16"
-                                            AllowManualPaging="false"
-                                            AllowRecordSelection="true"
-                                            EnableRecordHover="true"
-                                            Serialize="true"
-                                            CallbackMode="true"
-                                            KeepSelectedRecords="true"
-                                            AllowSorting="false"
-                                            ShowHeader="true"
-                                            AllowPageSizeSelection="false"
-                                            AllowMultiRecordSelection="false"
-                                        
-                                            >
-                                    <ClientSideEvents OnClientSelect="SetUpForEditActive" />
-                                    <Columns>
-                                        <obout:Column DataField="TestId" Width="1" runat="server" Visible="false"  ></obout:Column>
-                                        <obout:Column DataField="TestType" Width="1" runat="server" Visible="false"  ></obout:Column>
-                                        <obout:Column DataField="TestName"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                        <obout:Column DataField="Description"  Width="1" runat="server" Visible="false"  ></obout:Column>
-                                        <obout:Column DataField="Active"  Width="1" runat="server" Visible="false" ></obout:Column>
-                                        <obout:Column DataField="Test"  HeaderText=" " Width="350" runat="server"  ></obout:Column>
-                                    </Columns>
+                        </obout:Grid>
+                    </div>
+                </center>
+            </Content>
+        </RightPanel>
+    </obout:Splitter>
+</div>
 
-                                </obout:Grid>
-                            </div>
-                        </center>
-                    </Content>
-                </RightPanel>
-            </obout:Splitter>
-        </div>
-<%--    </ContentTemplate>--%>
-<%--<asp:UpdatePanel>--%>
 
 
 <div id="divOfHiddenThings" class="HiddenField">
@@ -157,7 +153,7 @@
                       
                     </td>
                     <td>
-                        <obout:OboutTextBox runat="server" id="TxtTestDescriptionNew"  Width="300px" WatermarkText="Enter Test Description..."/>
+                        <obout:OboutTextBox runat="server" id="txtTestDescriptionNew"  Width="300px" WatermarkText="Enter Test Description..."/>
                     </td>
                     <td>
                         <obout:OboutDropDownList ID="ddTestTypeNew" runat="server"
@@ -370,19 +366,21 @@
     }
     function SavedUpdate()
     {
-        var lMessage = '<br/><font size="5">Test ' + gTestName.value() + ' saved. <br />Click Ok to continue.<br /></font size>';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-        diaMessage.setSize(500, 240);
-        diaMessage.setTitle('User intervention required');
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
-        document.getElementById("btnDiaMessageNo").value = "Cancel";
-        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        $("#btnDiaMessageThree").hide();
-        diaMessage.Open();
+        $(document).ready(function () {
+            var lMessage = '<br/><font size="5">Test saved. <br />Click Ok to continue.<br /></font size>';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            diaMessage.setSize(500, 240);
+            diaMessage.setTitle('User intervention required');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "resetScreen();");
+            document.getElementById("btnDiaMessageNo").value = "Cancel";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            $("#btnDiaMessageThree").hide();
+            diaMessage.Open();
+        });
     }
     function btnAddNewTest_Click()
     {
@@ -390,13 +388,15 @@
     }
     function btnSaveNewTest_Click()
     {
-        var lTestName = txtTestName.value();
-        var lDescription = txtDescription.value();
-        var lTestType = ddTestType.value();
+       
+        var lTestName = txtTestNameNew.value();
+        var lDescription = txtTestDescriptionNew.value();
+        var lTestType = ddTestTypeNew.value(); 
         var ErrorFlag = true;
         var ErrorMsg = "There was an issue with the data entered please correct issues stated below:";
-
-        if(lTestName != "" && lDescription != "" && lTesstType != "" )
+   
+      
+        if (lTestName != "Enter Test Name..." && lDescription != "Enter Test Description..." && lTestType > 0)
         {
             ErrorFlag = false;
             var lMessage = '<br/><font size="5">You are about save a new test named ' + lTestName + ',<br /> . <br />Click Ok to continue.<br /></font size>';
@@ -413,28 +413,29 @@
             $("#btnDiaMessageThree").hide();
             diaMessage.Open();
         }
-        else
+        else 
         {
-            if(lTestName != "")
-            {
-                ErrorFlag = true;
-                ErrorMsg = ErrorMsg + "/n A test name must be entered"; 
-            }
-            else if ( lDescription != "")
-            {
-                ErrorFlag = true;
-                ErrorMsg = ErrorMsg + "/n A description of the test must be entered";
-            }
-            else If(lTesstType != "") 
-            {
-                ErrorFlag = true; 
-                ErrorMsg = ErrorMsg + "/n A test type must be entered";
-            }
+            if(lTestName == "Enter Test Name...")
+                {
+                    ErrorFlag = true;
+                    ErrorMsg = ErrorMsg + "<br /> A test name must be entered";
+                }
+            else if (lDescription == "Enter Test Description...")
+                {
+                    ErrorFlag = true;
+                    ErrorMsg = ErrorMsg + "<br /> A description of the test must be entered";
+                }
+            else if(lTestType < 0) 
+                {
+                    ErrorFlag = true; 
+                    ErrorMsg = ErrorMsg + "<br /> A test type must be entered";
+                }
         }
+        
         if (ErrorFlag)
         {
             ErrorFlag = false;
-            var lMessage = ErrorMsg + '/n>Correct errors and Click Ok to continue.<br /></font size>';
+            var lMessage = ErrorMsg + '<br />Correct errors and Click Ok to continue.<br /></font size>';
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
@@ -448,23 +449,23 @@
             $("#btnDiaMessageThree").hide();
             diaMessage.Open();
         }
-
     }
-
     function SavedNew() {
-        var lMessage = '<br/><font size="5">New Test has been saved. <br />Click Ok to continue.<br /></font size>';
-        $("#divErrorMsg").empty();
-        $('#divErrorMsg').append(lMessage);
-        document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-        diaMessage.setSize(500, 240);
-        diaMessage.setTitle('User intervention required');
-        document.getElementById("btnDiaMessageYes").value = "OK";
-        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "ChangeMadeToTests();");
-        document.getElementById("btnDiaMessageNo").value = "Cancel";
-        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
-        $("#btnDiaMessageNo").hide();
-        $("#btnDiaMessageThree").hide();
-        diaMessage.Open();
+        $(document).ready(function () {
+            var lMessage = '<br/><font size="5">New Test has been saved. <br />Click Ok to continue.<br /></font size>';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            diaMessage.setSize(500, 240);
+            diaMessage.setTitle('User intervention required');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "resetScreen();");
+            document.getElementById("btnDiaMessageNo").value = "Cancel";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            $("#btnDiaMessageThree").hide();
+            diaMessage.Open();
+        });
     }
     function DidNotSavedNew()
     {
@@ -479,6 +480,12 @@
         $("#btnDiaMessageNo").hide();
         $("#btnDiaMessageThree").hide();
         diaMessage.Open();
+    }
+    function resetScreen()
+    {
+        $(document).ready(function () {
+            btnAchievementTest_Click();
+        });
     }
 </script>
 

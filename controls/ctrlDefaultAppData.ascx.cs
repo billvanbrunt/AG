@@ -62,10 +62,8 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
         ddTestTypeNew.DataSource = dr;
         ddTestTypeNew.DataBind();
         dr.Close();
-
         cmd.Cancel();
-        
-    }
+     }
     private void getTestData(String vTestType)
     {
 
@@ -145,25 +143,23 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
         cmd.Parameters.Add(new SqlParameter("@TestName", lTestName));
         cmd.Parameters.Add(new SqlParameter("@Description", lDescription));
         cmd.Parameters.Add(new SqlParameter("@Active", lActive));
-
         try
         {
             cmd.ExecuteNonQuery();
             getTestData(lTestType);
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "SavedUpdate();", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "resetScreen();", true);
         }
         catch(Exception ex)
         {
             log.Error("Data was not saved TestId = " + lTestId + "  TestName = " + lTestName + ", description = " + lDescription + ", Active = " + lActive );
             Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "DidNotSAveUpdate();", true);
         }
-
-        
+       
     }
     protected void btnServerSaveNewTest_Click(object sender, EventArgs e)
     {
         var lTestName = txtTestNameNew.Text;
-        var lDescription = TxtTestDescriptionNew.Text;
+        var lDescription = txtTestDescriptionNew.Text;
         var lTestTypeNew = ddTestTypeNew.SelectedValue.ToString();
         SqlStr = "usp_SaveNewTest";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
@@ -172,18 +168,16 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
         cmd.Parameters.Add(new SqlParameter("@TestName", lTestName));
         cmd.Parameters.Add(new SqlParameter("@Description", lDescription));
         cmd.Parameters.Add(new SqlParameter("@TestType", lTestTypeNew));
-
+        SetAsyncTrigger();
         try
         {
             cmd.ExecuteNonQuery();
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "SavedNew();", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "resetScreen();", true);
         }
         catch (Exception ex)
         {
             log.Error("Data was not saved new test " + ex);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "DidNotSAveNew();", true);
         }
-
-
     }
 }

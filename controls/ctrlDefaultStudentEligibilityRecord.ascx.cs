@@ -20,6 +20,7 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
     {
         lStudentId = Request.QueryString["id"];
         OpenStudentInformation(lStudentId);
+        //OpenTestInformation(lStudentId);
     }
     protected void OpenStudentInformation(string vStudentId)
     {
@@ -40,7 +41,7 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
 
         var ldob = ds.Tables[0].Rows[0]["BirthDate"].ToString();
         txtDOB.Text = ldob.Substring(4, 2) + "/" + ldob.Substring(6, 2) + "/" + ldob.Substring(0, 4);
-        
+
         var lGender = ds.Tables[0].Rows[0]["Gender"].ToString();
         if (lGender == "F")
         {
@@ -56,6 +57,95 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         txtAppartmentNo.Text = ds.Tables[0].Rows[0]["Apartment"].ToString();
         txtPOBox.Text = ds.Tables[0].Rows[0]["POBox"].ToString();
         txtCityStateZip.Text = ds.Tables[0].Rows[0]["City"].ToString() + ", " + ds.Tables[0].Rows[0]["State"].ToString() + ". " + ds.Tables[0].Rows[0]["zip"].ToString();
+        var x = 0;
+        foreach (var row in ds.Tables[1].Rows)
+        {
+            var lSubject = ds.Tables[1].Rows[x]["Subject"].ToString();
+            if (lSubject == "Achievement")
+            {
+                txtTestNameACH.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDateACH.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScoreACH.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
+            if (lSubject == "Math")
+            {
+                txtTestNameMath.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDateMath.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScoreMath.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
+            if (lSubject == "Reading")
+            {
+                txtTestNameRead.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDateRead.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScoreRead.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
+            if (lSubject == "Science")
+            {
+                txtTestNameSCI.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDateSCI.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScoreSCI.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
+            if (lSubject == "Scoial")
+            {
+                txtTestNameSS.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDateSS.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScoreSS.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
+            if (lSubject == "Aptitude")
+            {
+                txtTestNameAPT.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDateAPT.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScoreAPT.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
+            if (lSubject == "Proformance")
+            {
+                txtTestNamePT.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDatePT.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScorePT.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
+            x = x + 1;
+        }
+
+       var lReading =  ds.Tables[2].Rows[0]["Reading"].ToString();
+       var lMath = ds.Tables[2].Rows[0]["Math"].ToString();
+       var lScience = ds.Tables[2].Rows[0]["Science"].ToString();
+       //var lScoial = ds.Tables[2].Rows[0]["Social"].ToString();
+
+        if (lReading == "NE" && lMath == "NE")
+        {
+            cbAGNE.Checked = true;
+        }
+        else if (lReading == "AG" && lMath == "NE")
+            {
+                 cbAGRM.Checked = true;
+                if (lReading == "NE" && lMath == "AG")
+                {
+                    cbAGM.Checked = true;
+                }
+                else
+                {
+                    cbAGR.Checked = true;
+                }
+            }
+        if(lReading == "AC" || lMath =="AC")
+        {
+            cbSEOREGAC.Checked = true;
+        }
+        if( lMath == "IG" || lReading == "IG")
+        {
+            cbIG.Checked = true;
+        }
+
+        if(lMath=="VS" || lReading == "VS")
+        {
+            cbSEOREGVS.Checked = true;
+        }
         
+
+        }
+    protected void enTestInformation(string vStudentId)
+    {
+
+
     }
 }
