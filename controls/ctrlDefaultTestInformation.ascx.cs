@@ -67,7 +67,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         grdAptitudeData.DataSource = ds.Tables[1];
         grdAptitudeData.DataBind();
 
-        
+
         grdTeacherInput.DataSource = ds.Tables[2];
         grdTeacherInput.DataBind();
 
