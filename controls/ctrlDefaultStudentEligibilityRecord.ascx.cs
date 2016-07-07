@@ -37,7 +37,7 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         txtFullName.Text = ds.Tables[0].Rows[0]["FullName"].ToString();
         txtStudentId.Text = ds.Tables[0].Rows[0]["StudentId"].ToString();
         txtSchoolName.Text = ds.Tables[0].Rows[0]["School"].ToString();
-
+        txtHomePhone.Text = ds.Tables[0].Rows[0]["HomePhone"].ToString();
 
         var ldob = ds.Tables[0].Rows[0]["BirthDate"].ToString();
         txtDOB.Text = ldob.Substring(4, 2) + "/" + ldob.Substring(6, 2) + "/" + ldob.Substring(0, 4);

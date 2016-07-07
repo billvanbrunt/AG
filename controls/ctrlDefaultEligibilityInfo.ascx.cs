@@ -109,7 +109,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
           grdHistory.DataBind();
           dr.Close();
           cmd.Cancel();
-}
+    }
     protected void OpenStudentInformation(string vStudentId)
     {
         SqlStr = "usp_GetStudentEligibilityInfo";

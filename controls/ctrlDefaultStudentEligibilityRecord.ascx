@@ -46,6 +46,9 @@
                     <br />
                     <label style="text-align: right; font-size: small;font-weight: bold;">DOB:</label>
                     <asp:Label ID="txtDOB" runat="server" Style="font-size: small;font-weight:normal;"></asp:Label>
+                    <br />
+                    <label style="text-align: right; font-size: small;font-weight: bold;">Phone:</label>
+                    <asp:Label ID="txtHomePhone" runat="server" Style="font-size: small;font-weight:normal;"></asp:Label>
                 </td>
             </tr>
         </table>

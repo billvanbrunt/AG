@@ -163,7 +163,6 @@
                         <td style="text-align: right;font-size: small;font-weight: bold;" colspan="1" rowspan ="2" >
                             Traditional:<br />Nontraditional:
                         </td>
-
                         <td style="text-align: left" colspan="1" rowspan ="2">
                             <obout:OboutDropDownList ID="ddlTraditional" runat="server" Width="150px" Font-Size="small" >
                                 <asp:ListItem Text="" Value="0" ></asp:ListItem>
@@ -172,7 +171,6 @@
                                 <asp:ListItem Text="Both" Value="Both"></asp:ListItem>
                             </obout:OboutDropDownList>
                             <br />
-
                             <obout:OboutDropDownList ID="ddlNonTraditional" runat="server" Width="150px" Font-Size="small">
                                 <asp:ListItem Text="" Value="" ></asp:ListItem>
                                 <asp:ListItem Text="Reading only" Value="Reading" ></asp:ListItem>
@@ -220,7 +218,6 @@
 
                             </obout:OboutCheckBox>
                         </td>
-
                         <td id="tdStartDate" style="text-align: right; font-size:small; font-weight: bold;">Date: </td>
                         <td id="tdStarttxt" style="text-align:left;" colspan="5">
                             <input type="text" id="txtSupportPlasnStart" name="txtSupportPlasnStart" Style="font-size:small;width:100px;border-radius:5px;" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" />
@@ -267,7 +264,6 @@
                             </obout:Calendar>
                         </td>
                     </tr>
-
                     <tr>
                         <td style="text-align: right; font-size: small;  font-weight: bold;">Comments: </td>
                         <td style="text-align: left" colspan="4">
@@ -288,51 +284,59 @@
 
             <div id="divHistory">
                 <obout:Grid ID="grdHistory" runat="server"
-                            AutoGenerateColumns="false"
-                            AllowAddingRecords="false"
-                            ShowFooter="true"
-                            PageSize="10"
-                            AllowManualPaging="false" 
-                            AllowRecordSelection="true"
-                            EnableRecordHover="true" 
-                            Serialize="true"
-                            CallbackMode="true"
-                            AutoPostBackOnSelect="true"  
-                            KeepSelectedRecords="true"  
+                                AutoGenerateColumns="false"
+                                AllowAddingRecords="false"
+                                ShowFooter="true"
+                                PageSize="10"
+                                AllowManualPaging="false" 
+                                Serialize="true"
+                                CallbackMode="true"
+                                                      
                             >
+                    <ClientSideEvents ExposeSender="true" OnClientSelect="ShowHistory" />
                     <Columns>
-                        <obout:Column DataField="StudentId" HeaderText="StudentId" visible="false"  Width="100" runat="server" ></obout:Column>
+                        <obout:Column DataField="HistoryId" HeaderText=""  visible="false" runat="server" ></obout:Column>
                         <obout:Column DataField="Decision"  HeaderText="Decision" Width="100" runat="server" >
-                            <TemplateSettings HeaderTemplateId="tempDecision" />
+                            <TemplateSettings HeaderTemplateId="tempDecision" EditTemplateId="etempDecision" />
                         </obout:Column>
                         <obout:Column DataField="Reading" HeaderText="Reading" Width="75" runat="server" >
-                            <TemplateSettings HeaderTemplateId="tempReading" />
+                            <TemplateSettings HeaderTemplateId="tempReading" EditTemplateId="etempReading" />
                         </obout:Column>
                         <obout:Column DataField="Math"     HeaderText="Math"   Width="65" runat="server" >
-                            <TemplateSettings HeaderTemplateId="tempMath" />
+                            <TemplateSettings HeaderTemplateId="tempMath" EditTemplateId="etempMath" />
                         </obout:Column>
                         <obout:Column DataField="Science"    HeaderText="Science"  Width="75" runat="server" >
-                            <TemplateSettings HeaderTemplateId="tempScience" />
+                            <TemplateSettings HeaderTemplateId="tempScience" EditTemplateId="etempScience" />
                         </obout:Column>
                         <obout:Column DataField="SocialStudies"     HeaderText="Social Studies"   Width="75" runat="server" >
-                            <TemplateSettings HeaderTemplateId="tempSocial" />
+                            <TemplateSettings HeaderTemplateId="tempSocial" EditTemplateId="etempSocial" />
                         </obout:Column>
-                        <obout:Column DataField="LOSInfromationEnteredDate1"    HeaderText="Changed Date" width="100"  runat="server" >
-                            <TemplateSettings HeaderTemplateId="tempChangeDate" />
+                        <obout:Column DataField="LOSInfromationEnteredDate"    HeaderText="Changed Date" width="100"  runat="server" >
+                            <TemplateSettings HeaderTemplateId="tempChangeDate" EditTemplateId="etempChangeDate" />
                         </obout:Column>
                         <obout:Column DataField="ChangeType"    HeaderText="Comments"  Width="235" runat="server" >
-                            <TemplateSettings HeaderTemplateId="tempComments" />
+                            <TemplateSettings HeaderTemplateId="tempComments" EditTemplateId="etempComments" />
                         </obout:Column>
-                        <obout:Column DataField="LOSInformationEnterBy"     HeaderText="Last Entered by"   visible="false" runat="server" ></obout:Column>
-
-                    </Columns>
-                    <TemplateSettings HeadingTemplateId="Active" />
+                        <obout:Column DataField="LOSInformationEnterBy" HeaderText=""   visible="false" runat="server" >
+                            <TemplateSettings EditTemplateId="etmpLOSInformationEnterBy" />
+                        </obout:Column>
+                        <obout:Column DataField="LOSInfromationEnteredDate"     HeaderText=""   Width="1"  runat="server" >
+                            <TemplateSettings EditTemplateId="etmpLOSInformationEnter" />
+                        </obout:Column>
+                        <obout:Column DataField="SupportPlanStartDate"      HeaderText=""   visible="false" runat="server" >
+                            <TemplateSettings EditTemplateId="etmpSupportPlanStartDate" />
+                        </obout:Column>
+                        <obout:Column DataField="SupportPlanResolvedDate"   HeaderText="" visible="false"   runat="server" >
+                            <TemplateSettings EditTemplateId="etmpSupportPlanResolvedDate" />
+                        </obout:Column>
+                        <obout:Column DataField="FullName"   HeaderText="" visible="false"   runat="server" />                     
+                    </Columns>  
+                        <TemplateSettings HeadingTemplateId="Active" />
                     <Templates>
                         <obout:GridTemplate runat="server" ID="Active">
                             <Template>Historical Data</Template>
                         </obout:GridTemplate>
                     </Templates>
-
                     <Templates>
                         <obout:GridTemplate runat="server" ID="tempDecision">
                             <Template><%--[1]--%>
@@ -399,10 +403,8 @@
                     </Templates>
                 </obout:Grid>
             </div>
-
         </fieldset>
     </div>
-
 </div>
 <owd:Dialog ID="diaMessage" runat="server"
             title="Error Message"
@@ -423,6 +425,100 @@
         <input type="Button" id="btnDiaMessageNo"   style="font-size:x-small;width:100px;border-radius:5px;" />
     </center>
 </owd:Dialog>
+<owd:Dialog ID="diaShowHistory" runat="server"
+            title="Historical Details"
+            ShowCloseButton="true" 
+            IsModal="true"
+            StyleFolder="~/obout_styles/windia/grandgray"
+            IsDraggable="true"   
+            VisibleOnLoad="false"
+            Width="500" 
+            Height="275"
+            IconPath="/images/gcsGlobe.png"
+            Position="SCREEN_CENTER">
+    <div id="divMainDiaShowHistory" >
+        <table style="align-self:center;width:510px;">
+            <tr>
+                <td>
+                    Record Id:
+                </td>
+                <td>
+                    <span id="txtHistoryId"  ></span>
+                </td>
+            </tr>
+            <tr style="background-color:lightgray;">
+                <td>
+                    Record Entered by:
+                </td>
+                <td>
+                    <span id="txtEnteredBy"  ></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   Date Entered:
+                </td>
+                <td>
+                    <span id="txtEnteredDate"  ></span>
+                </td>
+            </tr>
+            <tr style="background-color:lightgray;">
+                <td>
+                    Decision:
+                </td>
+                <td>
+                    <span id="txthDecision"  ></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Reading/Math/Science/History:
+                </td>
+                <td>
+                    <span id="txtStatus"  ></span> 
+                </td>
+            </tr>
+            <tr style="background-color:lightgray;">
+                <td>
+                    Support Plan:
+                </td>
+                <td>
+                    <span id="txtSupportPlan"  ></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Start Date:
+                </td>
+                <td>
+                    <span id="txtSupportPlanStartDate"  ></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    End Date:
+                </td>
+                <td>
+                    <span id="txtSupportPlanEndDate"  ></span>
+                </td>
+            </tr>
+
+        </table>
+        <center> 
+           <fieldset style="width:450px;height:75px; text-align:left;" >
+               <legend style="font-size: xx-small; font-weight: bolder; color: #295B8B">comments</legend>
+                <div id="divComments" style="width:440px;font-size:small;" >
+                
+                        <span id="txtComment"  ></span>
+               
+                </div>
+           </fieldset>
+        </center>
+    </div>
+</owd:Dialog>
+
+
+
 <script type="text/javascript">
     function GoBack_Click() {
         window.history.back();
@@ -435,11 +531,8 @@
         $('#divReadEligibility').show();
         $('#divUpdateEligibility').hide();
     }
-
     function btnSaveData_Click() {
         var lDecision = ddlDecision.value();
-        alert('THis is lDecision = ' + lDecision);
-
         var lddlTraditional = ddlTraditional.value();
         var lddlNonTraditional = ddlNonTraditional.value();
         var lddlReading = ddlReading.value();
@@ -455,7 +548,9 @@
  
         if (lDecision == "" && lddlReading == "" && lddlMath == "" && (lddlScience == "" || lddlScience == "NE") && (lddlSocialStudies == "" || lddlSocialStudies == "NE") && lchkStart == false && lchkEnd == false) {
             document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('btnCancelSaveData').click();");
-        } else {
+        }
+        else
+        {
             if (lDecision == "") {
                 lError = true;
                 lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select a Decision from dropdown<br />";
@@ -515,10 +610,46 @@
             }
         }
     }
-    
     function DoSaveEligibility() {
         document.getElementById('<%=btnServerSaveData.ClientID%>').click(); 
         diaMessage.Close();
-    }    
+    }
+    function ShowHistory() {
+        for (var i = 0; i < grdHistory.SelectedRecords.length; i++)
+        {
+           var fff = grdHistory.SelectedRecords[i];
+
+           if (fff.FullName == "")
+           {
+               document.getElementById('txtEnteredBy').innerHTML = fff.LOSInformationEnterBy;
+           }
+           else
+           {
+               document.getElementById('txtEnteredBy').innerHTML = fff.FullName;
+           }
+           document.getElementById('txtEnteredDate').innerHTML = fff.LOSInfromationEnteredDate;
+           document.getElementById('txtHistoryId').innerHTML = fff.HistoryId;
+           document.getElementById('txthDecision').innerHTML = fff.Decision;
+           document.getElementById('txtStatus').innerHTML = fff.Reading + '/' + fff.Math + '/' + fff.Science +  '/' + fff.SocialStudies;
+           document.getElementById('txtComment').innerHTML = fff.ChangeType;
+           document.getElementById('txtSupportPlanStartDate').innerHTML = fff.SupportPlanStartDate;
+           document.getElementById('txtSupportPlanEndDate').innerHTML = fff.SupportPlanEndDate;
+
+           if (fff.SupportPlanStartDate == '01/01/1900')
+           {
+               document.getElementById('txtSupportPlan').innerHTML = 'No';
+               document.getElementById('txtSupportPlanStartDate').innerHTML = 'n/a';
+               document.getElementById('txtSupportPlanEndDate').innerHTML = 'n/a';
+           }
+           else
+           {
+               document.getElementById('txtSupportPlan').innerHTML = 'Yes';
+               document.getElementById('txtSupportPlanStartDate').innerHTML = fff.SupportPlanStartDate;
+               document.getElementById('txtSupportPlanEndDate').innerHTML = fff.SupportPlanEndDate;
+           }
+diaShowHistory.Open();
+        }
+        
+    }
 </script>
     
