@@ -85,16 +85,17 @@
                                              AppendDataBoundItems="true" 
                                              Font-Size="X-Small"
                                              MenuWidth="350"
-                                             Width="300">
+                                             Width="250"
+                                            AllowAddingRecords="false">
                         <asp:ListItem>Test Name....</asp:ListItem>
                     </obout:OboutDropDownList>
 
                 </td>
                 <td style="width:127px;">
-                    &nbsp;&nbsp;
+                    &nbsp;
                     <input type="text" readonly="readonly" ID="txtAchTestDate" name="txtAchTestDate"  placeholder="Test Date" 
-                           Style="font-size: x-small;border-radius:5px;Width:72px;height:12px; Border Width:1px solid #C0C0C0;"
-                           />
+                           Style="font-size: x-small;border-radius:5px;Width:72px; Border Width:1px solid #C0C0C0;"
+                           />&nbsp;
                     <obout:Calendar ID="calAchTestDate" 
                                     runat="server" 
                                     TextBoxId="txtAchTestDate"
@@ -122,15 +123,15 @@
                 <td style="width:65px;">
                     <input type="text"  ID="txtAchScore" name="txtAchScore" Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Score" />
                 </td>
-                <td style="width:75px;display:none;">
-                    <input type="text" ID="txtAchScaleScore" name="txtAchScaleScore"  Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Sacle Score" />
+                <td style="width:100px;">
+                    <input type="text" ID="txtAchScaleScore" name="txtAchScaleScore"  Style="font-size: x-small;border-radius:5px;Width:75px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Sacle Score" />
                 </td>
                 <td>
                     <obout:OboutDropDownList ID="ddlUseForEligibility" runat="server" 
                                              AppendDataBoundItems="true" 
                                              Font-Size="X-Small"
-                                             MenuWidth="75"
-                                             Width="75">
+                                             MenuWidth="65"
+                                             Width="65">
                         <asp:ListItem Value="-1" Text=""> </asp:ListItem>
                         <asp:ListItem Value ="1"> Yes </asp:ListItem>
                         <asp:ListItem Value="0"> No </asp:ListItem>
@@ -156,7 +157,7 @@
         </table>
         <obout:Grid ID="grdActiveData" runat="server"
                         AutoGenerateColumns="false"
-                        AllowAddingRecords="true"
+                        AllowAddingRecords="false"
                         ShowFooter="true"
                         PageSize="20"
                         AllowManualPaging="false"
@@ -168,27 +169,39 @@
                         KeepSelectedRecords="true"
                         AllowSorting="true"
                         ShowHeader="true"
+                      
                 >
                 <Columns>
-                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="300" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="225" runat="server" AllowSorting="true" ></obout:Column>
                     <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="125" runat="server"  ></obout:Column>
                     <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
                     <obout:Column DataField="Score"     HeaderText="Test Score"   Width="75" runat="server" >
                           <TemplateSettings HeaderTemplateId="tempTestScore" />
                     </obout:Column>
-                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
-                        <TemplateSettings HeaderTemplateId="tempUseForEligibility" />
+                    <obout:Column DataField="ScaleScore"     HeaderText=""   Width="75" runat="server" >
+                        <TemplateSettings HeaderTemplateId="tempScaleScore1" />
+                    </obout:Column>
+                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" TemplateId="TplUFE" >
+                        <TemplateSettings HeaderTemplateId="tempUseForEligibility"  />
                     </obout:Column>
                 </Columns>
-           
             <Templates>
+                <obout:GridTemplate runat="server" ID="TplUFE">
+                    <Template>
+                        <%# (Container.Value == "1" ? "yes" : "no") %>
+                    </Template>
+                </obout:GridTemplate>
+          
                 <obout:GridTemplate runat="server" ID="tempUseForEligibility">
                     <Template>Use For<br />Eligibility</Template>
                 </obout:GridTemplate>
-            </Templates>
-            <Templates>
+            
                 <obout:GridTemplate runat="server" ID="tempTestScore">
                     <Template>Test<br />Score</Template>
+                </obout:GridTemplate>
+        
+                <obout:GridTemplate runat="server" ID="tempScaleScore1">
+                    <Template>Scale<br />Score</Template>
                 </obout:GridTemplate>
             </Templates>
          
@@ -276,8 +289,8 @@
             </tr>
         </table>
         <obout:Grid ID="grdAddAdditionalAchievmentTest" runat="server"
-                      AutoGenerateColumns="false"
-                        AllowAddingRecords="true"
+                        AutoGenerateColumns="false"
+                        AllowAddingRecords="false"
                         ShowFooter="true"
                         PageSize="20"
                         AllowManualPaging="false"
@@ -377,7 +390,7 @@
         </table>
         <obout:Grid ID="grdAptitudeData" runat="server"
                         AutoGenerateColumns="false"
-                        AllowAddingRecords="true"
+                        AllowAddingRecords="false"
                         ShowFooter="true"
                         PageSize="20"
                         AllowManualPaging="false"
@@ -392,9 +405,17 @@
                 >
                 <Columns>
                     <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="200" runat="server"  ></obout:Column>
-                    <obout:Column DataField="Score"  HeaderText="Score"  Width="180" runat="server" ></obout:Column>
-                </Columns>
+                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
+                    <obout:Column DataField="Score"  HeaderText="Score"  Width="130" runat="server" ></obout:Column>
+                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
+                         <TemplateSettings HeaderTemplateId="tempAptitudeseForEligibility" />
+                    </obout:Column>
+				</Columns>
+                <Templates>
+                    <obout:GridTemplate runat="server" ID="tempAptitudeseForEligibility">
+                        <Template>Use For<br />Eligibility</Template>
+                    </obout:GridTemplate>
+                </Templates>
         </obout:Grid>
     </div>
 
@@ -447,13 +468,12 @@
                     <input type="button" id="btnSaveAdditionalAptitude" style="border-style: none; border-width: 0px; font-size: x-small; border-top-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-left-color: transparent; color: #FFFFFF; font-family: Verdana; background-color: transparent; outline: none; display: none;" value="save" onclick="btnSaveAdditionalAptitude_Click()" />
                     <input type="button" ID="btnServerSaveAdditionalAptitude" runat="server" Style="display:none;" value="save"  onserverclick="btnServerSaveAdditionalAptitude_Click" />
                     <input type="button" id="btnCancelAdditionalAptitude" style="border-style: none; border-width: 0px; font-size: x-small; border-top-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-left-color: transparent; color: #FFFFFF; font-family: Verdana; background-color: transparent; outline: none; display: none;" value="cancel" onclick="btnCancelAdditionalAptitude_Click()" />
-
                 </td>
             </tr>
         </table>
         <obout:Grid ID="grdAdditionalAptitudeData" runat="server"
                      AutoGenerateColumns="false"
-                        AllowAddingRecords="true"
+                        AllowAddingRecords="false"
                         ShowFooter="true"
                         PageSize="20"
                         AllowManualPaging="false"
@@ -466,12 +486,19 @@
                         AllowSorting="true"
                         ShowHeader="true"
             >
-            <Columns>
-                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="200" runat="server"  ></obout:Column>
-                    <obout:Column DataField="Score"  HeaderText="Score"   Width="180px" runat="server" ></obout:Column>
-            </Columns>
-
+                <Columns>
+                        <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                        <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
+                        <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                        <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
+                             <TemplateSettings HeaderTemplateId="tempAdditionalAptitudeData" />
+                        </obout:Column>
+                </Columns>
+                <Templates>
+                        <obout:GridTemplate runat="server" ID="tempAdditionalAptitudeData">
+                            <Template>Use For<br />Eligibility</Template>
+                        </obout:GridTemplate>
+                </Templates>
         </obout:Grid>
     </div>
 
@@ -522,7 +549,7 @@
         </table>
         <obout:grid ID="grdTeacherInput" runat="server"
                      AutoGenerateColumns="false"
-                        AllowAddingRecords="true"
+                        AllowAddingRecords="false"
                         ShowFooter="true"
                         PageSize="20"
                         AllowManualPaging="false"
@@ -536,11 +563,19 @@
                         ShowHeader="true"
             >
           
-            <Columns>
-                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="575" runat="server" AllowSorting="true" ></obout:Column>
-                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="155" runat="server"  ></obout:Column>
-          
-            </Columns>
+                <Columns>
+                    <obout:Column DataField="TestName" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="TestDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
+                     <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                    <obout:Column DataField="UserForEligibility"  HeaderText="Useed for " Width="100" runat="server"  >
+                        <TemplateSettings HeaderTemplateId="tempTeacherInput" />
+                    </obout:Column>
+                </Columns>
+                <Templates>
+                    <obout:GridTemplate runat="server" ID="tempTeacherInput">
+                        <Template>Use For<br />Eligibility</Template>
+                    </obout:GridTemplate>
+                </Templates>
         </obout:grid>
     </div>
 
@@ -589,7 +624,7 @@
         </table>
        <Obout:Grid ID="grdStudentInput" runat="server"
                      AutoGenerateColumns="false"
-                        AllowAddingRecords="true"
+                        AllowAddingRecords="false"
                         ShowFooter="true"
                         PageSize="20"
                         AllowManualPaging="false"
@@ -603,11 +638,19 @@
                         ShowHeader="true"
             >
           
-            <Columns>
-                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="575" runat="server" AllowSorting="true" ></obout:Column>
-                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="155" runat="server"  ></obout:Column>
-            </Columns>
-           
+                <Columns>
+                    <obout:Column DataField="TestName" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="TestDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
+                     <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                    <obout:Column DataField="UsedForEligibility"  HeaderText="Test Date" Width="100" runat="server"  >
+                        <TemplateSettings HeaderTemplateId="tempStudentInput" />
+                    </obout:Column>
+                </Columns>
+                <Templates>
+                            <obout:GridTemplate runat="server" ID="tempStudentInput">
+                                <Template>Use For<br />Eligibility</Template>
+                            </obout:GridTemplate>
+                </Templates>
         </obout:Grid>
     </div>
 

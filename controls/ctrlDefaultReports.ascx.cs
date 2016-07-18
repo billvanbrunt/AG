@@ -45,7 +45,7 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         ddlMathLOS.Items.Add(new ListItem("", ""));
         ddlSCILOS.Items.Add(new ListItem("", ""));
         ddlSSLOS.Items.Add(new ListItem("", ""));
-        ddlSites.Items.Add(new ListItem("", "0"));
+        //ddlSites.Items.Add(new ListItem("", ""));
 
         ddlReportNames.DataSource = ds.Tables[0];
         ddlReportNames.DataBind();
@@ -78,11 +78,13 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         string lWhatReport = ddlReportNames.SelectedValue.ToString();
         if (lWhatReport != "")
         {
-            string lStoredProcName;
+            string lStoredProc;
             SqlStr = "select storedProcName from ReportsToPrint where ReportId=" + lWhatReport;
+
+
             SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
 
-            lStoredProcName = cmd.ExecuteScalar().ToString();
+            lStoredProc = cmd.ExecuteScalar().ToString();
             cmd.Cancel();
             cmd.Dispose();
             string details="";
@@ -103,65 +105,68 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
             string vScienceService = "";
             string vHistoryService = "";
 
-            if (ddlSites.SelectedValue != "0")
+            if (ddlSites.SelectedValue != "")
             {
-                vSite = ddlSites.SelectedValue;
+                vSite = " SiteId in (" + ddlSites.SelectedValue + ")";
             }
+            else
+            {
+                vSite = "SiteId LIKE '%'";
+            }
+            lStoredProc = lStoredProc + vSite;
 
-            if(ddlDecision.SelectedValue != "0")
-            {
-                vDecision = ddlDecision.SelectedValue;
-            }
             if (cboGrade.SelectedValue != "0")
             {
                 vGrade = cboGrade.SelectedValue;
+                lStoredProc = lStoredProc + " AND cs.GradeLevel = '" + vGrade + "' ";
             }
-            if(ddlGender.SelectedValue != "0")
+
+            if (ddlGender.SelectedValue != "0")
             {
                 vGender = ddlGender.SelectedValue;
+                lStoredProc = lStoredProc + " and cs.Gender = '" + vGender + "' ";
             }
-            if(cboEthnicity.SelectedValue != "0")
+            if(cboEthnicity.SelectedValue != "")
             {
                 vEthincity = cboEthnicity.SelectedValue;
+                lStoredProc = lStoredProc + " and ce.[Description] = '" + vEthincity + "' ";
             }
-            if (ddlReadingLOS.SelectedValue != "0")
+            if (ddlReadingLOS.SelectedValue != "")
             {
                 vReadingService = ddlReadingLOS.SelectedValue;
+                lStoredProc = lStoredProc + " AND 	lsi.Reading = '" + vReadingService + "' ";
             }
             if(ddlMathLOS.SelectedValue != "")
             {
                 vMathService = ddlMathLOS.SelectedValue;
+                lStoredProc = lStoredProc + " AND 	lsi.Math = '" + vMathService + "' ";
             }
 
-           if (ddlSCILOS.SelectedValue != "0")
+           if (ddlSCILOS.SelectedValue != "")
             {
                 vScienceService = ddlSCILOS.SelectedValue;
+                lStoredProc = lStoredProc + " AND lsi.Science =' " + vScienceService + "' ";
             }            
-            if (ddlSSLOS.SelectedValue != "0")
+            if (ddlSSLOS.SelectedValue != "")
             {
                 vHistoryService = ddlSSLOS.SelectedValue;
+                lStoredProc = lStoredProc + " AND lsi.SocialStudies = '" + vHistoryService + "' ";
             }
-             
-           if(vDecision == "")
+
+            if (ddlDecision.SelectedValue != "")
             {
-                SqlStr = lStoredProcName + "WODec";
+                vDecision = " si.decision IN (" + ddlDecision.SelectedValue + ")";
             }   
-           else
-            {
-                SqlStr = lStoredProcName;
-            } 
-            
+          
+            lStoredProc = lStoredProc + vDecision;
+            lStoredProc = lStoredProc + " order by SiteId, cs.GradeLevel, lastName, FirstName ";
+            SqlStr = lStoredProc;
+
             cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@Site", vSite + "%"));
-            cmd.Parameters.Add(new SqlParameter("@Decision", vDecision));
-            cmd.Parameters.Add(new SqlParameter("@Grade", vGrade + "%"));
-            cmd.Parameters.Add(new SqlParameter("@Gender", vGender + "%"));
-            cmd.Parameters.Add(new SqlParameter("@Ethincity", vEthincity + "%"));
-            cmd.Parameters.Add(new SqlParameter("@ReadingService", vReadingService + "%"));
-            cmd.Parameters.Add(new SqlParameter("@MathService", vMathService + "%"));
-            cmd.Parameters.Add(new SqlParameter("@ScienceService", vScienceService + "%"));
-            cmd.Parameters.Add(new SqlParameter("@HistoryService", vHistoryService + "%"));
+            cmd.CommandType = CommandType.Text;
+
+           
+
             try
             {
                 DataSet ds = Utilities.GetDataSet(cmd);

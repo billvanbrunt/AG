@@ -256,7 +256,7 @@
     <div id="divServiceEligibilityOptions"  style="width: 700px;">
         <legend style="font-weight:bold;">Service Eligibility Options</legend>
         <obout:OboutCheckBox ID="cbSEOREGClass" runat="server"
-                             Text="Differentiation in Regular Eduication Classroom"
+                             Text="Differentiation in Regular Education Classroom"
                              TextAlign="Right">
         </obout:OboutCheckBox>
         <br />
@@ -271,7 +271,7 @@
         </obout:OboutCheckBox>
         <br />
         <obout:OboutCheckBox ID="cbSEOREGVS" runat="server"
-                             Text="Very Strong (VS) at Academy @ Lincoin (full-time, self-contained)"
+                             Text="Very Strong (VS) at Academy @ Lincoln (full-time, self-contained)"
                              TextAlign="Right">
         </obout:OboutCheckBox>
     </div>

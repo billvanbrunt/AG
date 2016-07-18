@@ -34,13 +34,13 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
     }
     protected void btnAdditionalAchievement_Click(object sender, EventArgs e)
     {
-        gTestType.Text = "2";
-        getTestData("2");
+        gTestType.Text = "3";
+        getTestData("3");
     }
     protected void btnAptitudeTest_Click(object sender, EventArgs e)
     {
-        gTestType.Text = "3";
-        getTestData("3");
+        gTestType.Text = "2";
+        getTestData("2");
     }
     protected void btnAdditionalAptitudeTest_Click(object sender, EventArgs e)
     {

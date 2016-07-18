@@ -19,8 +19,8 @@
 
 <div id="divButtons" style="vertical-align:top;" >
     <asp:button id="btnAchievementTest" runat="server" CommandArgument="A" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Achievement Test" onclick="btnAchievementTest_Click" />
-    <asp:button id="btnAdditionalAchievement" runat="server" CommandArgument="B" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Achievement Test" onclick="btnAdditionalAchievement_Click"  />
-    <asp:button id="btnAptitudeTest" runat="server" CommandArgument="C" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" text="Aptitude Test" onclick="btnAptitudeTest_Click"/>
+    <asp:button id="btnAdditionalAchievement" runat="server" CommandArgument="C" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Achievement Test" onclick="btnAdditionalAchievement_Click"  />
+    <asp:button id="btnAptitudeTest" runat="server" CommandArgument="B" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" text="Aptitude Test" onclick="btnAptitudeTest_Click"/>
     <asp:button id="btnAdditionalAptitudeTest" runat="server" CommandArgument="D" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Aptitude Test" onclick="btnAdditionalAptitudeTest_Click"/>
     <input type="button" id="btnAddNewTest" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" value="Add New Test" onclick="btnAddNewTest_Click()"/>
 </div>

@@ -29,7 +29,15 @@
                         School:
                     </td>
                     <td colspan="4" style="text-align:left">
-                        <obout:OboutDropDownList ID="ddlSites" runat="server" SelectionMode="Multiple" DataTextField="SiteName" DataValueField="SiteId" Width="215px" Height="200px" AppendDataBoundItems="true" ></obout:OboutDropDownList>
+                        <obout:combobox ID="ddlSites" runat="server" 
+                                            SelectionMode="Multiple" 
+                                            DataTextField="SiteName" 
+                                            DataValueField="SiteId" 
+                                            Width="215px" 
+                                            Height="200px" 
+                                            AppendDataBoundItems="true" >
+
+                        </obout:combobox>
                     </td>
                 </tr>
                 <tr>
@@ -165,7 +173,9 @@
 
     function ClearForm_Click()
     {
-        ddlSite.selectedValue = 0;
+         ddlSite.value();
+        cboGrade.value();
+        alert("I'm Here");
     }
     
     function btnView_Click() {
