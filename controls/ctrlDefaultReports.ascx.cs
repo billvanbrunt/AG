@@ -80,8 +80,7 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         {
             string lStoredProc;
             SqlStr = "select storedProcName from ReportsToPrint where ReportId=" + lWhatReport;
-
-
+            
             SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
 
             lStoredProc = cmd.ExecuteScalar().ToString();
@@ -90,10 +89,6 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
             string details="";
             int lCounter = 0;
             bool hasSelectedItems = false;
-
-
-          
-
             string vStudentId = "1";
             string vSite = "";
             string vDecision = "";
@@ -115,13 +110,36 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
             }
             lStoredProc = lStoredProc + vSite;
 
-            if (cboGrade.SelectedValue != "0")
+            if (cboGrade.SelectedValue != "")
             {
-                vGrade = cboGrade.SelectedValue;
-                lStoredProc = lStoredProc + " AND cs.GradeLevel = '" + vGrade + "' ";
-            }
+                bool lhasSelectedItems = false;
+                var lInValue = "";
+                foreach (ComboBoxItem item in cboGrade.Items)
+                {
+                    if (item.Selected)
+                    {
+                        if (!lhasSelectedItems)
+                        {
+                            if (lInValue == "")
+                            {
+                                lInValue = "'" + item.Value + "'";
+                            }
+                            else
+                            {
+                                lInValue = lInValue + ",'" + item.Value + "'";
+                            }
+                        }
+                    }
 
-            if (ddlGender.SelectedValue != "0")
+                    lStoredProc = lStoredProc + " AND cs.GradeLevel in (" + lInValue + ")";
+                }
+            }
+            else
+            {
+                lStoredProc = lStoredProc + " AND cs.GradeLevel LIKE '%'";
+            }
+            
+        if (ddlGender.SelectedValue != "0")
             {
                 vGender = ddlGender.SelectedValue;
                 lStoredProc = lStoredProc + " and cs.Gender = '" + vGender + "' ";
@@ -129,7 +147,7 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
             if(cboEthnicity.SelectedValue != "")
             {
                 vEthincity = cboEthnicity.SelectedValue;
-                lStoredProc = lStoredProc + " and ce.[Description] = '" + vEthincity + "' ";
+                lStoredProc = lStoredProc + " and ce.Eth_Cde = '" + vEthincity + "' ";
             }
             if (ddlReadingLOS.SelectedValue != "")
             {

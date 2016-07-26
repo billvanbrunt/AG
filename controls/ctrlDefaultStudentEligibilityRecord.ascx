@@ -143,7 +143,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Proformance Task </td>
+                <td>Preformance Task </td>
                 <td>
                     <asp:Label ID="txtTestNamePT" runat="server" ></asp:Label>
                 </td>
@@ -280,7 +280,7 @@
         <table style="width:700px;font-size:x-small;" >
             <tr>
                 <td colspan="1" style="font-weight:bold;">
-                    Signatures of Team Academically Gifted (TAG):
+                    Signatures of Team for Academically Gifted (TAG):
                 </td>
             </tr>
 
@@ -338,7 +338,7 @@
                     <br />
                     <hr style="width:400px;" align="left"/>
 
-                    &nbsp;&nbsp; District Oversite Committee (DOC) concours:
+                    &nbsp;&nbsp; District Oversite Committee (DOC) concurs:
                     &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                     &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                     &nbsp;&nbsp; &nbsp;&nbsp;

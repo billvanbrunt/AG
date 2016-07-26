@@ -74,10 +74,10 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         grdStudentInput.DataSource = ds.Tables[3];
         grdStudentInput.DataBind();
 
-        grdAddAdditionalAchievmentTest.DataSource = ds.Tables[4];
+        grdAddAdditionalAchievmentTest.DataSource = ds.Tables[5];
         grdAddAdditionalAchievmentTest.DataBind();
 
-        grdAdditionalAptitudeData.DataSource = ds.Tables[5];
+        grdAdditionalAptitudeData.DataSource = ds.Tables[4];
         grdAdditionalAptitudeData.DataBind();
 
 
@@ -183,18 +183,20 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
     }
     protected void btnServerSaveTeacherInfo_Click(object sender, EventArgs e)
     {
-
-
         string lUserId = HttpContext.Current.User.Identity.Name.ToString();
         string lTestName = ddlAppTestName.SelectedValue.ToString();
         string lTestDate = Request.Form["txtTeacherDate"];
         string lScore = txtTeacherScore.Text;
+        int lUserfor = Int32.Parse(cboTeacherUsedFor.SelectedValue);
+
+
         SqlStr = "usp_SaveTeachersInput";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
 
         cmd.Parameters.Add(new SqlParameter("@StudentId", lStudentId));
         cmd.Parameters.Add(new SqlParameter("@ModDate", lTestDate));
+        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lUserfor));
         cmd.Parameters.Add(new SqlParameter("@CheckListScore", lScore));
         cmd.Parameters.Add(new SqlParameter("@LastModifiedBy", lUserId));
 

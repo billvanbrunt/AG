@@ -508,7 +508,7 @@
                 <td style="width: 150px; text-align: left;">
                     <obout:OboutTextBox ID="txtTeacherScore" font="x-small" width="200px"  runat="server" ></obout:OboutTextBox>
                 </td>
-                <td style="width: 635px; text-align: right;">
+                <td style="width: 335px; text-align: Center;">
                    
                    
                     <input type="text" readonly="readonly" ID="txtTeacherDate" name="txtTeacherDate" placeholder="Date"
@@ -528,7 +528,20 @@
                                     TextArrowRight="&amp;gt;"
                                     TitleText=" ">
                     </obout:Calendar>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td style="width: 85px; text-align: left;">
+                    <obout:OboutTextBox ID="txtTeacherEvalScore" font="x-small" runat="server" Width="75px" MaxLength="3" WatermarkText="Score"></obout:OboutTextBox>
+                </td>
+                <td>
+                    <obout:OboutDropDownList ID="cboTeacherUsedFor" runat="server" 
+                                             AppendDataBoundItems="true" 
+                                             Font-Size="X-Small"
+                                             MenuWidth="75"
+                                             Width="75">
+                        <asp:ListItem Value="-1" Text=""> </asp:ListItem>
+                        <asp:ListItem Value ="1"> Yes </asp:ListItem>
+                        <asp:ListItem Value="0"> No </asp:ListItem>
+                    </obout:OboutDropDownList>
                 </td>
             </tr>
         </table>
@@ -585,7 +598,7 @@
                 <td style="width: 150px; text-align: left;">
                     <obout:oboutTextBox ID="txtStudentInput" width="200px"  runat="server" CssClass="gridData" Text='<%#Eval("Score") %>'/>
                 </td>
-                <td style="width: 635px; text-align: right;">
+                <td style="width: 335px; text-align: center;">
                   
                     <input type="text" readonly="readonly" id="txtStudentDate" name="txtStudentDate" style="font-size: x-small; border-radius: 5px; width: 75px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" placeholder="Date" />
                     <obout:Calendar ID="calStudentInput" runat="server"
@@ -602,8 +615,20 @@
                                     TextArrowRight="&amp;gt;"
                                     TitleText=" ">
                     </obout:Calendar>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    
+                </td>
+                <td style="width: 85px; text-align: left;">
+                    <obout:OboutTextBox ID="txtStudentrScore" font="x-small" runat="server" Width="75px" MaxLength="3" WatermarkText="Score"></obout:OboutTextBox>
+                </td>
+                <td>
+                    <obout:OboutDropDownList ID="cboStudentUsedFor" runat="server" 
+                                             AppendDataBoundItems="true" 
+                                             Font-Size="X-Small"
+                                             MenuWidth="75"
+                                             Width="75">
+                        <asp:ListItem Value="-1" Text=""> </asp:ListItem>
+                        <asp:ListItem Value ="1"> Yes </asp:ListItem>
+                        <asp:ListItem Value="0"> No </asp:ListItem>
+                    </obout:OboutDropDownList>
                 </td>
             </tr>
         </table>
@@ -906,7 +931,7 @@
             document.getElementById('divAddNewTeacherInfo').style.display = 'none';
             document.getElementById('btnSaveTeacherInfo').style.display = 'none';
             document.getElementById('btnCancelTeacherInfo').style.display = 'none';
-            document.getElementById('btnAddTeacherInfo.ClientID%>').style.display = 'inline';
+            document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'inline';
         }
         function ADDTeacherInfo_Click() {
             document.getElementById('divAddNewTeacherInfo').style.display = 'block';
@@ -962,7 +987,7 @@
             document.getElementById('divAddNewStudentInfo').style.display = 'none';
             document.getElementById('btnSaveStudentInfo').style.display = 'none';
             document.getElementById('btnCancelStudentInfo').style.display = 'none';
-            document.getElementById('btnAddStudentInfo').style.display = 'inline';
+            document.getElementById('<%=btnAddStudentInfo.ClientID%>').style.display = 'inline';
         }
         // AddStudentInfo_Click()
         function AddStudentInfo_Click() {

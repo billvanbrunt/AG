@@ -36,7 +36,7 @@
                                             Width="215px" 
                                             Height="200px" 
                                             AppendDataBoundItems="true" >
-
+                            <obout:ComboBoxItem Value="0" Text="" />
                         </obout:combobox>
                     </td>
                 </tr>
@@ -58,25 +58,23 @@
                         Grade:
                     </td>
                     <td style=" text-align:left">
-                        <obout:OboutDropDownList ID="cboGrade" runat="server" SelectionMode="Multiple" AppendDataBoundItems="true"  DataTextField="" DataValueField="">
-                            <items>
-                                <asp:ListItem Value="0" Text="" />
-                                <asp:ListItem Value="PK" Text="PK" />
-                                <asp:ListItem Value="KI" Text="KI" />
-                                <asp:ListItem Value="01" Text="01" />
-                                <asp:ListItem Value="02" Text="02" />
-                                <asp:ListItem Value="03" Text="03" />
-                                <asp:ListItem Value="04" Text="04" />
-                                <asp:ListItem Value="05" Text="05" />
-                                <asp:ListItem Value="06" Text="06" />
-                                <asp:ListItem Value="07" Text="07" />
-                                <asp:ListItem Value="08" Text="08" />
-                                <asp:ListItem Value="09" Text="09" />
-                                <asp:ListItem Value="10" Text="10" />
-                                <asp:ListItem Value="11" Text="11" />
-                                <asp:ListItem Value="12" Text="12" />
-                            </items>
-                        </obout:OboutDropDownList>
+                        <obout:ComboBox ID="cboGrade" runat="server" SelectionMode="Multiple" AppendDataBoundItems="true" DataTextField="" DataValueField="">
+                            <obout:ComboBoxItem Value="0" Text="" />
+                            <obout:ComboBoxItem Value="PK" Text="PK" />
+                            <obout:ComboBoxItem Value="KI" Text="KI" />
+                            <obout:ComboBoxItem Value="01" Text="01" />
+                            <obout:ComboBoxItem Value="02" Text="02" />
+                            <obout:ComboBoxItem Value="03" Text="03" />
+                            <obout:ComboBoxItem Value="04" Text="04" />
+                            <obout:ComboBoxItem Value="05" Text="05" />
+                            <obout:ComboBoxItem Value="06" Text="06" />
+                            <obout:ComboBoxItem Value="07" Text="07" />
+                            <obout:ComboBoxItem Value="08" Text="08" />
+                            <obout:ComboBoxItem Value="09" Text="09" />
+                            <obout:ComboBoxItem Value="10" Text="10" />
+                            <obout:ComboBoxItem Value="11" Text="11" />
+                            <obout:ComboBoxItem Value="12" Text="12" />
+                        </obout:ComboBox>
 
                     </td>
                 </tr>
@@ -112,7 +110,7 @@
                     <td style="text-align:right">
                         Math Service:
                     </td>
-                    <td style=" text-align:left">
+                    <td style=" text-align:left">    
                         <obout:OboutDropDownList ID="ddlMathLOS" runat="server"  DataValueField="LOSCode"   DataTextField="LOSDescription" AppendDataBoundItems="true"></obout:OboutDropDownList>
                     </td>
                 </tr>
@@ -170,13 +168,23 @@
 </div>
 
 <script type="text/javascript" >
-
+    
     function ClearForm_Click()
     {
-         ddlSite.value();
-        cboGrade.value();
-        alert("I'm Here");
+        var initialSelectedIndex = -1;
+        cboGrade.selectedIndex(initialSelectedIndex);
+        ddlSites.selectedIndex(initialSelectedIndex);
+        ddlDecision.selectedIndex(initialSelectedIndex);
+        cboEthnicity.selectedIndex(initialSelectedIndex);
+        ddlGender.selectedIndex(initialSelectedIndex);
+        ddlReadingLOS.selectedIndex(initialSelectedIndex);
+        ddlMathLOS.selectedIndex(initialSelectedIndex);
+        ddlSCILOS.selectedIndex(initialSelectedIndex);
+        ddlSSLOS.selectedIndex(initialSelectedIndex);
     }
+        
+      
+    
     
     function btnView_Click() {
         var ddlVal = ddlReportNames.value();
@@ -184,13 +192,16 @@
         var ltxt = 'Oops,<br /> No resport has been selected. <br /> Click <font color="#295b8b"><b>ok</b></font> and select a report to print.';
         var lName = document.getElementById("<%=divErrorMsg.ClientID %>").id;
     
-        if (ddlVal == 0) {
+        if (ddlVal == 0)
+        {
             diaMessage.setTitle("Data Missing!");
             diaMessage.setSize(300, 175);
     
             document.getElementById(lName).innerHTML = ltxt;
             diaMessage.Open();
-        } else {
+        }
+        else
+        {
             lbtn = document.getElementById('<%=btnServerView.ClientID%>');
             lbtn.click();
         }
