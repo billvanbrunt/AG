@@ -51,6 +51,12 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
     {
 
     }
+    protected void btnDefault_Click(object sendeer, EventArgs e)
+    {
+        Response.Redirect("~/Default.aspx");
+
+    }
+
     protected void loadDropdown()
     {
         ddTestTypeNew.Items.Add(new ListItem(" ", " "));
@@ -159,7 +165,7 @@ public partial class ctrlDefaultAppData : System.Web.UI.UserControl
     protected void btnServerSaveNewTest_Click(object sender, EventArgs e)
     {
         var lTestName = txtTestNameNew.Text;
-        var lDescription = txtTestDescriptionNew.Text;
+        var lDescription = ""; //txtTestDescriptionNew.Text;
         var lTestTypeNew = ddTestTypeNew.SelectedValue.ToString();
         SqlStr = "usp_SaveNewTest";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());

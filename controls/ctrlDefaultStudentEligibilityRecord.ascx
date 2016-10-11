@@ -13,7 +13,6 @@
             <tr>
                 <td colspan="2" style="font-weight: bold;text-align:left;vertical-align:top;Font-Size:small;">
                     Student:
-
                     <asp:Label ID="txtFullName" runat="server" Font-Size="small" />
                     <br />
                     <Label style="text-align: right; font-size: small; width: 70px; font-weight: bold;">Student ID:</Label>
@@ -53,7 +52,6 @@
             </tr>
         </table>
     </div>
-
     <div id="divTable">
         <table style="width: 700px; font-size: x-small;" border="1">
             <tr>
@@ -207,7 +205,6 @@
             </tr>
         </table>
     </div>
-
     <div id="divEligibility" style="text-align:left;width: 700px">
 
         <table  style="width: 700px;text-align:left;">
@@ -225,6 +222,12 @@
                     </obout:OboutCheckBox>
                 </td>
                 <td>
+                    <obout:OboutCheckBox ID="cbAGRM" runat="server"
+                                         Text=" AG In Reading & Math"
+                                         TextAlign="Right">
+                    </obout:OboutCheckBox>
+                </td>
+                <td>
                     <obout:OboutCheckBox ID="cbAGR" runat="server"
                                          Text=" AG In Reading"
                                          TextAlign="Right">
@@ -236,12 +239,7 @@
                                          TextAlign="Right">
                     </obout:OboutCheckBox>
                 </td>
-                <td>
-                    <obout:OboutCheckBox ID="cbAGRM" runat="server"
-                                         Text=" AG In Reading & Math"
-                                         TextAlign="Right">
-                    </obout:OboutCheckBox>
-                </td>
+               
                 <td>
                     <obout:OboutCheckBox ID="cbAGNE" runat="server"
                                          Text=" Not Eligible"
@@ -336,19 +334,9 @@
                 <td>
                     <br />
                     <br />
-                    <hr style="width:400px;" align="left"/>
+                  
 
-                    &nbsp;&nbsp; District Oversite Committee (DOC) concurs:
-                    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    &nbsp;&nbsp; &nbsp;&nbsp;
-                    ______ DOC Placement <br />
-                    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    &nbsp;&nbsp; &nbsp;&nbsp;
-                    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    (No TAG Signatures needed)
+                   &nbsp;&nbsp; ______ DOC Placement 
                 </td>
             </tr>
             <tr>

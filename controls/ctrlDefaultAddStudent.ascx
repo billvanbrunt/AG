@@ -12,24 +12,35 @@
 <div id="DIvDefaultStudentMain" >
     <fieldset style="width: 730px; height: 70px; font-size: small;">
         <legend style="font-size: small; font-weight: bolder; color: #295B8B">Student Profile</legend>
-        <table style="width: 550px;">
+        <table width="600">
             <tr>
-                <td colspan="2" style="font-weight: bold;">
-                    <asp:Label ID="txtFullName" runat="server" Font-Size="large" />
+                <td>
+
+
+                    <table style="width: 300px;">
+                        <tr>
+                            <td colspan="2" style="font-weight: bold;">
+                                <asp:Label ID="txtFullName" runat="server" Font-Size="large" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; font-size: small; width: 70px; font-weight: bold;">Student ID:
+                            </td>
+                            <td style="text-align: left;">
+                                <asp:Label ID="txtStudentId" runat="server" Style="font-size: small;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; font-size: small; width: 70px; font-weight: bold;">School: 
+                            </td>
+                            <td style="text-align: left">
+                                <asp:Label ID="txtSchoolName" runat="server" Style="font-size: small;" />
+                            </td>
+                        </tr>
+                    </table>
                 </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; font-size: small; width: 70px; font-weight: bold;">Student ID:
-                </td>
-                <td style="text-align: left;">
-                    <asp:Label ID="txtStudentId" runat="server" Style="font-size: small;" />
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; font-size: small; width: 70px; font-weight: bold;">School: 
-                </td>
-                <td style="text-align: left">
-                    <asp:Label ID="txtSchoolName" runat="server" Style="font-size: small;" />
+                <td>
+                    <input type="button" id="Button1" runat="server" style="font-size: x-small; width: 125px; border-radius: 5px;" onserverclick="EligibilityInfo_Click" value="Add Student" />
                 </td>
             </tr>
         </table>

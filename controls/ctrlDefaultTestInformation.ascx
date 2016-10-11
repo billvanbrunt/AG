@@ -124,7 +124,7 @@
                     <input type="text"  ID="txtAchScore" name="txtAchScore" Style="font-size: x-small;border-radius:5px;Width:50px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Score" />
                 </td>
                 <td style="width:100px;">
-                    <input type="text" ID="txtAchScaleScore" name="txtAchScaleScore"  Style="font-size: x-small;border-radius:5px;Width:75px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Sacle Score" />
+                    <input type="text" ID="txtAchScaleScore" name="txtAchScaleScore"  Style="font-size: x-small;border-radius:5px;Width:75px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;" placeholder="Scale Score" />
                 </td>
                 <td>
                     <obout:OboutDropDownList ID="ddlUseForEligibility" runat="server" 
@@ -144,7 +144,7 @@
         <table style="width:730px;">
             <tr>
                 <td style="text-align:left;">
-                    <label class="gridTitle">&nbsp;Achievment Data</label>
+                    <label class="gridTitle">&nbsp; Achievement Data</label>
                 </td>
                 <td style="text-align:right;">
                     <input type="button" ID="btnAddAcheivmentTest" name="btnAddAcheivmentTest" runat="server" Style="border-style: none; border-width: 0px;font-size:x-small;border-top-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-left-color: transparent; color: #FFFFFF; font-family: Verdana; background-color: transparent;outline:none;display:inline;" value="Add New" onclick="btnAddAcheivmentTest_Click()" />
@@ -278,7 +278,7 @@
         <table style="width:730px;">
             <tr>
                 <td style="text-align:left;">
-                    <label class="gridTitle">&nbsp;Additional Achievment Data</label>
+                    <label class="gridTitle">&nbsp;Additional Achievement Data</label>
                 </td>
                 <td style="text-align:right;">
                     <input type="button" ID="btnAddAdditionalAchievmentTest" name="btnAddAdditionalAchievmentTest" runat="server" Style="border-style: none; border-width: 0px;font-size:x-small;border-top-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-left-color: transparent; color: #FFFFFF; font-family: Verdana; background-color: transparent;outline:none;display:inline;" value="Add New" onclick="btnAddAdditionalAchievmentTest_Click()" />
@@ -371,6 +371,17 @@
                 <td style="width: 85px; text-align: left;">
                     <obout:OboutTextBox ID="txtAppTestScore" font="x-small" runat="server" Width="75px" MaxLength="3" WatermarkText="Score"></obout:OboutTextBox>
                 </td>
+                <td>
+                    <obout:OboutDropDownList ID="ddlAddApptestUseForEligibility" runat="server" 
+                                             AppendDataBoundItems="true" 
+                                             Font-Size="X-Small"
+                                             MenuWidth="75"
+                                             Width="75">
+                        <asp:ListItem Value="-1" Text=""> </asp:ListItem>
+                        <asp:ListItem Value ="1"> Yes </asp:ListItem>
+                        <asp:ListItem Value="0"> No </asp:ListItem>
+                    </obout:OboutDropDownList>
+                </td>
             </tr>
         </table>
     </div>
@@ -454,6 +465,18 @@
                 <td style="width: 100px; text-align: left;">
                     <obout:OboutTextBox ID="txtAdditionalAptTestScore" font="x-small" runat="server" Width="85px" MaxLength="3" WatermarkText="Score"></obout:OboutTextBox>
                 </td>
+                <td>
+                    <obout:OboutDropDownList ID="ddlAddAdditionalApptestUseForEligibility" runat="server" 
+                                             AppendDataBoundItems="true" 
+                                             Font-Size="X-Small"
+                                             MenuWidth="75"
+                                             Width="75">
+                        <asp:ListItem Value="-1" Text=""> </asp:ListItem>
+                        <asp:ListItem Value ="1"> Yes </asp:ListItem>
+                        <asp:ListItem Value="0"> No </asp:ListItem>
+                    </obout:OboutDropDownList>
+                </td>
+                
             </tr>
         </table>
     </div>
@@ -577,10 +600,10 @@
             >
           
                 <Columns>
-                    <obout:Column DataField="TestName" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="TestDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
-                     <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
-                    <obout:Column DataField="UserForEligibility"  HeaderText="Useed for " Width="100" runat="server"  >
+                    <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
+                     <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                    <obout:Column DataField="UseForEligibility"  HeaderText="Useed for " Width="100" runat="server"  >
                         <TemplateSettings HeaderTemplateId="tempTeacherInput" />
                     </obout:Column>
                 </Columns>
@@ -664,10 +687,10 @@
             >
           
                 <Columns>
-                    <obout:Column DataField="TestName" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="TestDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
-                     <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
-                    <obout:Column DataField="UsedForEligibility"  HeaderText="Test Date" Width="100" runat="server"  >
+                    <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                    <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
+                     <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                    <obout:Column DataField="UseForEligibility"  HeaderText="Test Date" Width="100" runat="server"  >
                         <TemplateSettings HeaderTemplateId="tempStudentInput" />
                     </obout:Column>
                 </Columns>

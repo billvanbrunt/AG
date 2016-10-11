@@ -16,13 +16,13 @@
         display:none;
     }
 </style>
-
 <div id="divButtons" style="vertical-align:top;" >
-    <asp:button id="btnAchievementTest" runat="server" CommandArgument="A" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Achievement Test" onclick="btnAchievementTest_Click" />
+    <asp:button id="btnDefault" runat="server" style="font-size:x-small;width:75px;border-radius:5px; font-weight: bold;" text="Home"  onclick="btnDefault_Click" />
+    <asp:button id="btnAchievementTest" runat="server" CommandArgument="A" style="font-size:x-small;width:120px;border-radius:5px; font-weight: bold;" text="Achievement Test" onclick="btnAchievementTest_Click" />
     <asp:button id="btnAdditionalAchievement" runat="server" CommandArgument="C" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Achievement Test" onclick="btnAdditionalAchievement_Click"  />
-    <asp:button id="btnAptitudeTest" runat="server" CommandArgument="B" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" text="Aptitude Test" onclick="btnAptitudeTest_Click"/>
+    <asp:button id="btnAptitudeTest" runat="server" CommandArgument="B" style="font-size:x-small;width:100px;border-radius:5px; font-weight: bold;" text="Aptitude Test" onclick="btnAptitudeTest_Click"/>
     <asp:button id="btnAdditionalAptitudeTest" runat="server" CommandArgument="D" style="font-size:x-small;width:150px;border-radius:5px; font-weight: bold;" text="Additional Aptitude Test" onclick="btnAdditionalAptitudeTest_Click"/>
-    <input type="button" id="btnAddNewTest" style="font-size:x-small;width:125px;border-radius:5px; font-weight: bold;" value="Add New Test" onclick="btnAddNewTest_Click()"/>
+    <input type="button" id="btnAddNewTest" style="font-size:x-small;width:100px;border-radius:5px; font-weight: bold;" value="Add New Test" onclick="btnAddNewTest_Click()"/>
 </div>
 
 <hr style="color:#395b8b"  />
@@ -271,11 +271,7 @@
         var vTestId = gTestId.value();
         var vDescription = gDescription.value();
         var vActive = gActive.value();
-      // alert('Values for local Var   TestName = ' + lTestName + ', description = ' + lDescription + ', Active = ' + lActive + ' Values for Global Var TestName = ' + vTestName + ', description = ' + vDescription + ', Active = ' + vActive);
-        //alert('Values for local Var TestId = ' + lTestId + ' TestName = ' + lTestName + ' description = ' + lDescription + ' Active = ' + lActive);
-        //alert('Values for Global Var TestId = ' + vTestId + ' TestName = ' + vTestName + ' description = ' + vDescription + ' Active = ' + vActive);
-
-
+     
       
         if(vTestName !== lTestName || vDescription !== lDescription || vActive !== lActive)
         {

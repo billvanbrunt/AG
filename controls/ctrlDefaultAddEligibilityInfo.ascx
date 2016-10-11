@@ -43,7 +43,7 @@
                         </td>
                         <td style="text-align: left">
                           
-                            <input type="text" readonly="readonly" ID="txtInitialScreeningDate"  Style="font-size: small;border-radius:5px;Width:115px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;"  />
+                            <input type="text" readonly="readonly" ID="txtInitialScreeningDate" name="txtInitialScreeningDate" Style="font-size: small;border-radius:5px;Width:115px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;"  />
                             <obout:Calendar ID="calScreenDate" runat="server" 
                                                 TextBoxId="txtInitialScreeningDate"
                                                 StyleFolder="~\Obout_styles\calendar\default"
@@ -131,7 +131,7 @@
                         </td>
                         <td id="lblStartDate1" style="text-align: right; font-size: small;  font-weight: bold;">Date: </td>
                         <td id="lblStartDate2" style="text-align: left" colspan="5">
-                            <input type="text" readonly="readonly" ID="txtSupportPlasnStart"  Style="font-size: small;border-radius:5px;Width:115px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;"  />
+                            <input type="text" readonly="readonly" ID="txtSupportPlasnStart" name="txtSupportPlasnStart"  Style="font-size: small;border-radius:5px;Width:115px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;"  />
                             <obout:Calendar ID="calSupportPlasnStartDAte" runat="server" 
                                                 TextBoxId="txtSupportPlasnStart"
                                                 StyleFolder="~\Obout_styles\calendar\default"
@@ -158,7 +158,7 @@
                         </td>
                         <td id="lblEndDate1" style="text-align: right; font-size: small;  font-weight: bold;">Date: </td>
                         <td id="lblEndDate2" colspan="2">
-                            <input type="text" readonly="readonly" ID="txtSupportPlanResolved" Style="font-size: small;border-radius:5px;Width:115px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;"  />
+                            <input type="text" readonly="readonly" ID="txtSupportPlanResolved" name="txtSupportPlanResolved" Style="font-size: small;border-radius:5px;Width:115px; Border Color:#CCCCCC Style:Solid;Border Width:1px solid #C0C0C0;"  />
                             <obout:Calendar ID="calSupportPlanResolvedDate" runat="server"
                                                 TextBoxId="txtSupportPlanResolved"
                                                 StyleFolder="~\Obout_styles\calendar\default"

@@ -115,17 +115,52 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     {
         string lUserId = HttpContext.Current.User.Identity.Name.ToString();
         string lDecision =  ddlDecision.SelectedValue.Trim();
-      
+        string lTraditional = ddlTraditional.SelectedValue.Trim();
+        string lNonTrasitional = ddlNontraditional.SelectedValue.Trim();
+        string lReading = ddlReading.SelectedValue.Trim();
+        string lMath = ddlMath.SelectedValue.Trim();
+        string lScience = ddlScience.SelectedValue.Trim();
+        string lSocialStudies = ddlSocialStudies.SelectedValue.Trim();
+        string lSPIDate="1900/01/01";
+        string lSPrDate="1900/01/01";
+       
+        string lInitialScreeningDate = Request.Form["txtInitialScreeningDate"];
+        
+            if (chkSupportPlanStart.Checked == true)
+            {
+                lSPIDate = Request.Form["txtSupportPlasnStart"];
+            }
+       
+        if(chkSupportPlanResolved.Checked == true)
+            {
+                lSPrDate = Request.Form["txtSupportPlanResolved"];
+            }
+
         SqlStr = "usp_SaveNewStudent";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-        var x = hftxtInitalScreeningDate.Value;
-        var y = hftxtSupportStartDate.Value;
-        var z = hftxtSupportEndDate.Value;
+        //var x = hftxtInitalScreeningDate.Value;
+        //var y = hftxtSupportStartDate.Value;
+        //var z = hftxtSupportEndDate.Value;
+
+        DateTime lt1 = DateTime.Parse(lSPIDate);
+        DateTime lt2 = DateTime.Parse(lSPrDate);
+        DateTime lt3 = DateTime.Parse(lInitialScreeningDate);
 
         cmd.Parameters.Add(new SqlParameter("@StudentId", lStudentId));
-        cmd.Parameters.Add(new SqlParameter("@LastModifiedBy", lUserId));
         cmd.Parameters.Add(new SqlParameter("@Decision", lDecision));
+        cmd.Parameters.Add(new SqlParameter("@Traditional", lTraditional));
+        cmd.Parameters.Add(new SqlParameter("@NonTrasitional", lNonTrasitional));
+        cmd.Parameters.Add(new SqlParameter("@Reading", lReading));
+        cmd.Parameters.Add(new SqlParameter("@Math", lMath));
+        cmd.Parameters.Add(new SqlParameter("@Science", lScience));
+        cmd.Parameters.Add(new SqlParameter("@SocialStudies", lSocialStudies));
+        cmd.Parameters.Add(new SqlParameter("@PortfolioSubmitted", lt3));
+        cmd.Parameters.Add(new SqlParameter("@LastModifiedBy", lUserId));
+        cmd.Parameters.Add(new SqlParameter("@SPIDate", lt1 ));
+        cmd.Parameters.Add(new SqlParameter("@SPrDate", lt2));
+
+
         cmd.ExecuteNonQuery();
 
         Response.Redirect("/DefaultTestInformation.aspx?id=" + lStudentId);

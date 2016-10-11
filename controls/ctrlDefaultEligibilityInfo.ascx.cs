@@ -17,7 +17,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     public string lStudentId;
     SqlPage sQl = new SqlPage();
     public string gGroupId;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         lStudentId = Request.QueryString["id"];
@@ -33,16 +33,16 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     }
     protected void setRights(string vGroupId)
     {
-        if(vGroupId == "READ")
+        if (vGroupId == "READ")
         {
-            btnUpdate.Style["display"]= "none";
+            btnUpdate.Style["display"] = "none";
         }
 
     }
     protected string GetCookieGroup()
     {
-       string lGroupId="";
-       HttpCookie _userInfoCookie = Request.Cookies["GCSAGApp"];
+        string lGroupId = "";
+        HttpCookie _userInfoCookie = Request.Cookies["GCSAGApp"];
         if (_userInfoCookie != null)
         {
             lGroupId = _userInfoCookie["GroupId"];
@@ -51,25 +51,26 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     }
     protected void LoadDecisions()
     {
-        ddlDecision.Items.Clear();  
+        ddlDecision.Items.Clear();
         ddlDecision.Items.Add(new ListItem("", ""));
         SqlStr = "usp_GetDecionTypes";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-      
+
         dr = cmd.ExecuteReader();
         ddlDecision.DataSource = dr;
         ddlDecision.DataBind();
         dr.Close();
         cmd.Cancel();
-    
-    }
-    protected void LoadLevelofService() {
 
-        ddlReading.Items.Clear();       
+    }
+    protected void LoadLevelofService()
+    {
+
+        ddlReading.Items.Clear();
         ddlMath.Items.Clear();
         ddlScience.Items.Clear();
-        ddlSocialStudies.Items.Clear();  
+        ddlSocialStudies.Items.Clear();
 
         SqlStr = "usp_GetLevelofService";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
@@ -80,7 +81,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         SqlDataAdapter da = new SqlDataAdapter();
         da.SelectCommand = cmd;
         da.Fill(ds, "myData");
-        
+
         ddlReading.Items.Add(new ListItem("", ""));
         ddlMath.Items.Add(new ListItem("", ""));
         ddlScience.Items.Add(new ListItem("", ""));
@@ -94,9 +95,9 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         ddlScience.DataBind();
         ddlSocialStudies.DataSource = ds;
         ddlSocialStudies.DataBind();
-      
+
         cmd.Cancel();
-  }
+    }
     protected void LoadStudentHistory(string vStudentId)
     {
         SqlStr = "usp_GetStudentHistory";
@@ -105,10 +106,10 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         cmd.Parameters.Add(new SqlParameter("@StudentId", vStudentId));
         dr = cmd.ExecuteReader();
 
-          grdHistory.DataSource = dr;
-          grdHistory.DataBind();
-          dr.Close();
-          cmd.Cancel();
+        grdHistory.DataSource = dr;
+        grdHistory.DataBind();
+        dr.Close();
+        cmd.Cancel();
     }
     protected void OpenStudentInformation(string vStudentId)
     {
@@ -127,14 +128,15 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         txtSchoolName.Text = ds.Tables[0].Rows[0]["School"].ToString();
         txtLastModificationInfo.Text = ds.Tables[0].Rows[0]["LOSInfromationEnteredDate"].ToString() + "&nbsp;&nbsp;&nbsp;<b>By:</b> " + ds.Tables[0].Rows[0]["LOSInformationEnterBy"].ToString();
         txtModificationType.Text = ds.Tables[0].Rows[0]["ChangeType"].ToString();
-
-        txtInitialScreeningDate.Text = ds.Tables[0].Rows[0]["PlacementDate"].ToString().Substring(0,10);
-        txtInitialScreeningDate2.Text = ds.Tables[0].Rows[0]["PlacementDate"].ToString().Substring(0, 10);
-
-
-       string lTS =  ds.Tables[0].Rows[0]["TraditionalStudy"].ToString();
-       string lNTS = ds.Tables[0].Rows[0]["NonTraditionalStudy"].ToString();
-        if(lTS != "0")
+        
+        string tempDate = ds.Tables[0].Rows[0]["PlacementDate"].ToString();
+        int DOSpace = tempDate.IndexOf(' ');
+        txtInitialScreeningDate.Text = tempDate.Substring(0, DOSpace);
+        txtInitialScreeningDate2.Text = tempDate.Substring(0, DOSpace);
+        
+        string lTS = ds.Tables[0].Rows[0]["TraditionalStudy"].ToString();
+        string lNTS = ds.Tables[0].Rows[0]["NonTraditionalStudy"].ToString();
+        if (lTS != "0")
         {
             ddlTraditional.SelectedValue = lTS;
             txtTraditional.Text = ddlTraditional.SelectedItem.ToString();
@@ -147,12 +149,11 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         try
         {
             ddlDecision.SelectedValue = ds.Tables[0].Rows[0]["DecisionId"].ToString();
-            txtDecision.Text = ds.Tables[0].Rows[0][4].ToString();
+            txtDecision.Text = ds.Tables[0].Rows[0][3].ToString();
         }
         catch (Exception)
-        { 
-      
-            txtDecision.Text = ds.Tables[0].Rows[0]["Decision"].ToString();
+        {
+            txtDecision.Text = ds.Tables[0].Rows[0]["3"].ToString();
             ddlDecision.SelectedItem.Value = ds.Tables[0].Rows[0]["DecisionId"].ToString();
         }
         try
@@ -163,9 +164,9 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
             ddlSocialStudies.SelectedValue = ds.Tables[0].Rows[0]["SocialStudies"].ToString();
         }
         catch (Exception) { }
-        txtReading.Text     = ds.Tables[0].Rows[0]["Reading"].ToString();
-        txtMath.Text        = ds.Tables[0].Rows[0]["Math"].ToString();
-        txtScience.Text     = ds.Tables[0].Rows[0]["Science"].ToString();
+        txtReading.Text = ds.Tables[0].Rows[0]["Reading"].ToString();
+        txtMath.Text = ds.Tables[0].Rows[0]["Math"].ToString();
+        txtScience.Text = ds.Tables[0].Rows[0]["Science"].ToString();
         txtSocialStudies.Text = ds.Tables[0].Rows[0]["SocialStudies"].ToString();
 
         string lSDS = ds.Tables[0].Rows[0]["SupportPlanStartDate"].ToString();
@@ -185,14 +186,12 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
             chkSupportPlanResolvedReadOnly.Enabled = false;
             chkSupportPlanResolved.Checked = false;
             chkSupportPlanResolved.Enabled = true;
-            txtSupportPlanResolvedDateReadOnly.Text=lSPRD;
-               
+            txtSupportPlanResolvedDateReadOnly.Text = lSPRD;
         }
-        
-        txtComments.Text = ds.Tables[0].Rows[0]["Comments"].ToString();
-        txtCommentsEdit.Text = "";
 
-
+        string lUserId = HttpContext.Current.User.Identity.Name.ToString();
+        txtComments.Text = System.DateTime.Now.ToString() + "\r\nBy: " + lUserId + "\r\n\r\n\r\n" + ds.Tables[0].Rows[0]["Comments"].ToString();
+        //txtCommentsEdit.Text = "";
     }
     protected void ShowSearchWindowAgain_Click(object sender, EventArgs e)
     {
@@ -209,34 +208,34 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     protected void btnServerSaveData_Click(object sender, EventArgs e)
     {
         string lUserId = HttpContext.Current.User.Identity.Name.ToString();
-        string lDecision = ddlDecision.SelectedValue;
+        string lDecision = ddlDecision.SelectedItem.ToString();
         string lTradit = ddlTraditional.SelectedValue.ToString();
         string lNTradit = ddlNonTraditional.SelectedValue.ToString();
         string lReading = ddlReading.SelectedValue.ToString();
         string lMath = ddlMath.SelectedValue.ToString();
         string lScience = ddlScience.SelectedValue.ToString();
         string lSocal = ddlSocialStudies.SelectedValue.ToString();
-        string lStartDate = "1900-01-01";
-        string lEndDate = "1900-01-01";
-        string lComments = txtCommentsEdit.Text;
+        DateTime lStartDate = DateTime.Parse("1900-01-01");
+        DateTime lEndDate = DateTime.Parse("1900-01-01");
 
-        string llDate =  Request.Form["txtSupportPlasnStart"].ToString();
+        
+        string llDate = Request.Form["txtSupportPlasnStart"].ToString();
 
-        if (llDate != "") 
+        if (llDate != "")
         {
-            lStartDate = llDate;
+            lStartDate = DateTime.Parse(llDate);
         }
         llDate = Request.Form["txtSupportPlanResolved"];
 
         if (llDate != "")
         {
-            lEndDate = llDate;
+            lEndDate = DateTime.Parse(llDate);
         }
         SqlStr = "usp_SaveNewEligibility";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-       
-        
+
+
         //cmd.Parameters.Add(new SqlParameter("@TripMonth", lTripMonth.ToString()));
         cmd.Parameters.Add(new SqlParameter("@StudentId", lStudentId));
         cmd.Parameters.Add(new SqlParameter("@EnterBy", lUserId));
@@ -249,11 +248,11 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         cmd.Parameters.Add(new SqlParameter("@SocialStudies", lSocal));
         cmd.Parameters.Add(new SqlParameter("@SupportPlanStartDate", lStartDate));
         cmd.Parameters.Add(new SqlParameter("@SupportPlanResolvedDate", lEndDate));
-        cmd.Parameters.Add(new SqlParameter("@Comments", lComments));
+        //cmd.Parameters.Add(new SqlParameter("@Comments", lComments));
 
 
 
-         cmd.ExecuteNonQuery();
+        cmd.ExecuteNonQuery();
 
         LoadLevelofService();
         LoadDecisions();
@@ -263,7 +262,17 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
 
 
     }
+    protected void btnServerSaveNotes_Click(object sender, EventArgs e)
+    {
+        string lComments = txtComments.Text;
+
+        SqlStr = "usp_SaveComments";
+        SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        cmd.Parameters.Add(new SqlParameter("@StudentId", lStudentId));
+        cmd.Parameters.Add(new SqlParameter("@Comments", lComments));
+
+        cmd.ExecuteNonQuery();
+    }
 }
- 
-
-

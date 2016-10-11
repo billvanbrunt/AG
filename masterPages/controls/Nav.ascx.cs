@@ -68,6 +68,7 @@ public partial class masterPages_controls_Nav : System.Web.UI.UserControl
             else
             {
                 btnAdmin.Visible = false;
+                btnAppData.Visible = false;
                 btnReturnToMain.Visible = true;
             }
            
@@ -84,7 +85,6 @@ public partial class masterPages_controls_Nav : System.Web.UI.UserControl
         }
        
     }
-
     protected string GetSiteIdAssignments(string gWhoAreYou)
     {
         string lYourSites = "";

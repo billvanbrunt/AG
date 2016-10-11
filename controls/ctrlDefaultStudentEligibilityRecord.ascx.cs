@@ -24,7 +24,16 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
     }
     protected void OpenStudentInformation(string vStudentId)
     {
+        txtTestNameACH.Text ="N/A";
+        txtTestNameMath.Text ="N/A";
+        txtTestNameRead.Text="N/A";
+        txtTestNameSCI.Text ="N/A";
+        txtTestNameSS.Text ="N/A";
+        txtTestNameAPT.Text ="N/A";
+        txtTestNamePT.Text ="N/A";
+
         SqlStr = "usp_GetAGStudentInfo";
+
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
         cmd.Parameters.Add(new SqlParameter("@StudentId", vStudentId));
@@ -57,10 +66,15 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         txtAppartmentNo.Text = ds.Tables[0].Rows[0]["Apartment"].ToString();
         txtPOBox.Text = ds.Tables[0].Rows[0]["POBox"].ToString();
         txtCityStateZip.Text = ds.Tables[0].Rows[0]["City"].ToString() + ", " + ds.Tables[0].Rows[0]["State"].ToString() + ". " + ds.Tables[0].Rows[0]["zip"].ToString();
+
+       
+
         var x = 0;
         foreach (var row in ds.Tables[1].Rows)
         {
             var lSubject = ds.Tables[1].Rows[x]["Subject"].ToString();
+            
+
             if (lSubject == "Achievement")
             {
                 txtTestNameACH.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
@@ -103,31 +117,87 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
                 txtTestDatePT.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
                 txtTestScorePT.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
             }
+
             x = x + 1;
         }
+     
+        var lEligCode =  ds.Tables[2].Rows[0]["DecisionCode"].ToString();
+        var lTrid = ds.Tables[2].Rows[0]["TraditionalStudy"].ToString();
+        var lNonTrid = ds.Tables[2].Rows[0]["NonTraditionalStudy"].ToString();
+        int llReading = 0;
+        int llMath = 0;
+        var lReading = ds.Tables[2].Rows[0]["Reading"].ToString();
+        var lMath = ds.Tables[2].Rows[0]["Math"].ToString();
 
-       var lReading =  ds.Tables[2].Rows[0]["Reading"].ToString();
-       var lMath = ds.Tables[2].Rows[0]["Math"].ToString();
-       var lScience = ds.Tables[2].Rows[0]["Science"].ToString();
-       //var lScoial = ds.Tables[2].Rows[0]["Social"].ToString();
+        switch (lEligCode)
+        {
+            case "AG":
+                switch (lTrid)
+                {
+                    case "Both":
+                        cbAGRM.Checked = true;
+                        break;
+                    case "Reading only":
+                        cbAGR.Checked = true;
+                        break;
+                    case "Math only":
+                        cbAGM.Checked = true;
+                        break;
+                }
+                switch (lNonTrid)
+                {
+                    case "Both":
+                        cbAGRM.Checked = true;
+                        break;
+                    case "Reading only":
+                        cbAGR.Checked = true;
+                        break;
+                    case "Math only":
+                        cbAGM.Checked = true;
+                        break;
+                }
+                break;
+            case "IG":
+                cbIG.Checked = true;
+                break;
+            case "NE":
+                cbAGNE.Checked = true;
+                break;
+        }
 
-        if (lReading == "NE" && lMath == "NE")
+
+
+
+
+        if (lReading == "AC" || lMath == "AR" || lMath == "AM" || lMath == "IG")
+        {
+            llReading = 1;
+        }
+        if (lMath == "AC" || lMath == "AR" || lMath == "AM" || lMath == "IG")
+        {
+            llMath = 1;
+        }
+
+
+        if (llReading == 0 && llMath == 0)
         {
             cbAGNE.Checked = true;
         }
-        else if (lReading == "AG" && lMath == "NE")
-            {
-                 cbAGRM.Checked = true;
-                if (lReading == "NE" && lMath == "AG")
-                {
-                    cbAGM.Checked = true;
-                }
-                else
-                {
-                    cbAGR.Checked = true;
-                }
-            }
-        if(lReading == "AC" || lMath =="AC")
+        else if (llReading == 1 && llMath == 1)
+        {
+            cbAGRM.Checked = true;
+        }
+        else if (llReading == 0 && llMath == 1)
+        {
+            cbAGM.Checked = true;
+        }
+        else if (llReading == 1 && llMath == 0)
+        {
+            cbAGR.Checked = true;
+        }
+        
+
+        if (lReading == "AG" || lMath =="AG")
         {
             cbSEOREGAC.Checked = true;
         }
@@ -140,7 +210,44 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         {
             cbSEOREGVS.Checked = true;
         }
-        
+
+
+        var y = 0;
+        txtGradeMathName.Text = "N/A";
+        txtGradeReadingName.Text = "N/A";
+        txtGradeSCIName.Text = "N/A";
+        txtGradeSSName.Text = "N/A";
+        foreach (var row in ds.Tables[3].Rows)
+        {
+
+            if (ds.Tables[3].Rows[y]["Subject"].ToString() == "Reading")
+            {
+                txtGradeReadingName.Text = ds.Tables[3].Rows[y]["TestName"].ToString() + "-" + ds.Tables[3].Rows[y]["Description"].ToString();
+                txtGradeReadingDate .Text = ds.Tables[3].Rows[y]["TestDate"].ToString();
+                txtGradeReadingGrade.Text = ds.Tables[3].Rows[y]["Score"].ToString();
+            }
+            if (ds.Tables[3].Rows[y]["Subject"].ToString() == "Math")
+            {
+                txtGradeMathName.Text = ds.Tables[3].Rows[y]["TestName"].ToString() + "-" + ds.Tables[3].Rows[y]["Description"].ToString();
+                txtGradeMathDate.Text = ds.Tables[3].Rows[y]["TestDate"].ToString();
+                txtGradeMathGrade.Text = ds.Tables[3].Rows[y]["Score"].ToString();
+            }
+            if (ds.Tables[3].Rows[y]["Subject"].ToString() == "Science")
+            {
+                txtGradeSCIName.Text = ds.Tables[3].Rows[y]["TestName"].ToString() + "-" + ds.Tables[3].Rows[y]["Description"].ToString();
+                txtGradeSCIDate.Text = ds.Tables[3].Rows[y]["TestDate"].ToString();
+                txtGradeSCIGrade.Text = ds.Tables[3].Rows[y]["Score"].ToString();
+            }
+            if (ds.Tables[3].Rows[y]["Subject"].ToString() == "Social Studies")
+            {
+                txtGradeMathName.Text = ds.Tables[3].Rows[y]["TestName"].ToString() + "-" + ds.Tables[3].Rows[y]["Description"].ToString();
+                txtGradeSSDate.Text = ds.Tables[3].Rows[y]["TestDate"].ToString();
+                txtGradeSSGrade.Text = ds.Tables[3].Rows[y]["Score"].ToString();
+            }
+            y++;
+        }
+
+
 
         }
     protected void enTestInformation(string vStudentId)

@@ -79,8 +79,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
 
         grdAdditionalAptitudeData.DataSource = ds.Tables[4];
         grdAdditionalAptitudeData.DataBind();
-
-
+        
         cmd.Cancel();
         da.Dispose();
         ds.Dispose();
@@ -161,6 +160,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         string lTestName = ddlAppTestName.SelectedValue.ToString();
         string lTestDate = Request.Form["txtAppTestDate"];
         string lScore = txtAppTestScore.Text;
+        string lUserfor = ddlAddAdditionalApptestUseForEligibility.SelectedValue.ToString();
         SqlStr = "usp_AddAcheivmentTest";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
@@ -170,7 +170,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         cmd.Parameters.Add(new SqlParameter("@TestName", lTestName));
         cmd.Parameters.Add(new SqlParameter("@TestDate", lTestDate));
         cmd.Parameters.Add(new SqlParameter("@Score", lScore));
-        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", "0"));
+        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lUserfor));
         cmd.Parameters.Add(new SqlParameter("@EnteredBy", lUserId));
 
         cmd.ExecuteNonQuery();
@@ -193,12 +193,15 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         SqlStr = "usp_SaveTeachersInput";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-
+       
         cmd.Parameters.Add(new SqlParameter("@StudentId", lStudentId));
-        cmd.Parameters.Add(new SqlParameter("@ModDate", lTestDate));
+        cmd.Parameters.Add(new SqlParameter("@Name", lTestName));
+        cmd.Parameters.Add(new SqlParameter("@ModifiedBy", lUserId));
+        //cmd.Parameters.Add(new SqlParameter("@ModifiedDate", lTestDate));
         cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lUserfor));
-        cmd.Parameters.Add(new SqlParameter("@CheckListScore", lScore));
-        cmd.Parameters.Add(new SqlParameter("@LastModifiedBy", lUserId));
+        cmd.Parameters.Add(new SqlParameter("@Score", lScore));
+        cmd.Parameters.Add(new SqlParameter("@RatingDate", lTestDate));
+
 
         cmd.ExecuteNonQuery();
         LoadTestInfo(lStudentId);
@@ -211,15 +214,22 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
     {
         string lUserId = HttpContext.Current.User.Identity.Name.ToString();
         string lTestDate = Request.Form["txtStudentDate"];
-        string lScore = txtStudentInput.Text;
+        string lName = txtStudentInput.Text;
+        string lScore = txtStudentrScore.Text;
+        int lUserfor = Int32.Parse(cboStudentUsedFor.SelectedValue);
+
         SqlStr = "usp_SaveStudentInput";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
 
         cmd.Parameters.Add(new SqlParameter("@StudentId", lStudentId));
-        cmd.Parameters.Add(new SqlParameter("@ModDate", lTestDate));
-        cmd.Parameters.Add(new SqlParameter("@CheckListScore", lScore));
-        cmd.Parameters.Add(new SqlParameter("@LastModifiedBy", lUserId));
+        cmd.Parameters.Add(new SqlParameter("@Name", lName));
+        cmd.Parameters.Add(new SqlParameter("@ModifiedBy", lUserId));
+        //cmd.Parameters.Add(new SqlParameter("@ModifiedDate", lTestDate));
+        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lUserfor));
+        cmd.Parameters.Add(new SqlParameter("@Score", lScore));
+        cmd.Parameters.Add(new SqlParameter("@RatingDate", lTestDate));
+
 
         cmd.ExecuteNonQuery();
         LoadTestInfo(lStudentId);
@@ -260,6 +270,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         string lTestName = ddlAdditionalAptTestName.SelectedValue.ToString();
         string lTestDate = Request.Form["txtAdditionalAptTestDate"].ToString();
         string lScore = txtAdditionalAptTestScore.Text;
+        string lUserfor = ddlAddAdditionalApptestUseForEligibility.SelectedValue.ToString();
         SqlStr = "usp_AddAcheivmentTest";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
@@ -269,7 +280,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         cmd.Parameters.Add(new SqlParameter("@TestName", lTestName));
         cmd.Parameters.Add(new SqlParameter("@TestDate", lTestDate));
         cmd.Parameters.Add(new SqlParameter("@Score", lScore));
-        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", "0"));
+        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lUserfor));
         cmd.Parameters.Add(new SqlParameter("@EnteredBy", lUserId));
 
         cmd.ExecuteNonQuery();
