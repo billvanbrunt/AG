@@ -30,13 +30,16 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
     }
     protected void loadDropDowns()
     {
+        string lUserId = HttpContext.Current.User.Identity.Name.ToString();
         SqlStr = "usp_GetDropDownInfo";
+
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-
+        cmd.Parameters.Add(new SqlParameter("@UserId", lUserId));
         DataSet ds = new DataSet();
 
         SqlDataAdapter da = new SqlDataAdapter();
+
         da.SelectCommand = cmd;
         da.Fill(ds, "myData");
 
@@ -45,8 +48,7 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
         ddlMathLOS.Items.Add(new ListItem("", ""));
         ddlSCILOS.Items.Add(new ListItem("", ""));
         ddlSSLOS.Items.Add(new ListItem("", ""));
-        //ddlSites.Items.Add(new ListItem("", ""));
-
+        
         ddlReportNames.DataSource = ds.Tables[0];
         ddlReportNames.DataBind();
 
@@ -99,55 +101,82 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
             string vMathService = "";
             string vScienceService = "";
             string vHistoryService = "";
+            string vGrades = "";
 
             if (ddlSites.SelectedValue != "")
             {
-                vSite = " SiteId in (" + ddlSites.SelectedValue + ")";
+                vSite = " SiteId in (";
+                string newSites = "'";
+                string lInValue = ddlSites.SelectedValue.ToString();
+                string[] values = lInValue.Split(',');
+ 
+                for (int i = 0; i < values.Length; i++)
+                {
+                    if (newSites != "'")
+                    {
+                        newSites = newSites + "','" + values[i];
+                    }
+                    else
+                    {
+                        newSites = newSites + values[i];
+                    }
+                    vSite = vSite + newSites + "')";
+                }
+
             }
             else
             {
-                vSite = "SiteId LIKE '%'";
+                vSite = "SiteId LIKE '%' ";
             }
             lStoredProc = lStoredProc + vSite;
 
             if (cboGrade.SelectedValue != "")
             {
-                bool lhasSelectedItems = false;
-                var lInValue = "";
-                foreach (ComboBoxItem item in cboGrade.Items)
+               lStoredProc = lStoredProc + " and cs.GradeLevel in (";
+               string newGrades = "'";
+               string lInValue = cboGrade.SelectedValue.ToString();
+               string[] values = lInValue.Split(',');
+                
+                for (int i = 0; i < values.Length; i++)
                 {
-                    if (item.Selected)
-                    {
-                        if (!lhasSelectedItems)
-                        {
-                            if (lInValue == "")
-                            {
-                                lInValue = "'" + item.Value + "'";
-                            }
-                            else
-                            {
-                                lInValue = lInValue + ",'" + item.Value + "'";
-                            }
-                        }
+                    if(newGrades != "'")
+                    { 
+                        newGrades = newGrades + "','" + values[i];
                     }
-
-                    lStoredProc = lStoredProc + " AND cs.GradeLevel in (" + lInValue + ")";
+                    else
+                    {
+                        newGrades = newGrades +  values[i];
+                    }
                 }
+                newGrades = newGrades + "'";
+                lStoredProc = lStoredProc + newGrades +  ")";
             }
-            else
-            {
-                lStoredProc = lStoredProc + " AND cs.GradeLevel LIKE '%'";
-            }
-            
-        if (ddlGender.SelectedValue != "0")
+            if (ddlGender.SelectedValue != "0")
             {
                 vGender = ddlGender.SelectedValue;
                 lStoredProc = lStoredProc + " and cs.Gender = '" + vGender + "' ";
             }
-            if(cboEthnicity.SelectedValue != "")
+            if (cboEthnicity.SelectedValue != "")
             {
                 vEthincity = cboEthnicity.SelectedValue;
-                lStoredProc = lStoredProc + " and ce.Eth_Cde = '" + vEthincity + "' ";
+                lStoredProc = lStoredProc + " and ce.Eth_Cde in (";
+                string newGrades = "'";
+                string lInValue = cboEthnicity.SelectedValue.ToString();
+                string[] values = lInValue.Split(',');
+
+                for (int i = 0; i < values.Length; i++)
+                {
+                    if (newGrades != "'")
+                    {
+                        newGrades = newGrades + "','" + values[i];
+                    }
+                    else
+                    {
+                        newGrades = newGrades + values[i];
+                    }
+                }
+                newGrades = newGrades + "'";
+                lStoredProc = lStoredProc + newGrades + ")";
             }
             if (ddlReadingLOS.SelectedValue != "")
             {
@@ -170,21 +199,26 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
                 vHistoryService = ddlSSLOS.SelectedValue;
                 lStoredProc = lStoredProc + " AND lsi.SocialStudies = '" + vHistoryService + "' ";
             }
-
             if (ddlDecision.SelectedValue != "")
             {
-                vDecision = " si.decision IN (" + ddlDecision.SelectedValue + ")";
-            }   
-          
+                string NewValue = ddlDecision.SelectedValue;
+                if (NewValue == "All Eligible")
+                {
+                    vDecision = " and si.decision IN (8,9,10,11)";
+                }
+                else
+                { 
+                    vDecision = " and si.decision IN (" + ddlDecision.SelectedValue + ")";
+                }
+            }
+
             lStoredProc = lStoredProc + vDecision;
-            lStoredProc = lStoredProc + " order by SiteId, cs.GradeLevel, lastName, FirstName ";
+            lStoredProc = lStoredProc + " and  RTRIM(LTRIM(Homeroom)) <> ''  order by SiteId, cs.GradeLevel, lastName, FirstName ";
             SqlStr = lStoredProc;
 
             cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
             cmd.CommandType = CommandType.Text;
-
-           
-
+            
             try
             {
                 DataSet ds = Utilities.GetDataSet(cmd);
@@ -197,19 +231,15 @@ public partial class controls_ctrlDefaultReports : System.Web.UI.UserControl
 
                     ExportExcel.ExportXML(ds.Tables[0], filepath, "Results");
                     ExportUtilities.DownloadFile(filepath, filename);
-
                 }
                 else
                 {
-
                     divErrorMsg.InnerHtml = "No data has been found using your criteria. <br /> Click <font color='#295b8b'<b>ok</b></font>, change the criteria and try again. <br/> If the problem persists please contact department lead.";
-
                     diaMessage.Title = "No Data Found";
                     diaMessage.Width = 400;
                     diaMessage.Height = 175;
                     diaMessage.VisibleOnLoad = true;
                     diaMessage.IsDraggable = true;
-
                 }
             }
             catch (Exception ex)

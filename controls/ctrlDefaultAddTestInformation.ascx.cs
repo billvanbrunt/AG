@@ -66,7 +66,6 @@ public partial class controls_ctrlDefaultAddTestInformation : System.Web.UI.User
     {
         Response.Redirect("/DefaultEligibilityInfo.aspx?id=" + lStudentId);
     }
-    
     protected void ShowSearchWindowAgain_Click(object sender, EventArgs e)
     {
         Response.Redirect("/default.aspx");
@@ -76,7 +75,6 @@ public partial class controls_ctrlDefaultAddTestInformation : System.Web.UI.User
         Response.Redirect("/defaultAddStudent.aspx?id=" + lStudentId);
 
     }
-
     protected void btnStudentEligibilityRecord_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/DefaultAddStudentEligibilityRecord.aspx?id=" + lStudentId);

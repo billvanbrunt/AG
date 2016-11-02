@@ -172,7 +172,7 @@
                             </obout:OboutDropDownList>
                             <br />
                             <obout:OboutDropDownList ID="ddlNonTraditional" runat="server" Width="150px" Font-Size="small">
-                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                                <asp:ListItem Text="" Value="0"></asp:ListItem>
                                 <asp:ListItem Text="Reading only" Value="Reading"></asp:ListItem>
                                 <asp:ListItem Text="Math only" Value="Math"></asp:ListItem>
                                 <asp:ListItem Text="Both" Value="Both"></asp:ListItem>

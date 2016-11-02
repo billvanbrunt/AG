@@ -175,10 +175,6 @@ public partial class controls_ctrlDefaultAdmin : System.Web.UI.UserControl
             cmd.ExecuteNonQuery();
 
             LoadGrid();
-
-
-
-
         }
     }
     protected void btnReturnToMain_Click(object sender, EventArgs e)

@@ -52,6 +52,7 @@
                                                      SelectionMode="Multiple" 
                                                      >
                                  <obout:ComboBoxItem runat="server" Text="" />
+                                <obout:ComboBoxItem runat="server" Text="All Eligible" />
                         </obout:combobox>
                     </td>
                     <td style="text-align:right">

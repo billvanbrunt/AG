@@ -165,13 +165,14 @@
                         EnableRecordHover="true"
                         Serialize="true"
                         CallbackMode="true"
-                        AutoPostBackOnSelect="true"
                         KeepSelectedRecords="true"
                         AllowSorting="true"
                         ShowHeader="true"
-                      
+                       
                 >
+            <ClientSideEvents OnClientSelect='ChangeEligibility' />
                 <Columns>
+                    <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
                     <obout:Column DataField="TestName" HeaderText="Test Name"   Width="225" runat="server" AllowSorting="true" ></obout:Column>
                     <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="125" runat="server"  ></obout:Column>
                     <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
@@ -298,12 +299,14 @@
                         EnableRecordHover="true"
                         Serialize="true"
                         CallbackMode="true"
-                        AutoPostBackOnSelect="true"
+                       
                         KeepSelectedRecords="true"
                         AllowSorting="true"
                         ShowHeader="true"
                 >
+                 <ClientSideEvents OnClientSelect='ChangeEligibility' />
             <Columns>
+                 <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
                 <obout:Column DataField="TestName" HeaderText="Test Name"   Width="250" runat="server" AllowSorting="true" ></obout:Column>
                 <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="105" runat="server"  ></obout:Column>
                 <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
@@ -409,12 +412,14 @@
                         EnableRecordHover="true"
                         Serialize="true"
                         CallbackMode="true"
-                        AutoPostBackOnSelect="true"
+                        
                         KeepSelectedRecords="true"
                         AllowSorting="true"
                         ShowHeader="true"
                 >
+                 <ClientSideEvents OnClientSelect='ChangeEligibility' />
                 <Columns>
+                     <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
                     <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
                     <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
                     <obout:Column DataField="Score"  HeaderText="Score"  Width="130" runat="server" ></obout:Column>
@@ -504,12 +509,14 @@
                         EnableRecordHover="true"
                         Serialize="true"
                         CallbackMode="true"
-                        AutoPostBackOnSelect="true"
+                       
                         KeepSelectedRecords="true"
                         AllowSorting="true"
                         ShowHeader="true"
             >
+                 <ClientSideEvents OnClientSelect='ChangeEligibility' />
                 <Columns>
+                        <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>    
                         <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
                         <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
                         <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
@@ -529,7 +536,7 @@
         <table style="border: 3px solid white; background-color: #C0C0C0; vertical-align: middle; ">
             <tr>
                 <td style="width: 150px; text-align: left;">
-                    <obout:OboutTextBox ID="txtTeacherScore" font="x-small" width="200px"  runat="server" ></obout:OboutTextBox>
+                    <obout:OboutTextBox ID="txtTeacherTest" font="x-small" width="200px"  runat="server" ></obout:OboutTextBox>
                 </td>
                 <td style="width: 335px; text-align: Center;">
                    
@@ -584,7 +591,7 @@
             </tr>
         </table>
         <obout:grid ID="grdTeacherInput" runat="server"
-                     AutoGenerateColumns="false"
+                        AutoGenerateColumns ="false"
                         AllowAddingRecords="false"
                         ShowFooter="true"
                         PageSize="20"
@@ -593,13 +600,14 @@
                         EnableRecordHover="true"
                         Serialize="true"
                         CallbackMode="true"
-                        AutoPostBackOnSelect="true"
                         KeepSelectedRecords="true"
                         AllowSorting="true"
                         ShowHeader="true"
             >
-          
+          <ClientSideEvents OnClientSelect='ChangeTeacherEligibility' />
                 <Columns>
+                    <obout:Column DataField="TeacherInputId"   Width="225" runat="server" visible="false" ></obout:Column>
+                     <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
                     <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
                     <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
                      <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
@@ -687,6 +695,7 @@
             >
           
                 <Columns>
+                     <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
                     <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
                     <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
                      <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
@@ -718,6 +727,13 @@
                        ConnectionString="<%$ ConnectionStrings:con%>" SelectCommandType="StoredProcedure"
                        ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
 
+    <div id="HiddenStuff"  style="display:none;">
+        <obout:OboutTextBox ID="hTestId" runat="server" ></obout:OboutTextBox>
+        <obout:OboutTextBox ID="hValue" runat="server"></obout:OboutTextBox>
+        <input ID="btnChangeEligibility" type="button" runat="server"  onserverclick="btnChangeEligibility_Click" />
+        <input ID="btnChangeTeacherEligibility" type="button" runat="server"  onserverclick="btnChangeTeacherEligibility_Click" />
+         <input ID="btnChangeStudentEligibility" type="button" runat="server"  onserverclick="btnChangeStudentEligibility_Click" />
+    </div>
     <owd:Dialog ID="diaMessage" runat="server"
                 title="Error Message"
                 ShowCloseButton="true" 
@@ -726,19 +742,19 @@
                 IsDraggable="true"   
                 VisibleOnLoad="false"
                 Width="500" 
-                Height="240"
+                Height="250"
                 IconPath="/images/warning.gif"
                 Position="SCREEN_CENTER"
                 >
         <center>
             <div ID="divErrorMsg"  style="background-color:Transparent;Border Style:None;Border Color:0px none Transparent;text-align:left;"></div>
-            <br /><br />
+            <br />
             <input type="Button" id="btnDiaMessageYes"  style="font-size:x-small;width:100px;border-radius:5px;" />
             <input type="Button" id="btnDiaMessageNo"   style="font-size:x-small;width:100px;border-radius:5px;" />
         </center>
     </owd:Dialog>
 </div>
-    <script  type="text/javascript">
+<script  type="text/javascript">
         $(document).ready(function () {
             ADDachTest.Attributes.Add("style", "display:none");
             btnADDAptitude.Attributes.Add("style", "display:none");
@@ -963,7 +979,7 @@
             document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'none';
         }
         function btnSaveTeacherInfo_Click() {
-            var lCheckListScore = txtTeacherScore.value();
+            var lCheckListScore = txtTeacherTest.value();
             var lModDate = txtTeacherDate.value;
         
             var lError = false;
@@ -1110,6 +1126,185 @@
             $("#btnDiaMessageNo").hide();
             diaMessage.Open();
         }
-    </script>
+        function ChangeEligibility(arrSelectedRecords)
+        {
+            var go = true;
+            var NewSetTo;
+            var CurrentSetTo;
+            var lTestId;
+            var record;
+           
+            for (var i = 0; i < arrSelectedRecords.length; i++)
+            {
+                record = arrSelectedRecords[i];
+                lTestId = record.TestID;
+                CurrentSetTo = record.UseForEligibility; // rtempUseForEligibility;
+            }
+
+            function ChangeEligibility(arrSelectedRecords) {
+                var go = true;
+                var NewSetTo;
+                var CurrentSetTo;
+                var lTestId;
+                var record;
+
+                for (var i = 0; i < arrSelectedRecords.length; i++)
+                {
+                    record = arrSelectedRecords[i];
+                    lTestId = record.TestID;
+                    CurrentSetTo = record.UseForEligibility; // rtempUseForEligibility;
+                }
+
+               
+
+                hTestId.value(lTestId);
+                if (CurrentSetTo == 'no') {
+                    hValue.value('yes');
+                    NewSetTo = 'yes';
+                }
+                else {
+                    hValue.value('no');
+                    NewSetTo = 'no';
+                }
+
+
+
+                lMessage = "You are about to change 'Use for Eligibiliy' to <h1>" + NewSetTo.toUpperCase() + "</h1>Click OK to Continue.";
+                $("#divErrorMsg").empty();
+                $('#divErrorMsg').append(lMessage);
+                document.getElementById("divErrorMsg").setAttribute("style", "Height:100px;Width:325px;");
+                diaMessage.setSize(350, 175);
+                diaMessage.setTitle('Update Use for Eligibiliy');
+                document.getElementById("btnDiaMessageYes").value = "OK";
+                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateUFE();");
+                document.getElementById("btnDiaMessageNo").value = "Cancel";
+                document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+                diaMessage.Open();
+
+
+            }
+
+            hTestId.value(lTestId);
+            if (CurrentSetTo == 'no')
+            {
+                hValue.value('yes');
+                NewSetTo = 'yes';
+            }
+            else
+            {
+                hValue.value('no');
+                NewSetTo = 'no';
+            }
+
+            
+
+            lMessage = "You are about to change 'Use for Eligibiliy' to <h1>" + NewSetTo.toUpperCase() + "</h1>Click OK to Continue.";
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:100px;Width:325px;");
+            diaMessage.setSize(350, 175);
+            diaMessage.setTitle('Update Use for Eligibiliy');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateUFE();");
+            document.getElementById("btnDiaMessageNo").value = "Cancel";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            diaMessage.Open();
+
+            
+        }
+        function UpdateUFE()
+        {
+            document.getElementById("<%= btnChangeEligibility.ClientID %>").click(); 
+        }
+     
+        function UpdateTeacherElegibility()
+         {
+             document.getElementById("<%= btnChangeTeacherEligibility.ClientID %>").click(); 
+        }
+    
+        function UpdateStudentElegibility()
+         {
+             document.getElementById("<%= btnChangeStudentEligibility.ClientID %>").click(); 
+         }
+    function ChangeTeacherEligibility(arrSelectedRecords) {
+        var go = true;
+        var NewSetTo;
+        var CurrentSetTo;
+        var lTestId;
+        var record;
+      
+
+        for (var i = 0; i < arrSelectedRecords.length; i++)
+        {
+            record = arrSelectedRecords[i];
+            lTestId = record.TeacherInputId;
+            CurrentSetTo = record.UseForEligibility; //rtempUseForEligibility;
+        }
+         
+        hTestId.value(lTestId);
+        if (CurrentSetTo == 'no')
+        {
+            hValue.value('yes');
+            NewSetTo = 'yes';
+        }
+        else
+        {
+            hValue.value('no');
+            NewSetTo = 'no';
+        }
+
+        lMessage = "You are about to change 'Use for Eligibiliy' to <h1>" + NewSetTo.toUpperCase() + "</h1>Click OK to Continue.";
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:100px;Width:325px;");
+        diaMessage.setSize(350, 175);
+        diaMessage.setTitle('Update Use for Eligibiliy');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateTeacherElegibility();");
+        document.getElementById("btnDiaMessageNo").value = "Cancel";
+        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+        diaMessage.Open();
+
+
+    }
+    function ChangeStudentEligibility(arrSelectedRecords) {
+        var go = true;
+        var NewSetTo;
+        var CurrentSetTo;
+        var lTestId;
+        var record;
+
+
+        for (var i = 0; i < arrSelectedRecords.length; i++) {
+            record = arrSelectedRecords[i];
+            lTestId = record.StudentInputId;
+            CurrentSetTo = record.UseForEligibility; //rtempUseForEligibility;
+        }
+
+        hTestId.value(lTestId);
+        if (CurrentSetTo == 'no') {
+            hValue.value('yes');
+            NewSetTo = 'yes';
+        }
+        else {
+            hValue.value('no');
+            NewSetTo = 'no';
+        }
+
+        lMessage = "You are about to change 'Use for Eligibiliy' to <h1>" + NewSetTo.toUpperCase() + "</h1>Click OK to Continue.";
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:100px;Width:325px;");
+        diaMessage.setSize(350, 175);
+        diaMessage.setTitle('Update Use for Eligibiliy');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateStudentElegibility();");
+        document.getElementById("btnDiaMessageNo").value = "Cancel";
+        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+        diaMessage.Open();
+
+
+    }
+</script>
 
         

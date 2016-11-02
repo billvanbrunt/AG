@@ -100,6 +100,12 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     }
     protected void LoadStudentHistory(string vStudentId)
     {
+
+
+        grdHistory.ClearPreviousDataSource();
+        grdHistory.DataSource = null;
+        grdHistory.DataBind();
+
         SqlStr = "usp_GetStudentHistory";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
@@ -113,6 +119,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     }
     protected void OpenStudentInformation(string vStudentId)
     {
+        ClearForm();
         SqlStr = "usp_GetStudentEligibilityInfo";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
@@ -149,7 +156,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         try
         {
             ddlDecision.SelectedValue = ds.Tables[0].Rows[0]["DecisionId"].ToString();
-            txtDecision.Text = ds.Tables[0].Rows[0][3].ToString();
+            txtDecision.Text = ds.Tables[0].Rows[0][4].ToString();
         }
         catch (Exception)
         {
@@ -208,7 +215,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     protected void btnServerSaveData_Click(object sender, EventArgs e)
     {
         string lUserId = HttpContext.Current.User.Identity.Name.ToString();
-        string lDecision = ddlDecision.SelectedItem.ToString();
+        int lDecision = Convert.ToInt16(ddlDecision.SelectedValue);
         string lTradit = ddlTraditional.SelectedValue.ToString();
         string lNTradit = ddlNonTraditional.SelectedValue.ToString();
         string lReading = ddlReading.SelectedValue.ToString();
@@ -259,8 +266,6 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         OpenStudentInformation(lStudentId);
         LoadStudentHistory(lStudentId);
 
-
-
     }
     protected void btnServerSaveNotes_Click(object sender, EventArgs e)
     {
@@ -275,4 +280,31 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
 
         cmd.ExecuteNonQuery();
     }
+    protected void ClearForm()
+    {
+        txtFullName.Text = "";
+        txtStudentId.Text = "";
+        txtSchoolName.Text = "";
+        txtLastModificationInfo.Text = "";
+        txtModificationType.Text = "";
+        ddlTraditional.SelectedValue = "0";
+        txtTraditional.Text = "";
+        ddlNonTraditional.SelectedValue = "0";
+        txtNonTraditional.Text ="";
+      //  ddlDecision.SelectedValue ="0";
+        txtDecision.Text = "";
+        txtDecision.Text = "";
+        ddlDecision.SelectedItem.Value = "0";
+        ddlReading.SelectedValue = "";
+        ddlMath.SelectedValue = "";
+        ddlScience.SelectedValue = "";
+        ddlSocialStudies.SelectedValue = "";
+        txtReading.Text = "";
+        txtMath.Text = "";
+        txtScience.Text = "";
+        txtSocialStudies.Text = "";
+
+
+    }
+
 }

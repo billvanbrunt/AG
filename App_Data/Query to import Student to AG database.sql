@@ -372,7 +372,7 @@ Insert into TestingData
 FROM [AG].[dbo].AL_Achievement 
 where  DATALENGTH(ltrim(rtrim(OverAllScore))) > 1
 
-insert into TeacherInput
+ insert into TeacherInput
 		( StudentId
 		, Name
 		, RatingDate
@@ -389,7 +389,7 @@ insert into TeacherInput
 			else [GRSDate]
 			   end 
 			
-			,OverallScore
+			,GRS
 			, case 
 				when [ModDateGRD] IS NULL then '01/01/1900'
 				when [ModDateGRD] = '' then '01/01/1900'

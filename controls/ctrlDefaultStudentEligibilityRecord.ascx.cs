@@ -129,10 +129,10 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         var lReading = ds.Tables[2].Rows[0]["Reading"].ToString();
         var lMath = ds.Tables[2].Rows[0]["Math"].ToString();
 
-        switch (lEligCode)
+        switch (lEligCode.Trim())
         {
             case "AG":
-                switch (lTrid)
+                switch (lTrid.Trim())
                 {
                     case "Both":
                         cbAGRM.Checked = true;
@@ -144,7 +144,7 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
                         cbAGM.Checked = true;
                         break;
                 }
-                switch (lNonTrid)
+                switch (lNonTrid.Trim())
                 {
                     case "Both":
                         cbAGRM.Checked = true;
@@ -169,11 +169,11 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
 
 
 
-        if (lReading == "AC" || lMath == "AR" || lMath == "AM" || lMath == "IG")
+        if (lReading.Trim() == "AG" || lReading.Trim() == "AC" || lMath.Trim() == "AR" || lMath.Trim() == "AM" || lMath.Trim() == "IG")
         {
             llReading = 1;
         }
-        if (lMath == "AC" || lMath == "AR" || lMath == "AM" || lMath == "IG")
+        if (lMath.Trim() == "AG" || lMath.Trim() == "AC" || lMath.Trim() == "AC" || lMath.Trim() == "AR" || lMath.Trim() == "AM" || lMath.Trim() == "IG")
         {
             llMath = 1;
         }
@@ -197,16 +197,16 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         }
         
 
-        if (lReading == "AG" || lMath =="AG")
+        if (lReading.Trim() == "AG" || lMath.Trim() == "AG")
         {
             cbSEOREGAC.Checked = true;
         }
-        if( lMath == "IG" || lReading == "IG")
+        if( lMath.Trim() == "IG" || lReading.Trim() == "IG")
         {
             cbIG.Checked = true;
         }
 
-        if(lMath=="VS" || lReading == "VS")
+        if(lMath.Trim() == "VS" || lReading.Trim() == "VS")
         {
             cbSEOREGVS.Checked = true;
         }

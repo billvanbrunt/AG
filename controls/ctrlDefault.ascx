@@ -5,7 +5,7 @@
 <%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="obout" %>
 
 <div id="divApp" >
-   
+     
 
     <div id="divMenu">
       
@@ -128,7 +128,8 @@
                             CallbackMode="true"
                             OnSelect="OpenStudentData" 
                             AutoPostBackOnSelect="true" 
-                    >
+                                
+                            >
                     <Columns>
                         <obout:Column DataField="StudentId"  ReadOnly="true" HeaderText="StudentId"   Width="100" runat="server" ></obout:Column>
                         <obout:Column DataField="LastName"  ReadOnly="true"  HeaderText="Last Name"   Width="125" runat="server" ></obout:Column>
@@ -144,7 +145,7 @@
                     </Templates>
                 </obout:Grid>
             </div>
-            <div id="divSearchResultsProspective" style="display:none;">
+            <div id="divSearchResultsProspective" style="display:none;" >
                 <obout:Grid ID="grdSearchResultProspective" runat="server"
                             AutoGenerateColumns="false"
                             AllowAddingRecords="false"
@@ -156,7 +157,8 @@
                             Serialize="true"
                             CallbackMode="true"
                             OnSelect="OpenProspectiveStudentData" 
-                            AutoPostBackOnSelect="true">
+                            AutoPostBackOnSelect="true"    
+                            >
                     <Columns>
                         <obout:Column DataField="StudentId"  ReadOnly="true" HeaderText="StudentId"   Width="100" runat="server" ></obout:Column>
                         <obout:Column DataField="LastName"  ReadOnly="true"  HeaderText="Last Name"   Width="125" runat="server" ></obout:Column>
@@ -187,13 +189,15 @@
             Height="200"
             IconPath="/images/warning.gif"
             Position="SCREEN_CENTER"
->
+  
+            >
     <center>
         <obout:OboutTextBox ID="txtMessage" runat="server" Height="125px"  Width="485px" BackColor="Transparent" BorderStyle="None" BorderColor="Transparent" TextMode="MultiLine"></obout:OboutTextBox>
         <br /><br />
         <input type="Button" id="btnDiaMessageYes"  style="font-size:x-small;width:100px;border-radius:5px;" />
         <input type="Button" id="btnDiaMessageNo"   style="font-size:x-small;width:100px;border-radius:5px;" />
     </center>
+
 </owd:Dialog>
 
 <script type="text/javascript">
@@ -234,35 +238,31 @@
         var lLastName = txtLastName.value();
         var lFirstName = txtFirstName.value();
     
-        if (lStudentId == '' && lLastName == '' && lFirstName == '')
-        {
+        if (lStudentId == '' && lLastName == '' && lFirstName == '') {
             document.getElementById("btnDiaMessageYes").value = "OK";
             document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
             $("#btnDiaMessageNo").hide();
             txtMessage.value('You must enter something in either First Name, Last Name of Student Id to do a lookup. \n Please click OK and try again.');
             diaMessage.setIconPath('/images/warning.gif');
             diaMessage.Open();
-        }
-        else
-        {
+        } else {
             $('#<%= btnSearchServer.ClientID%>').click();
         }
     }
     function EnterEvent(e) {
         
-        if (e.keyCode == 13)
-        {
+        if (e.keyCode == 13) {
             $('#<%= btnSearch.ClientID%>').click();
         }
     }
 
-    function OpenNoSites()
-    {
+    function OpenNoSites() {
         document.getElementById("btnDiaMessageYes").value = "OK";
         document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
         $("#btnDiaMessageNo").hide();
         txtMessage.value('There was a problem with your account, there are no schools assigned to you. \n Please contat your supervisor to get this problem solved. \n Click ok to continue.');
         diaMessage.setIconPath('/images/warning.gif');
         diaMessage.Open();
+
     }
 </script>

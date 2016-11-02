@@ -68,7 +68,7 @@
                             Width="740"
                             KeepSelectedRecords="true"
                             AllowPageSizeSelection="false">
-                            <ClientSideEvents OnClientSelect="DoRow_Clicked" />
+                            <ClientSideEvents  OnClientSelect="DoRow_Clicked" />
                             <Columns>
                                 <obout:Column HeaderText="ID" DataField="MemberId" ReadOnly="true" Visible="false"></obout:Column>
                                 <obout:Column HeaderText="Site" DataField="SiteId" ReadOnly="true" Visible="false"></obout:Column>
@@ -190,7 +190,7 @@
             IconPath="/images/warning.gif"
             Position="SCREEN_CENTER"
     >
-            <div id="divSearchEmployee" >
+        <div id="divSearchEmployee" >
             <table style="width:485px;">
                 <tr style="text-align:center;width:485px;">
                     <td>
@@ -471,11 +471,12 @@
 
         lGroupName = ddlGroups.options[i].text;
        
-        for (var j = 0; j < grdEmployees.SelectedRecords.length; j++) {
+        for (var j = 0; j < grdEmployees.SelectedRecords.length; j++)
+        {
             var record = grdEmployees.SelectedRecords[j];
             lUserName = record.FullName;
             lMemberId = record.MemberId;
-       }
+        }
 
         lNoSites = grdSchoolSelect.SelectedRecords.length;
        

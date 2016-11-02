@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using Obout.Grid;
+using System.Collections;
 
 public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserControl
 {
@@ -16,7 +17,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
     public string lStudentId;
     SqlPage sQl = new SqlPage();
     GlobalVariables g = new GlobalVariables();
-   
+
     protected void Page_Load(object sender, EventArgs e)
     {
         lStudentId = Request.QueryString["id"];
@@ -43,7 +44,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         HttpCookie _userInfoCookie = Request.Cookies["GCSAGApp"];
         if (_userInfoCookie != null)
         {
-           // lSiteId = _userInfoCookie["Sites"];
+            // lSiteId = _userInfoCookie["Sites"];
             lGroupId = _userInfoCookie["GroupId"];
         }
         return lGroupId;
@@ -79,24 +80,26 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
 
         grdAdditionalAptitudeData.DataSource = ds.Tables[4];
         grdAdditionalAptitudeData.DataBind();
-        
+
         cmd.Cancel();
         da.Dispose();
         ds.Dispose();
 
     }
-    protected void LoadStudentInfo(string vStudentId){
+    protected void LoadStudentInfo(string vStudentId)
+    {
         SqlStr = "usp_GetStudentEligibilityInfo";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
         cmd.Parameters.Add(new SqlParameter("@StudentId", vStudentId));
 
         DataSet ds = new DataSet();
-        
+
         SqlDataAdapter da = new SqlDataAdapter();
         da.SelectCommand = cmd;
         da.Fill(ds, "myData");
-        if (ds.Tables.Count>=1){
+        if (ds.Tables.Count >= 1)
+        {
             txtFullName.Text = ds.Tables[0].Rows[0]["FullName"].ToString();
             txtStudentId.Text = vStudentId;
             txtSchoolName.Text = ds.Tables[0].Rows[0]["School"].ToString();
@@ -108,12 +111,12 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
     }
     protected void ShowSearchWindowAgain_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/defaultStudent.aspx?id=" + lStudentId);
+        Response.Redirect("/default.aspx");
     }
     protected void clearAchData()
     {
-        ddlTestName.SelectedIndex=-1;
-        ddlSubject.SelectedIndex=-1;
+        ddlTestName.SelectedIndex = -1;
+        ddlSubject.SelectedIndex = -1;
         ddlUseForEligibility.SelectedIndex = -1;
     }
     protected void btnStudentInfo_Click(object sender, EventArgs e)
@@ -142,7 +145,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         cmd.Parameters.Add(new SqlParameter("@Subject", lSubject));
         cmd.Parameters.Add(new SqlParameter("@TestName", lTestName));
         cmd.Parameters.Add(new SqlParameter("@TestDate", lTestDate));
-        cmd.Parameters.Add(new SqlParameter("@Score",lScore));
+        cmd.Parameters.Add(new SqlParameter("@Score", lScore));
         cmd.Parameters.Add(new SqlParameter("@ScaleScore", lScaleScore));
         cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lUseForEligibility));
         cmd.Parameters.Add(new SqlParameter("@EnteredBy", lUserId));
@@ -160,7 +163,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         string lTestName = ddlAppTestName.SelectedValue.ToString();
         string lTestDate = Request.Form["txtAppTestDate"];
         string lScore = txtAppTestScore.Text;
-        string lUserfor = ddlAddAdditionalApptestUseForEligibility.SelectedValue.ToString();
+        string lUserfor = ddlAddApptestUseForEligibility.SelectedValue.ToString();
         SqlStr = "usp_AddAcheivmentTest";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
@@ -184,16 +187,16 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
     protected void btnServerSaveTeacherInfo_Click(object sender, EventArgs e)
     {
         string lUserId = HttpContext.Current.User.Identity.Name.ToString();
-        string lTestName = ddlAppTestName.SelectedValue.ToString();
+        string lTestName = txtTeacherTest.Text;
         string lTestDate = Request.Form["txtTeacherDate"];
-        string lScore = txtTeacherScore.Text;
+        string lScore = txtTeacherEvalScore.Text;
         int lUserfor = Int32.Parse(cboTeacherUsedFor.SelectedValue);
 
 
         SqlStr = "usp_SaveTeachersInput";
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
         cmd.CommandType = CommandType.StoredProcedure;
-       
+
         cmd.Parameters.Add(new SqlParameter("@StudentId", lStudentId));
         cmd.Parameters.Add(new SqlParameter("@Name", lTestName));
         cmd.Parameters.Add(new SqlParameter("@ModifiedBy", lUserId));
@@ -261,7 +264,7 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         cmd.ExecuteNonQuery();
         LoadTestInfo(lStudentId);
         clearAchData();
-       
+
         Response.Redirect("~/defaultTestInformation.aspx?id=" + lStudentId);
     }
     protected void btnServerSaveAdditionalAptitude_Click(object sender, EventArgs e)
@@ -286,7 +289,90 @@ public partial class controls_ctrlDefaultTestInformation : System.Web.UI.UserCon
         cmd.ExecuteNonQuery();
         LoadTestInfo(lStudentId);
 
-              
+
         Response.Redirect("~/defaultTestInformation.aspx?id=" + lStudentId);
+    }
+    protected void btnChangeEligibility_Click(object sender, EventArgs e)
+    {
+        var lNewValue = 9;
+        var vValue =  hValue.Text;
+        var vTestId = hTestId.Text;
+
+        if (vValue == "no")
+        {
+            lNewValue = 0;
+        }
+        else if (vValue == "yes")
+        {
+            lNewValue = 1;
+        }
+
+        SqlStr = "usp_UpdateEligibility";
+        SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        cmd.Parameters.Add(new SqlParameter("@TestId", vTestId));
+        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lNewValue));
+
+        cmd.ExecuteNonQuery();
+        LoadTestInfo(lStudentId);
+        hValue.Text="";
+        hTestId.Text="";
+    }
+
+    protected void btnChangeTeacherEligibility_Click(object sender, EventArgs e)
+    {
+        var lNewValue = 9;
+        var vValue = hValue.Text;
+        var vTestId = hTestId.Text;
+
+        if (vValue == "no")
+        {
+            lNewValue = 0;
+        }
+        else if (vValue == "yes")
+        {
+            lNewValue = 1;
+        }
+
+        SqlStr = "usp_UpdateEligibilityTeacher";
+        SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        cmd.Parameters.Add(new SqlParameter("@TeacherInputId", vTestId));
+        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lNewValue));
+
+        cmd.ExecuteNonQuery();
+        LoadTestInfo(lStudentId);
+        hValue.Text = "";
+        hTestId.Text = "";
+    }
+
+    protected void btnChangeStudentEligibility_Click(object sender, EventArgs e)
+    {
+        var lNewValue = 9;
+        var vValue = hValue.Text;
+        var vTestId = hTestId.Text;
+
+        if (vValue == "no")
+        {
+            lNewValue = 0;
+        }
+        else if (vValue == "yes")
+        {
+            lNewValue = 1;
+        }
+
+        SqlStr = "usp_UpdateEligibilityTeacher";
+        SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        cmd.Parameters.Add(new SqlParameter("@StudentInputID", vTestId));
+        cmd.Parameters.Add(new SqlParameter("@UseForEligibility", lNewValue));
+
+        cmd.ExecuteNonQuery();
+        LoadTestInfo(lStudentId);
+        hValue.Text = "";
+        hTestId.Text = "";
     }
 }
