@@ -596,11 +596,11 @@
                     lError = true;
                     lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select a Decision from dropdown<br />";
                 }
-                if (lddlTraditional == 0 && lddlNonTraditional == 0)
-                {
-                    lError = true;
-                    lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make a selection from either the Traditional/Nontraditional dropdown.<br />";
-                }
+                //if (lddlTraditional == 0 && lddlNonTraditional == 0)
+                //{
+                //    lError = true;
+                //    lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make a selection from either the Traditional/Nontraditional dropdown.<br />";
+                //}
                 if (lddlReading == "")
                 {
                     lError = true;

@@ -86,7 +86,7 @@
                                              Font-Size="X-Small"
                                              MenuWidth="350"
                                              Width="250"
-                                            AllowAddingRecords="false">
+                                             AllowAddingRecords="false">
                         <asp:ListItem>Test Name....</asp:ListItem>
                     </obout:OboutDropDownList>
 
@@ -156,56 +156,62 @@
 
         </table>
         <obout:Grid ID="grdActiveData" runat="server"
-                        AutoGenerateColumns="false"
-                        AllowAddingRecords="false"
-                        ShowFooter="true"
-                        PageSize="20"
-                        AllowManualPaging="false"
-                        AllowRecordSelection="true"
-                        EnableRecordHover="true"
-                        Serialize="true"
-                        CallbackMode="true"
-                        KeepSelectedRecords="true"
-                        AllowSorting="true"
-                        ShowHeader="true"
+                    AutoGenerateColumns="false"
+                    AllowAddingRecords="false"
+                    ShowFooter="true"
+                    PageSize="20"
+                    AllowManualPaging="false"
+                    AllowRecordSelection="true"
+                    EnableRecordHover="true"
+                    Serialize="true"
+                    CallbackMode="true"
+                    KeepSelectedRecords="true"
+                    AllowSorting="true"
+                    ShowHeader="true"
                        
-                >
+                    >
             <ClientSideEvents OnClientSelect='ChangeEligibility' />
-                <Columns>
-                    <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
-                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="225" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="125" runat="server"  ></obout:Column>
-                    <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
-                    <obout:Column DataField="Score"     HeaderText="Test Score"   Width="75" runat="server" >
-                          <TemplateSettings HeaderTemplateId="tempTestScore" />
-                    </obout:Column>
-                    <obout:Column DataField="ScaleScore"     HeaderText=""   Width="75" runat="server" >
-                        <TemplateSettings HeaderTemplateId="tempScaleScore1" />
-                    </obout:Column>
-                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" TemplateId="TplUFE" >
-                        <TemplateSettings HeaderTemplateId="tempUseForEligibility"  />
-                    </obout:Column>
-                </Columns>
+            <Columns>
+                <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
+                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="225" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="125" runat="server"  ></obout:Column>
+                <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
+                <obout:Column DataField="Score"     HeaderText="Test Score"   Width="75" runat="server" >
+                    <TemplateSettings HeaderTemplateId="tempTestScore" />
+                </obout:Column>
+                <obout:Column DataField="ScaleScore"     HeaderText=""   Width="75" runat="server" >
+                    <TemplateSettings HeaderTemplateId="tempScaleScore1" />
+                </obout:Column>
+                <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" TemplateId="TplUFE" >
+                    <TemplateSettings HeaderTemplateId="tempUseForEligibility"  />
+                </obout:Column>
+            </Columns>
             <Templates>
                 <obout:GridTemplate runat="server" ID="TplUFE">
                     <Template>
-                        <%# (Container.Value == "1" ? "yes" : "no") %>
+                    <%# (Container.Value == "1" ? "yes" : "no") %>
                     </Template>
                 </obout:GridTemplate>
-          
+
                 <obout:GridTemplate runat="server" ID="tempUseForEligibility">
-                    <Template>Use For<br />Eligibility</Template>
+                    <Template>
+                        Use For<br />Eligibility
+                    </Template>
                 </obout:GridTemplate>
-            
+
                 <obout:GridTemplate runat="server" ID="tempTestScore">
-                    <Template>Test<br />Score</Template>
+                    <Template>
+                        Test<br />Score
+                    </Template>
                 </obout:GridTemplate>
-        
+
                 <obout:GridTemplate runat="server" ID="tempScaleScore1">
-                    <Template>Scale<br />Score</Template>
+                    <Template>
+                        Scale<br />Score
+                    </Template>
                 </obout:GridTemplate>
             </Templates>
-         
+
         </obout:Grid>
 
     </div>
@@ -290,37 +296,37 @@
             </tr>
         </table>
         <obout:Grid ID="grdAddAdditionalAchievmentTest" runat="server"
-                        AutoGenerateColumns="false"
-                        AllowAddingRecords="false"
-                        ShowFooter="true"
-                        PageSize="20"
-                        AllowManualPaging="false"
-                        AllowRecordSelection="true"
-                        EnableRecordHover="true"
-                        Serialize="true"
-                        CallbackMode="true"
+                    AutoGenerateColumns="false"
+                    AllowAddingRecords="false"
+                    ShowFooter="true"
+                    PageSize="20"
+                    AllowManualPaging="false"
+                    AllowRecordSelection="true"
+                    EnableRecordHover="true"
+                    Serialize="true"
+                    CallbackMode="true"
                        
-                        KeepSelectedRecords="true"
-                        AllowSorting="true"
-                        ShowHeader="true"
-                >
-                 <ClientSideEvents OnClientSelect='ChangeEligibility' />
+                    KeepSelectedRecords="true"
+                    AllowSorting="true"
+                    ShowHeader="true"
+                    >
+            <ClientSideEvents OnClientSelect='ChangeEligibility' />
             <Columns>
-                 <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
+                <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
                 <obout:Column DataField="TestName" HeaderText="Test Name"   Width="250" runat="server" AllowSorting="true" ></obout:Column>
                 <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="105" runat="server"  ></obout:Column>
                 <obout:Column DataField="Subject" HeaderText="Test Subject" Width="130" runat="server" ></obout:Column>
                 <obout:Column DataField="Score"     HeaderText=""   Width="70" runat="server" >
-                        <TemplateSettings HeaderTemplateId="tempACHTestScore" />
+                    <TemplateSettings HeaderTemplateId="tempACHTestScore" />
                 </obout:Column>
                 <obout:Column DataField="ScaleScore"     HeaderText=""   Width="75" runat="server" >
-                        <TemplateSettings HeaderTemplateId="tempScaleScore" />
+                    <TemplateSettings HeaderTemplateId="tempScaleScore" />
                 </obout:Column>
                 <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
                     <TemplateSettings HeaderTemplateId="tempACHUseForEligibility" />
                 </obout:Column>
             </Columns>
-           
+
             <Templates>
                 <obout:GridTemplate runat="server" ID="tempACHTestScore">
                     <Template>Score</Template>
@@ -328,12 +334,16 @@
             </Templates>
             <Templates>
                 <obout:GridTemplate runat="server" ID="tempScaleScore">
-                    <Template>Scale<br />Score</Template>
+                    <Template>
+                        Scale<br />Score
+                    </Template>
                 </obout:GridTemplate>
             </Templates>
             <Templates>
                 <obout:GridTemplate runat="server" ID="tempACHUseForEligibility">
-                    <Template>Use For<br />Eligibility</Template>
+                    <Template>
+                        Use For<br />Eligibility
+                    </Template>
                 </obout:GridTemplate>
             </Templates>
         </obout:Grid>
@@ -403,35 +413,37 @@
             </tr>
         </table>
         <obout:Grid ID="grdAptitudeData" runat="server"
-                        AutoGenerateColumns="false"
-                        AllowAddingRecords="false"
-                        ShowFooter="true"
-                        PageSize="20"
-                        AllowManualPaging="false"
-                        AllowRecordSelection="true"
-                        EnableRecordHover="true"
-                        Serialize="true"
-                        CallbackMode="true"
+                    AutoGenerateColumns="false"
+                    AllowAddingRecords="false"
+                    ShowFooter="true"
+                    PageSize="20"
+                    AllowManualPaging="false"
+                    AllowRecordSelection="true"
+                    EnableRecordHover="true"
+                    Serialize="true"
+                    CallbackMode="true"
                         
-                        KeepSelectedRecords="true"
-                        AllowSorting="true"
-                        ShowHeader="true"
-                >
-                 <ClientSideEvents OnClientSelect='ChangeEligibility' />
-                <Columns>
-                     <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
-                    <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
-                    <obout:Column DataField="Score"  HeaderText="Score"  Width="130" runat="server" ></obout:Column>
-                    <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
-                         <TemplateSettings HeaderTemplateId="tempAptitudeseForEligibility" />
-                    </obout:Column>
-				</Columns>
-                <Templates>
-                    <obout:GridTemplate runat="server" ID="tempAptitudeseForEligibility">
-                        <Template>Use For<br />Eligibility</Template>
-                    </obout:GridTemplate>
-                </Templates>
+                    KeepSelectedRecords="true"
+                    AllowSorting="true"
+                    ShowHeader="true"
+                    >
+            <ClientSideEvents OnClientSelect='ChangeEligibility' />
+            <Columns>
+                <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
+                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
+                <obout:Column DataField="Score"  HeaderText="Score"  Width="130" runat="server" ></obout:Column>
+                <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
+                    <TemplateSettings HeaderTemplateId="tempAptitudeseForEligibility" />
+                </obout:Column>
+            </Columns>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempAptitudeseForEligibility">
+                    <Template>
+                        Use For<br />Eligibility
+                    </Template>
+                </obout:GridTemplate>
+            </Templates>
         </obout:Grid>
     </div>
 
@@ -481,7 +493,7 @@
                         <asp:ListItem Value="0"> No </asp:ListItem>
                     </obout:OboutDropDownList>
                 </td>
-                
+
             </tr>
         </table>
     </div>
@@ -500,35 +512,37 @@
             </tr>
         </table>
         <obout:Grid ID="grdAdditionalAptitudeData" runat="server"
-                     AutoGenerateColumns="false"
-                        AllowAddingRecords="false"
-                        ShowFooter="true"
-                        PageSize="20"
-                        AllowManualPaging="false"
-                        AllowRecordSelection="true"
-                        EnableRecordHover="true"
-                        Serialize="true"
-                        CallbackMode="true"
+                    AutoGenerateColumns="false"
+                    AllowAddingRecords="false"
+                    ShowFooter="true"
+                    PageSize="20"
+                    AllowManualPaging="false"
+                    AllowRecordSelection="true"
+                    EnableRecordHover="true"
+                    Serialize="true"
+                    CallbackMode="true"
                        
-                        KeepSelectedRecords="true"
-                        AllowSorting="true"
-                        ShowHeader="true"
-            >
-                 <ClientSideEvents OnClientSelect='ChangeEligibility' />
-                <Columns>
-                        <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>    
-                        <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                        <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
-                        <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
-                        <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
-                             <TemplateSettings HeaderTemplateId="tempAdditionalAptitudeData" />
-                        </obout:Column>
-                </Columns>
-                <Templates>
-                        <obout:GridTemplate runat="server" ID="tempAdditionalAptitudeData">
-                            <Template>Use For<br />Eligibility</Template>
-                        </obout:GridTemplate>
-                </Templates>
+                    KeepSelectedRecords="true"
+                    AllowSorting="true"
+                    ShowHeader="true"
+                    >
+            <ClientSideEvents OnClientSelect='ChangeEligibility' />
+            <Columns>
+                <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
+                <obout:Column DataField="TestName" HeaderText="Test Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="TestDate"  HeaderText="Test Date" Width="150" runat="server"  ></obout:Column>
+                <obout:Column DataField="Score"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                <obout:Column DataField="UseForEligibility"  HeaderText=""  Width="100" runat="server" >
+                    <TemplateSettings HeaderTemplateId="tempAdditionalAptitudeData" />
+                </obout:Column>
+            </Columns>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempAdditionalAptitudeData">
+                    <Template>
+                        Use For<br />Eligibility
+                    </Template>
+                </obout:GridTemplate>
+            </Templates>
         </obout:Grid>
     </div>
 
@@ -539,8 +553,7 @@
                     <obout:OboutTextBox ID="txtTeacherTest" font="x-small" width="200px"  runat="server" ></obout:OboutTextBox>
                 </td>
                 <td style="width: 335px; text-align: Center;">
-                   
-                   
+
                     <input type="text" readonly="readonly" ID="txtTeacherDate" name="txtTeacherDate" placeholder="Date"
                            Style="font-size: x-small;border-radius:5px;Width:72px;height:12px; Border Width:1px solid #C0C0C0;"
                            />
@@ -591,35 +604,37 @@
             </tr>
         </table>
         <obout:grid ID="grdTeacherInput" runat="server"
-                        AutoGenerateColumns ="false"
-                        AllowAddingRecords="false"
-                        ShowFooter="true"
-                        PageSize="20"
-                        AllowManualPaging="false"
-                        AllowRecordSelection="true"
-                        EnableRecordHover="true"
-                        Serialize="true"
-                        CallbackMode="true"
-                        KeepSelectedRecords="true"
-                        AllowSorting="true"
-                        ShowHeader="true"
-            >
-          <ClientSideEvents OnClientSelect='ChangeTeacherEligibility' />
-                <Columns>
-                    <obout:Column DataField="TeacherInputId"   Width="225" runat="server" visible="false" ></obout:Column>
-                     <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
-                    <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
-                     <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
-                    <obout:Column DataField="UseForEligibility"  HeaderText="Useed for " Width="100" runat="server"  >
-                        <TemplateSettings HeaderTemplateId="tempTeacherInput" />
-                    </obout:Column>
-                </Columns>
-                <Templates>
-                    <obout:GridTemplate runat="server" ID="tempTeacherInput">
-                        <Template>Use For<br />Eligibility</Template>
-                    </obout:GridTemplate>
-                </Templates>
+                    AutoGenerateColumns ="false"
+                    AllowAddingRecords="false"
+                    ShowFooter="true"
+                    PageSize="20"
+                    AllowManualPaging="false"
+                    AllowRecordSelection="true"
+                    EnableRecordHover="true"
+                    Serialize="true"
+                    CallbackMode="true"
+                    KeepSelectedRecords="true"
+                    AllowSorting="true"
+                    ShowHeader="true"
+                    >
+            <ClientSideEvents OnClientSelect='ChangeTeacherEligibility' />
+            <Columns>
+                <obout:Column DataField="TeacherInputId"   Width="225" runat="server" visible="false" ></obout:Column>
+                <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
+                <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
+                <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                <obout:Column DataField="UseForEligibility"  HeaderText="Useed for " Width="100" runat="server"  >
+                    <TemplateSettings HeaderTemplateId="tempTeacherInput" />
+                </obout:Column>
+            </Columns>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempTeacherInput">
+                    <Template>
+                        Use For<br />Eligibility
+                    </Template>
+                </obout:GridTemplate>
+            </Templates>
         </obout:grid>
     </div>
 
@@ -630,7 +645,7 @@
                     <obout:oboutTextBox ID="txtStudentInput" width="200px"  runat="server" CssClass="gridData" Text='<%#Eval("Score") %>'/>
                 </td>
                 <td style="width: 335px; text-align: center;">
-                  
+
                     <input type="text" readonly="readonly" id="txtStudentDate" name="txtStudentDate" style="font-size: x-small; border-radius: 5px; width: 75px; border color: #CCCCCC Style:Solid; border width: 1px solid #C0C0C0;" placeholder="Date" />
                     <obout:Calendar ID="calStudentInput" runat="server"
                                     TextBoxId="txtStudentDate"
@@ -678,36 +693,38 @@
                 </td>
             </tr>
         </table>
-       <Obout:Grid ID="grdStudentInput" runat="server"
-                     AutoGenerateColumns="false"
-                        AllowAddingRecords="false"
-                        ShowFooter="true"
-                        PageSize="20"
-                        AllowManualPaging="false"
-                        AllowRecordSelection="true"
-                        EnableRecordHover="true"
-                        Serialize="true"
-                        CallbackMode="true"
-                        AutoPostBackOnSelect="true"
-                        KeepSelectedRecords="true"
-                        AllowSorting="true"
-                        ShowHeader="true"
-            >
-          
-                <Columns>
-                     <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
-                    <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
-                    <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
-                     <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
-                    <obout:Column DataField="UseForEligibility"  HeaderText="Test Date" Width="100" runat="server"  >
-                        <TemplateSettings HeaderTemplateId="tempStudentInput" />
-                    </obout:Column>
-                </Columns>
-                <Templates>
-                            <obout:GridTemplate runat="server" ID="tempStudentInput">
-                                <Template>Use For<br />Eligibility</Template>
-                            </obout:GridTemplate>
-                </Templates>
+        <Obout:Grid ID="grdStudentInput" runat="server"
+                    AutoGenerateColumns="false"
+                    AllowAddingRecords="false"
+                    ShowFooter="true"
+                    PageSize="20"
+                    AllowManualPaging="false"
+                    AllowRecordSelection="true"
+                    EnableRecordHover="true"
+                    Serialize="true"
+                    CallbackMode="true"
+                    AutoPostBackOnSelect="true"
+                    KeepSelectedRecords="true"
+                    AllowSorting="true"
+                    ShowHeader="true"
+                    >
+
+            <Columns>
+                <obout:Column DataField="TestID"   Width="225" runat="server" visible="false" ></obout:Column>
+                <obout:Column DataField="Name" HeaderText="Name"   Width="350" runat="server" AllowSorting="true" ></obout:Column>
+                <obout:Column DataField="RatingDate"  HeaderText="Date" Width="150" runat="server"  ></obout:Column>
+                <obout:Column DataField="Rating"  HeaderText="Score"   Width="130px" runat="server" ></obout:Column>
+                <obout:Column DataField="UseForEligibility"  HeaderText="Test Date" Width="100" runat="server"  >
+                    <TemplateSettings HeaderTemplateId="tempStudentInput" />
+                </obout:Column>
+            </Columns>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="tempStudentInput">
+                    <Template>
+                        Use For<br />Eligibility
+                    </Template>
+                </obout:GridTemplate>
+            </Templates>
         </obout:Grid>
     </div>
 
@@ -732,7 +749,7 @@
         <obout:OboutTextBox ID="hValue" runat="server"></obout:OboutTextBox>
         <input ID="btnChangeEligibility" type="button" runat="server"  onserverclick="btnChangeEligibility_Click" />
         <input ID="btnChangeTeacherEligibility" type="button" runat="server"  onserverclick="btnChangeTeacherEligibility_Click" />
-         <input ID="btnChangeStudentEligibility" type="button" runat="server"  onserverclick="btnChangeStudentEligibility_Click" />
+        <input ID="btnChangeStudentEligibility" type="button" runat="server"  onserverclick="btnChangeStudentEligibility_Click" />
     </div>
     <owd:Dialog ID="diaMessage" runat="server"
                 title="Error Message"
@@ -755,500 +772,445 @@
     </owd:Dialog>
 </div>
 <script  type="text/javascript">
-        $(document).ready(function () {
-            ADDachTest.Attributes.Add("style", "display:none");
-            btnADDAptitude.Attributes.Add("style", "display:none");
-        });
-        function ADDAptitude_Click() {
-            document.getElementById('divAddAptitudeTest').style.display = 'block';
-            document.getElementById('btnSaveAptitude').style.display = 'inline';
-            document.getElementById('btnCancelAptitude').style.display = 'inline';
-            document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'none';
-        }
-        function btnCancelAptitude_Click() {
-            document.getElementById('divAddAptitudeTest').style.display = 'none';
-            document.getElementById('btnSaveAptitude').style.display = 'none';
-            document.getElementById('btnCancelAptitude').style.display = 'none';
-            document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'inline';
-        }
-        function btnSaveAptitude_Click() {
-            var lTestName = ddlAppTestName.value();
-            var lTestDate = txtAppTestDate.value;
-            var lScore = txtAppTestScore.value();
-            var lError = false;
-            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+    $(document).ready(function () {
+        ADDachTest.Attributes.Add("style", "display:none");
+        btnADDAptitude.Attributes.Add("style", "display:none");
+    });
+    function ADDAptitude_Click() {
+        document.getElementById('divAddAptitudeTest').style.display = 'block';
+        document.getElementById('btnSaveAptitude').style.display = 'inline';
+        document.getElementById('btnCancelAptitude').style.display = 'inline';
+        document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'none';
+    }
+    function btnCancelAptitude_Click() {
+        document.getElementById('divAddAptitudeTest').style.display = 'none';
+        document.getElementById('btnSaveAptitude').style.display = 'none';
+        document.getElementById('btnCancelAptitude').style.display = 'none';
+        document.getElementById('<%=btnADDAptitude.ClientID%>').style.display = 'inline';
+    }
+    function btnSaveAptitude_Click() {
+        var lTestName = ddlAppTestName.value();
+        var lTestDate = txtAppTestDate.value;
+        var lScore = txtAppTestScore.value();
+        var lError = false;
+        var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
 
-            if (lTestName == "Test Name....") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-            }
-            if (lTestDate == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-            }
-            if (lScore == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-            }
-            if (lError == true) {
-                lMessage += '</font><br />Please correct the above issues and try again.';
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-                document.getElementById("btnDiaMessageYes").value = "OK";
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-                $("#btnDiaMessageNo").hide();
-                diaMessage.Open();
-            } else {
-                document.getElementById("<%=btnServerSaveAptitude.ClientID%>").click();
-            }
+        if (lTestName == "Test Name....") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
         }
+        if (lTestDate == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+        }
+        if (lScore == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+        }
+        if (lError == true) {
+            lMessage += '</font><br />Please correct the above issues and try again.';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        } else {
 
-        function btnADDAdditionalAptitude_Click() {
-            document.getElementById('divAdditionalAptitudeTest').style.display = 'block';
-            document.getElementById('btnSaveAdditionalAptitude').style.display = 'inline';
-            document.getElementById('btnCancelAdditionalAptitude').style.display = 'inline';
-            document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'none';
-        }
-        function btnCancelAdditionalAptitude_Click() {
-            document.getElementById('divAdditionalAptitudeTest').style.display = 'none';
-            document.getElementById('btnSaveAdditionalAptitude').style.display = 'none';
-            document.getElementById('btnCancelAdditionalAptitude').style.display = 'none';
-            document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'inline';
-        }
-        function btnSaveAdditionalAptitude_Click() {
-            var lTestName = ddlAdditionalAptTestName.value();
-            var lTestDate = txtAdditionalAptTestDate.value;
-            var lScore = txtAdditionalAptTestScore.value();
-
-            var lError = false;
-            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
-
-            if (lTestName == "Test Name....") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-            }
-
-            if (lTestDate == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-            }
-            if (lScore == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-            }
-
-            if (lError == true) {
-                lMessage += '</font><br />Please correct the above issues and try again.';
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-                document.getElementById("btnDiaMessageYes").value = "OK";
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-                $("#btnDiaMessageNo").hide();
-                diaMessage.Open();
-            } else {
-                document.getElementById("<%=btnServerSaveAdditionalAptitude.ClientID%>").click();
-            }
-        }
-
-        function btnAddAcheivmentTest_Click() {
-            document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'none';
-            document.getElementById('divAddAchievmentTest').style.display = 'block';
-            document.getElementById('btnSaveAchevmentTest').style.display = 'inline';
-            document.getElementById('btnCancelAchevment').style.display = 'inline';
-        }
-        function btnCancelAchevment_Click() {
-            document.getElementById('divAddAchievmentTest').style.display = 'none';
-            document.getElementById('btnSaveAchevmentTest').style.display = 'none';
-            document.getElementById('btnCancelAchevment').style.display = 'none';
-            document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'inline';
-        }
-        function btnSaveAchevmentTest_Click() {
-            var lTestName = ddlTestName.value();
-            var lTestDate = txtAchTestDate.value;
-            var lSubject = ddlSubject.value();
-            var lScore = txtAchScore.value;
-            var lScaleScore = txtAchScaleScore.value;
-            var lUseForEligibility = ddlUseForEligibility.value();
-            var lError = false;
-            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
-
-            if (lTestName == "Test Name....") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-            }
-
-            if (lTestDate == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-            }
-
-            if (lSubject == "Subject....") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for this test must be selected from the list.<br />";
-            }
-            if (lScore == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-            }
-            if (lUseForEligibility == "-1") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
-            }
-            if (lError == true) {
-                lMessage += '</font><br />Please correct the above issues and try again.';
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("btnDiaMessageYes").value = "OK";
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-                $("#btnDiaMessageNo").hide();
-                diaMessage.Open();
-            } else {
-                document.getElementById("<%=btnServerSaveAchevment.ClientID%>").click();
-            }
-        }
-
-        function btnCancelAdditionalAchievmentTest_Click() {
-            document.getElementById('divAdditionalAchievmentTest').style.display = 'none';
-            document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'none';
-            document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'none';
-            document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'inline';
-        }
-        function btnAddAdditionalAchievmentTest_Click() {
-            document.getElementById('divAdditionalAchievmentTest').style.display = 'block';
-            document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'inline';
-            document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'inline';
-            document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'none';
-        }
-        function btnSaveAdditionalAchievmentTest_Click() {
-            //ToDo: Stopped Here
-            var lTestName = ddlAdditionalAchievmentTestName.value();
-            var lTestDate = txtAddAdditionalAchievementTestDate.value;
-            var lSubject = ddlAddAdditionalAchievementTestSubject.value();
-            var lScore = txtAddAdditionalAchievementTestScore.value;
-            var lScaleScore = txtAddAdditionalAchievementTestScaleScore.value;
-            var lUseForEligibility = ddlAddAdditionalAchievementUseForEligibility.value();
-            var lError = false;
-            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
-        
-            if (lTestName == "Test Name....") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
-            }
-            if (lTestDate == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
-            }
-            if (lSubject == "Subject....") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for tis test must be selected from the list.<br />";
-            }
-            if (lScore == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
-            }
-            if (lUseForEligibility == "-1") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
-            }
-        
-            if (lError == true) {
-                lMessage += '</font><br />Please correct the above issues and try again.';
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("btnDiaMessageYes").value = "OK";
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-                $("#btnDiaMessageNo").hide();
-                diaMessage.Open();
-            } else {
-                document.getElementById("<%=btnServerSaveAdditionalAchievmentTest.ClientID%>").click();
-            }
-        }
-        
-        function btnCancelTeacherInfo_Click() {
-            document.getElementById('divAddNewTeacherInfo').style.display = 'none';
-            document.getElementById('btnSaveTeacherInfo').style.display = 'none';
-            document.getElementById('btnCancelTeacherInfo').style.display = 'none';
-            document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'inline';
-        }
-        function ADDTeacherInfo_Click() {
-            document.getElementById('divAddNewTeacherInfo').style.display = 'block';
-            document.getElementById('btnSaveTeacherInfo').style.display = 'inline';
-            document.getElementById('btnCancelTeacherInfo').style.display = 'inline';
-            document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'none';
-        }
-        function btnSaveTeacherInfo_Click() {
-            var lCheckListScore = txtTeacherTest.value();
-            var lModDate = txtTeacherDate.value;
-        
-            var lError = false;
-            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
-        
-            if (lCheckListScore == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
-            }
-        
-            if (lModDate == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
-            }
-        
-            if (lError == true) {
-                lMessage += '</font><br />Please correct the above issues and try again.';
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-                diaMessage.setSize(500, 240);
-                diaMessage.setTitle('Data Problem');
-                document.getElementById("btnDiaMessageYes").value = "OK";
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-                $("#btnDiaMessageNo").hide();
-                diaMessage.Open();
-            } else {
-                lMessage = "You are about to change Teacher's Input.<br /><br /> Click Yes to continue.";
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-                diaMessage.setSize(300, 150);
-                diaMessage.setTitle('Save Teacher Data');
-                document.getElementById("btnDiaMessageYes").value = "OK";
-                document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveTeacherInfo.ClientID%>').click();");
-                document.getElementById("btnDiaMessageNo").value = "cancel";
-                $("#btnDiaMessageNo").show();
-                diaMessage.Open();
-            }
-        }
-        
-        function btnCancelStudentInfo_Click() {
-            document.getElementById('divAddNewStudentInfo').style.display = 'none';
-            document.getElementById('btnSaveStudentInfo').style.display = 'none';
-            document.getElementById('btnCancelStudentInfo').style.display = 'none';
-            document.getElementById('<%=btnAddStudentInfo.ClientID%>').style.display = 'inline';
-        }
-        // AddStudentInfo_Click()
-        function AddStudentInfo_Click() {
-            document.getElementById('divAddNewStudentInfo').style.display = 'block';
-            document.getElementById('btnSaveStudentInfo').style.display = 'inline';
-            document.getElementById('btnCancelStudentInfo').style.display = 'inline';
-            document.getElementById('<%=btnAddStudentInfo.ClientID%>').style.display = 'none';
-        }
-        function btnSaveStudentInfo_Click() {
-            var lCheckListScore = txtStudentInput.value();
-            var lModDate = txtStudentDate.value;
-            var lError = false;
-            var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
-        
-            if (lCheckListScore == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
-            }
-        
-            if (lModDate == "") {
-                lError = true;
-                lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
-            }
-        
-            if (lError == true) {
-                lMessage += '</font><br />Please correct the above issues and try again.';
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
-                diaMessage.setSize(500, 240);
-                diaMessage.setTitle('Data Problem');
-                document.getElementById("btnDiaMessageYes").value = "Ok";
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-                $("#btnDiaMessageNo").hide();
-                diaMessage.Open();
-            } else {
-                lMessage = "You are about to save Student Input.<br /><br /> Click Ok to continue.";
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-                diaMessage.setSize(300, 150);
-                diaMessage.setTitle('Save Data');
-                document.getElementById("btnDiaMessageYes").value = "Ok";
-                document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveStudentInfo.ClientID%>').click();");
-                document.getElementById("btnDiaMessageNo").value = "cancel";
-                $("#btnDiaMessageNo").show();
-                diaMessage.Open();
-            }
-        }
-        
-        function OpenSaveSuccessful() {
-            txtAchTestDate.value = '';
-            lMessage += 'The test results were saves successfully';
+            lMessage = "You are about to save a new Aptitude Test.<br /><br /> Click Yes to continue.";
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
             diaMessage.setSize(300, 150);
-            diaMessage.setTitle('Data Saved');
+            diaMessage.setTitle('Save Teacher Data');
             document.getElementById("btnDiaMessageYes").value = "OK";
-            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-            $("#btnDiaMessageNo").hide();
-            diaMessage.Open();
-        }
-        function OpenSaveTeacherSuccessful() {
-            txtTeacherDate.value = '';
-            lMessage = 'The Teacher Input results were saves successfully';
-            $("#divErrorMsg").empty();
-            $('#divErrorMsg').append(lMessage);
-            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-            diaMessage.setSize(300, 150);
-            diaMessage.setTitle('Data Saved');
-            document.getElementById("btnDiaMessageYes").value = "OK";
-            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-            $("#btnDiaMessageNo").hide();
-            diaMessage.Open();
-        }
-        function OpenStudentSaveSuccessful() {
-            lMessage = 'The test results were saves successfully';
-            $("#divErrorMsg").empty();
-            $('#divErrorMsg').append(lMessage);
-            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
-            diaMessage.setSize(300, 150);
-            diaMessage.setTitle('Data Saved');
-            document.getElementById("btnDiaMessageYes").value = "OK";
-            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-            $("#btnDiaMessageNo").hide();
-            diaMessage.Open();
-        }
-        function OpenSaveSuccessful() {
-            txtAchTestDate.value = '';
-            lMessage += 'The test results were saves successfully';
-            $("#divErrorMsg").empty();
-            $('#divErrorMsg').append(lMessage);
-            document.getElementById("btnDiaMessageYes").value = "OK";
-            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
-            $("#btnDiaMessageNo").hide();
-            diaMessage.Open();
-        }
-        function ChangeEligibility(arrSelectedRecords)
-        {
-            var go = true;
-            var NewSetTo;
-            var CurrentSetTo;
-            var lTestId;
-            var record;
-           
-            for (var i = 0; i < arrSelectedRecords.length; i++)
-            {
-                record = arrSelectedRecords[i];
-                lTestId = record.TestID;
-                CurrentSetTo = record.UseForEligibility; // rtempUseForEligibility;
-            }
-
-            function ChangeEligibility(arrSelectedRecords) {
-                var go = true;
-                var NewSetTo;
-                var CurrentSetTo;
-                var lTestId;
-                var record;
-
-                for (var i = 0; i < arrSelectedRecords.length; i++)
-                {
-                    record = arrSelectedRecords[i];
-                    lTestId = record.TestID;
-                    CurrentSetTo = record.UseForEligibility; // rtempUseForEligibility;
-                }
-
-               
-
-                hTestId.value(lTestId);
-                if (CurrentSetTo == 'no') {
-                    hValue.value('yes');
-                    NewSetTo = 'yes';
-                }
-                else {
-                    hValue.value('no');
-                    NewSetTo = 'no';
-                }
-
-
-
-                lMessage = "You are about to change 'Use for Eligibiliy' to <h1>" + NewSetTo.toUpperCase() + "</h1>Click OK to Continue.";
-                $("#divErrorMsg").empty();
-                $('#divErrorMsg').append(lMessage);
-                document.getElementById("divErrorMsg").setAttribute("style", "Height:100px;Width:325px;");
-                diaMessage.setSize(350, 175);
-                diaMessage.setTitle('Update Use for Eligibiliy');
-                document.getElementById("btnDiaMessageYes").value = "OK";
-                document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateUFE();");
-                document.getElementById("btnDiaMessageNo").value = "Cancel";
-                document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
-                diaMessage.Open();
-
-
-            }
-
-            hTestId.value(lTestId);
-            if (CurrentSetTo == 'no')
-            {
-                hValue.value('yes');
-                NewSetTo = 'yes';
-            }
-            else
-            {
-                hValue.value('no');
-                NewSetTo = 'no';
-            }
-
-            
-
-            lMessage = "You are about to change 'Use for Eligibiliy' to <h1>" + NewSetTo.toUpperCase() + "</h1>Click OK to Continue.";
-            $("#divErrorMsg").empty();
-            $('#divErrorMsg').append(lMessage);
-            document.getElementById("divErrorMsg").setAttribute("style", "Height:100px;Width:325px;");
-            diaMessage.setSize(350, 175);
-            diaMessage.setTitle('Update Use for Eligibiliy');
-            document.getElementById("btnDiaMessageYes").value = "OK";
-            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateUFE();");
-            document.getElementById("btnDiaMessageNo").value = "Cancel";
             document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveAptitude.ClientID%>').click();");
+            document.getElementById("btnDiaMessageNo").value = "cancel";
+            $("#btnDiaMessageNo").show();
+            diaMessage.Open();
+           
+        }
+    }
+    function btnADDAdditionalAptitude_Click() {
+        document.getElementById('divAdditionalAptitudeTest').style.display = 'block';
+        document.getElementById('btnSaveAdditionalAptitude').style.display = 'inline';
+        document.getElementById('btnCancelAdditionalAptitude').style.display = 'inline';
+        document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'none';
+    }
+    function btnCancelAdditionalAptitude_Click() {
+        document.getElementById('divAdditionalAptitudeTest').style.display = 'none';
+        document.getElementById('btnSaveAdditionalAptitude').style.display = 'none';
+        document.getElementById('btnCancelAdditionalAptitude').style.display = 'none';
+        document.getElementById('<%=btnADDAdditionalAptitude.ClientID%>').style.display = 'inline';
+    }
+    function btnSaveAdditionalAptitude_Click() {
+        var lTestName = ddlAdditionalAptTestName.value();
+        var lTestDate = txtAdditionalAptTestDate.value;
+        var lScore = txtAdditionalAptTestScore.value();
+
+        var lError = false;
+        var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+
+        if (lTestName == "Test Name....") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
+        }
+
+        if (lTestDate == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+        }
+        if (lScore == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+        }
+
+        if (lError == true) {
+            lMessage += '</font><br />Please correct the above issues and try again.';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        } else {
+            lMessage = "You are about add a new Aptitude test.<br /><br /> Click Yes to continue.";
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Save Teacher Data');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveAdditionalAptitude.ClientID%>').click();");
+            document.getElementById("btnDiaMessageNo").value = "cancel";
+            $("#btnDiaMessageNo").show();
             diaMessage.Open();
 
-            
+            document.getElementById("").click();
         }
-        function UpdateUFE()
-        {
-            document.getElementById("<%= btnChangeEligibility.ClientID %>").click(); 
+    }
+
+    function btnAddAcheivmentTest_Click() {
+        document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'none';
+        document.getElementById('divAddAchievmentTest').style.display = 'block';
+        document.getElementById('btnSaveAchevmentTest').style.display = 'inline';
+        document.getElementById('btnCancelAchevment').style.display = 'inline';
+    }
+    function btnCancelAchevment_Click() {
+        document.getElementById('divAddAchievmentTest').style.display = 'none';
+        document.getElementById('btnSaveAchevmentTest').style.display = 'none';
+        document.getElementById('btnCancelAchevment').style.display = 'none';
+        document.getElementById('<%=btnAddAcheivmentTest.ClientID%>').style.display = 'inline';
+    }
+    function btnSaveAchevmentTest_Click() {
+        var lTestName = ddlTestName.value();
+        var lTestDate = txtAchTestDate.value;
+        var lSubject = ddlSubject.value();
+        var lScore = txtAchScore.value;
+        var lScaleScore = txtAchScaleScore.value;
+        var lUseForEligibility = ddlUseForEligibility.value();
+        var lError = false;
+        var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+
+        if (lTestName == "Test Name....") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
+        }
+
+        if (lTestDate == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+        }
+
+        if (lSubject == "Subject....") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for this test must be selected from the list.<br />";
+        }
+        if (lScore == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+        }
+        if (lUseForEligibility == "-1") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
+        }
+        if (lError == true) {
+            lMessage += '</font><br />Please correct the above issues and try again.';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        } else {
+            lMessage = "You are about to a new Achevment Test.<br /><br /> Click Yes to continue.";
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Save Teacher Data');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveAchevment.ClientID%>').click();");
+            document.getElementById("btnDiaMessageNo").value = "cancel";
+            $("#btnDiaMessageNo").show();
+            diaMessage.Open();
+        }
+    }
+
+    function btnCancelAdditionalAchievmentTest_Click() {
+        document.getElementById('divAdditionalAchievmentTest').style.display = 'none';
+        document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'none';
+        document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'none';
+        document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'inline';
+    }
+    function btnAddAdditionalAchievmentTest_Click() {
+        document.getElementById('divAdditionalAchievmentTest').style.display = 'block';
+        document.getElementById('btnSaveAdditionalAchievmentTest').style.display = 'inline';
+        document.getElementById('btnCancelAdditionalAchievmentTest').style.display = 'inline';
+        document.getElementById('<%=btnAddAdditionalAchievmentTest.ClientID%>').style.display = 'none';
+    }
+    function btnSaveAdditionalAchievmentTest_Click() {
+        var lTestName = ddlAdditionalAchievmentTestName.value();
+        var lTestDate = txtAddAdditionalAchievementTestDate.value;
+        var lSubject = ddlAddAdditionalAchievementTestSubject.value();
+        var lScore = txtAddAdditionalAchievementTestScore.value;
+        var lScaleScore = txtAddAdditionalAchievementTestScaleScore.value;
+        var lUseForEligibility = ddlAddAdditionalAchievementUseForEligibility.value();
+        var lError = false;
+        var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+        
+        if (lTestName == "Test Name....") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test name must be selected from the list.<br />";
+        }
+        if (lTestDate == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test date must be selected from calendar.<br />";
+        }
+        if (lSubject == "Subject....") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A subject for tis test must be selected from the list.<br />";
+        }
+        if (lScore == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A test score must be entered.<br />";
+        }
+        if (lUseForEligibility == "-1") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select whether this test is being used for eligibility purposes.<br />";
         }
      
-        function UpdateTeacherElegibility()
-         {
-             document.getElementById("<%= btnChangeTeacherEligibility.ClientID %>").click(); 
+        if (lError == true) {
+            lMessage += '</font><br />Please correct the above issues and try again.';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        } else {
+lMessage = "You are about to add a new AchievmentTest.<br /><br /> Click Yes to continue.";
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Save Teacher Data');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveAdditionalAchievmentTest.ClientID%>').click();");
+            document.getElementById("btnDiaMessageNo").value = "cancel";
+            $("#btnDiaMessageNo").show();
+            diaMessage.Open();
+
+
+          
+        }
+    }
+        
+    function btnCancelTeacherInfo_Click() {
+        document.getElementById('divAddNewTeacherInfo').style.display = 'none';
+        document.getElementById('btnSaveTeacherInfo').style.display = 'none';
+        document.getElementById('btnCancelTeacherInfo').style.display = 'none';
+        document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'inline';
+    }
+    function ADDTeacherInfo_Click() {
+        document.getElementById('divAddNewTeacherInfo').style.display = 'block';
+        document.getElementById('btnSaveTeacherInfo').style.display = 'inline';
+        document.getElementById('btnCancelTeacherInfo').style.display = 'inline';
+        document.getElementById('<%=btnAddTeacherInfo.ClientID%>').style.display = 'none';
+    }
+    function btnSaveTeacherInfo_Click() {
+        var lCheckListScore = txtTeacherTest.value();
+        var lModDate = txtTeacherDate.value;
+        
+        var lError = false;
+        var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+        
+        if (lCheckListScore == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
+        }
+        if (lModDate == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
+        }
+        if (lError == true) {
+            lMessage += '</font><br />Please correct the above issues and try again.';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            diaMessage.setSize(500, 240);
+            diaMessage.setTitle('Data Problem');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        } else {
+            lMessage = "You are about to change Teacher's Input.<br /><br /> Click Yes to continue.";
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Save Teacher Data');
+            document.getElementById("btnDiaMessageYes").value = "OK";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveTeacherInfo.ClientID%>').click();");
+            document.getElementById("btnDiaMessageNo").value = "cancel";
+            $("#btnDiaMessageNo").show();
+            diaMessage.Open();
+        }
+    }
+        
+    function btnCancelStudentInfo_Click() {
+        document.getElementById('divAddNewStudentInfo').style.display = 'none';
+        document.getElementById('btnSaveStudentInfo').style.display = 'none';
+        document.getElementById('btnCancelStudentInfo').style.display = 'none';
+        document.getElementById('<%=btnAddStudentInfo.ClientID%>').style.display = 'inline';
+    }
+    
+    function AddStudentInfo_Click() {
+        document.getElementById('divAddNewStudentInfo').style.display = 'block';
+        document.getElementById('btnSaveStudentInfo').style.display = 'inline';
+        document.getElementById('btnCancelStudentInfo').style.display = 'inline';
+        document.getElementById('<%=btnAddStudentInfo.ClientID%>').style.display = 'none';
+    }
+    function btnSaveStudentInfo_Click() {
+        var lCheckListScore = txtStudentInput.value();
+        var lModDate = txtStudentDate.value;
+        var lError = false;
+        var lMessage = 'There is a problem with the data entered <br /><br /><font color="red">';
+    
+        if (lCheckListScore == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The input box must have something entered.<br />";
         }
     
-        function UpdateStudentElegibility()
-         {
-             document.getElementById("<%= btnChangeStudentEligibility.ClientID %>").click(); 
-         }
-    function ChangeTeacherEligibility(arrSelectedRecords) {
+        if (lModDate == "") {
+            lError = true;
+            lMessage += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A date must be selected from calendar.<br />";
+        }
+    
+        if (lError == true) {
+            lMessage += '</font><br />Please correct the above issues and try again.';
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:135px;Width:485px;");
+            diaMessage.setSize(500, 240);
+            diaMessage.setTitle('Data Problem');
+            document.getElementById("btnDiaMessageYes").value = "Ok";
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+            $("#btnDiaMessageNo").hide();
+            diaMessage.Open();
+        } else {
+            lMessage = "You are about to save Student Input.<br /><br /> Click Ok to continue.";
+            $("#divErrorMsg").empty();
+            $('#divErrorMsg').append(lMessage);
+            document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+            diaMessage.setSize(300, 150);
+            diaMessage.setTitle('Save Data');
+            document.getElementById("btnDiaMessageYes").value = "Ok";
+            document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+            document.getElementById("btnDiaMessageYes").setAttribute("onClick", "document.getElementById('<%=btnServerSaveStudentInfo.ClientID%>').click();");
+            document.getElementById("btnDiaMessageNo").value = "cancel";
+            $("#btnDiaMessageNo").show();
+            diaMessage.Open();
+        }
+    }
+    
+    function OpenSaveSuccessful() {
+        txtAchTestDate.value = '';
+        lMessage += 'The test results were saves successfully';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+        diaMessage.setSize(300, 150);
+        diaMessage.setTitle('Data Saved');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+        $("#btnDiaMessageNo").hide();
+        diaMessage.Open();
+    }
+    function OpenSaveTeacherSuccessful() {
+        txtTeacherDate.value = '';
+        lMessage = 'The Teacher Input results were saves successfully';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+        diaMessage.setSize(300, 150);
+        diaMessage.setTitle('Data Saved');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+        $("#btnDiaMessageNo").hide();
+        diaMessage.Open();
+    }
+    function OpenStudentSaveSuccessful() {
+        lMessage = 'The test results were saves successfully';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
+        diaMessage.setSize(300, 150);
+        diaMessage.setTitle('Data Saved');
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+        $("#btnDiaMessageNo").hide();
+        diaMessage.Open();
+    }
+    function OpenSaveSuccessful() {
+        txtAchTestDate.value = '';
+        lMessage += 'The test results were saves successfully';
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "diaMessage.Close();");
+        $("#btnDiaMessageNo").hide();
+        diaMessage.Open();
+    }
+
+    //ToDo: Stopped Here
+    function ChangeEligibility(arrSelectedRecords) {
+
         var go = true;
         var NewSetTo;
         var CurrentSetTo;
         var lTestId;
         var record;
-      
-
-        for (var i = 0; i < arrSelectedRecords.length; i++)
-        {
+    
+        for (var i = 0; i < arrSelectedRecords.length; i++) {
             record = arrSelectedRecords[i];
-            lTestId = record.TeacherInputId;
-            CurrentSetTo = record.UseForEligibility; //rtempUseForEligibility;
+            lTestId = record.TestID;
+            CurrentSetTo = record.UseForEligibility; // rtempUseForEligibility;
         }
-         
+    
         hTestId.value(lTestId);
-        if (CurrentSetTo == 'no')
-        {
+        if (CurrentSetTo == 'no') {
             hValue.value('yes');
             NewSetTo = 'yes';
-        }
-        else
-        {
+        } else {
             hValue.value('no');
             NewSetTo = 'no';
         }
@@ -1260,12 +1222,54 @@
         diaMessage.setSize(350, 175);
         diaMessage.setTitle('Update Use for Eligibiliy');
         document.getElementById("btnDiaMessageYes").value = "OK";
+        document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateUFE();");
+        document.getElementById("btnDiaMessageNo").value = "Cancel";
+        document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
+        diaMessage.Open();
+    }
+    function UpdateUFE() {
+        document.getElementById("<%= btnChangeEligibility.ClientID %>").click(); 
+    }
+    function UpdateTeacherElegibility() {
+        document.getElementById("<%= btnChangeTeacherEligibility.ClientID %>").click(); 
+    }
+    
+    function UpdateStudentElegibility() {
+        document.getElementById("<%= btnChangeStudentEligibility.ClientID %>").click(); 
+    }
+    function ChangeTeacherEligibility(arrSelectedRecords) {
+        var go = true;
+        var NewSetTo;
+        var CurrentSetTo;
+        var lTestId;
+        var record;
+    
+        for (var i = 0; i < arrSelectedRecords.length; i++) {
+            record = arrSelectedRecords[i];
+            lTestId = record.TeacherInputId;
+            CurrentSetTo = record.UseForEligibility; //rtempUseForEligibility;
+        }
+         
+        hTestId.value(lTestId);
+        if (CurrentSetTo == 'no') {
+            hValue.value('yes');
+            NewSetTo = 'yes';
+        } else {
+            hValue.value('no');
+            NewSetTo = 'no';
+        }
+    
+        lMessage = "You are about to change 'Use for Eligibiliy' to <h1>" + NewSetTo.toUpperCase() + "</h1>Click OK to Continue.";
+        $("#divErrorMsg").empty();
+        $('#divErrorMsg').append(lMessage);
+        document.getElementById("divErrorMsg").setAttribute("style", "Height:100px;Width:325px;");
+        diaMessage.setSize(350, 175);
+        diaMessage.setTitle('Update Use for Eligibiliy');
+        document.getElementById("btnDiaMessageYes").value = "OK";
         document.getElementById("btnDiaMessageYes").setAttribute("onClick", "UpdateTeacherElegibility();");
         document.getElementById("btnDiaMessageNo").value = "Cancel";
         document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
         diaMessage.Open();
-
-
     }
     function ChangeStudentEligibility(arrSelectedRecords) {
         var go = true;
@@ -1273,20 +1277,18 @@
         var CurrentSetTo;
         var lTestId;
         var record;
-
-
+    
         for (var i = 0; i < arrSelectedRecords.length; i++) {
             record = arrSelectedRecords[i];
             lTestId = record.StudentInputId;
             CurrentSetTo = record.UseForEligibility; //rtempUseForEligibility;
         }
-
+    
         hTestId.value(lTestId);
         if (CurrentSetTo == 'no') {
             hValue.value('yes');
             NewSetTo = 'yes';
-        }
-        else {
+        } else {
             hValue.value('no');
             NewSetTo = 'no';
         }
@@ -1302,9 +1304,7 @@
         document.getElementById("btnDiaMessageNo").value = "Cancel";
         document.getElementById("btnDiaMessageNo").setAttribute("onClick", "diaMessage.Close();");
         diaMessage.Open();
-
-
     }
 </script>
-
-        
+    
+    

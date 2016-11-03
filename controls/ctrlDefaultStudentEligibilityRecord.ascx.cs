@@ -24,14 +24,14 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
     }
     protected void OpenStudentInformation(string vStudentId)
     {
-        txtTestNameACH.Text ="N/A";
+        //txtTestNameACH.Text ="N/A";
         txtTestNameMath.Text ="N/A";
         txtTestNameRead.Text="N/A";
         txtTestNameSCI.Text ="N/A";
         txtTestNameSS.Text ="N/A";
         txtTestNameAPT.Text ="N/A";
         txtTestNamePT.Text ="N/A";
-
+        txtTestNamePT1.Text = "N/A";
         SqlStr = "usp_GetAGStudentInfo";
 
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
@@ -77,9 +77,9 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
 
             if (lSubject == "Achievement")
             {
-                txtTestNameACH.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
-                txtTestDateACH.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
-                txtTestScoreACH.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+                //txtTestNameACH.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+               // txtTestDateACH.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+              //  txtTestScoreACH.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
             }
             if (lSubject == "Math")
             {
@@ -195,11 +195,14 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         {
             cbAGR.Checked = true;
         }
-        
+        if (lReading.Trim() == "AC" || lMath.Trim() == "Ac")
+        {
+            cbSEOREGAC.Checked = true;
+        }
 
         if (lReading.Trim() == "AG" || lMath.Trim() == "AG")
         {
-            cbSEOREGAC.Checked = true;
+            cbSEOREGPO.Checked = true;
         }
         if( lMath.Trim() == "IG" || lReading.Trim() == "IG")
         {
@@ -249,7 +252,7 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
 
 
 
-        }
+    }
     protected void enTestInformation(string vStudentId)
     {
 

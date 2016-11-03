@@ -21,7 +21,7 @@
                     <label style="text-align: right; font-size: small;font-weight: bold;" >Street Address:</label>
                     <asp:Label ID="txtAddress" runat="server" Style="font-size: small;font-weight:normal;"></asp:Label>
                     <br />
-                    <label style="text-align: right; font-size: small;font-weight: bold;" >Appartment No.:</label>
+                    <label style="text-align: right; font-size: small;font-weight: bold;" >Apartment No.:</label>
                     <asp:Label ID="txtAppartmentNo" runat="server" Style="font-size: small;font-weight:normal;"></asp:Label>
                     <br />
                     <label style="text-align: right; font-size: small;font-weight: bold;" >P.O. Box:</label>
@@ -69,15 +69,15 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 125px;">Achievment </td>
-                <td style="width: 375px;">
-                    <asp:Label ID="txtTestNameACH" runat="server" ></asp:Label>
+                <td>Aptitude </td>
+                <td>
+                    <asp:Label ID="txtTestNameAPT" runat="server" ></asp:Label>
                 </td>
                 <td>
-                    <asp:Label ID="txtTestDateACH" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestDateAPT" runat="server" ></asp:Label>
                 </td>
                 <td>
-                    <asp:Label ID="txtTestScoreACH" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestScoreAPT" runat="server" ></asp:Label>
                 </td>
             </tr>
             <tr>
@@ -129,19 +129,19 @@
                 </td>
             </tr>
             <tr>
-                <td>Aptitude </td>
+                <td>Performance Task </td>
                 <td>
-                    <asp:Label ID="txtTestNameAPT" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestNamePT1" runat="server" ></asp:Label>
                 </td>
                 <td>
-                    <asp:Label ID="txtTestDateAPT" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestDatePT1" runat="server" ></asp:Label>
                 </td>
                 <td>
-                    <asp:Label ID="txtTestScoreAPT" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestScorePT1" runat="server" ></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td>Preformance Task </td>
+                <td>Performance Task </td>
                 <td>
                     <asp:Label ID="txtTestNamePT" runat="server" ></asp:Label>
                 </td>
