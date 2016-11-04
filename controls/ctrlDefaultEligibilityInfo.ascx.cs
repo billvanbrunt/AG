@@ -66,7 +66,6 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     }
     protected void LoadLevelofService()
     {
-
         ddlReading.Items.Clear();
         ddlMath.Items.Clear();
         ddlScience.Items.Clear();
@@ -100,8 +99,6 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     }
     protected void LoadStudentHistory(string vStudentId)
     {
-
-
         grdHistory.ClearPreviousDataSource();
         grdHistory.DataSource = null;
         grdHistory.DataBind();
@@ -256,8 +253,6 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         cmd.Parameters.Add(new SqlParameter("@SupportPlanStartDate", lStartDate));
         cmd.Parameters.Add(new SqlParameter("@SupportPlanResolvedDate", lEndDate));
         //cmd.Parameters.Add(new SqlParameter("@Comments", lComments));
-
-
 
         cmd.ExecuteNonQuery();
 
