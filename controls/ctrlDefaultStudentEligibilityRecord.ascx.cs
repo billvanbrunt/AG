@@ -30,8 +30,8 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         txtTestNameSCI.Text ="N/A";
         txtTestNameSS.Text ="N/A";
         txtTestNameAPT.Text ="N/A";
-        txtTestNamePT.Text ="N/A";
-        txtTestNamePT1.Text = "N/A";
+        txtTestNamePT1.Text ="N/A";
+        txtTestNamePT2.Text = "N/A";
         SqlStr = "usp_GetAGStudentInfo";
 
         SqlCommand cmd = new SqlCommand(SqlStr, sQl.GetSqlConn());
@@ -73,7 +73,7 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         foreach (var row in ds.Tables[1].Rows)
         {
             var lSubject = ds.Tables[1].Rows[x]["Subject"].ToString();
-            
+            var lTestType = ds.Tables[1].Rows[x]["TestType"].ToString();
 
             if (lSubject == "Achievement")
             {
@@ -105,19 +105,28 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
                 txtTestDateSS.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
                 txtTestScoreSS.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
             }
-            if (lSubject == "Aptitude")
+            if (lSubject == "Aptitude" & lTestType == "2" )
             {
                 txtTestNameAPT.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
                 txtTestDateAPT.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
                 txtTestScoreAPT.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
             }
-            if (lSubject == "Proformance")
-            {
-                txtTestNamePT.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
-                txtTestDatePT.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
-                txtTestScorePT.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
-            }
 
+           if (lTestType == "3" || lTestType== "4" )
+            {
+                if(txtTestNamePT1.Text == "")
+                { 
+                    txtTestNamePT1.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                    txtTestDatePT1.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                    txtTestScorePT1.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+                }
+            }
+            else
+            {
+                txtTestNamePT2.Text = ds.Tables[1].Rows[x]["TestName"].ToString();
+                txtTestDatePT2.Text = ds.Tables[1].Rows[x]["TestDate"].ToString();
+                txtTestScorePT2.Text = ds.Tables[1].Rows[x]["TestScore"].ToString();
+            }
             x = x + 1;
         }
      
@@ -195,11 +204,10 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         {
             cbAGR.Checked = true;
         }
-        if (lReading.Trim() == "AC" || lMath.Trim() == "Ac")
+        if (lReading.Trim() == "AC" || lMath.Trim() == "AC")
         {
             cbSEOREGAC.Checked = true;
         }
-
         if (lReading.Trim() == "AG" || lMath.Trim() == "AG")
         {
             cbSEOREGPO.Checked = true;
@@ -213,7 +221,10 @@ public partial class controls_DefaultStudentEligibilityRecord : System.Web.UI.Us
         {
             cbSEOREGVS.Checked = true;
         }
-
+        if (lMath.Trim() == "CO" || lReading.Trim() == "CO")
+        {
+            cbSEOREConst.Checked = true;
+        }
 
         var y = 0;
         txtGradeMathName.Text = "N/A";

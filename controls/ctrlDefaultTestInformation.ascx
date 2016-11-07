@@ -818,7 +818,7 @@
             diaMessage.Open();
         } else {
 
-            lMessage = "You are about to save a new Aptitude Test.<br /><br /> Click Yes to continue.";
+            lMessage = "You are about to save a new Aptitude Test.<br /><br /> Click OK to continue.";
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
@@ -877,7 +877,7 @@
             $("#btnDiaMessageNo").hide();
             diaMessage.Open();
         } else {
-            lMessage = "You are about add a new Aptitude test.<br /><br /> Click Yes to continue.";
+            lMessage = "You are about add a new Aptitude test.<br /><br /> Click OK to continue.";
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
@@ -947,7 +947,7 @@
             $("#btnDiaMessageNo").hide();
             diaMessage.Open();
         } else {
-            lMessage = "You are about to a new Achevment Test.<br /><br /> Click Yes to continue.";
+            lMessage = "You are about to a new Achevment Test.<br /><br /> Click OK to continue.";
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
@@ -1014,7 +1014,7 @@
             $("#btnDiaMessageNo").hide();
             diaMessage.Open();
         } else {
-lMessage = "You are about to add a new AchievmentTest.<br /><br /> Click Yes to continue.";
+lMessage = "You are about to add a new AchievmentTest.<br /><br /> Click OK to continue.";
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
@@ -1026,12 +1026,8 @@ lMessage = "You are about to add a new AchievmentTest.<br /><br /> Click Yes to 
             document.getElementById("btnDiaMessageNo").value = "cancel";
             $("#btnDiaMessageNo").show();
             diaMessage.Open();
-
-
-          
         }
     }
-        
     function btnCancelTeacherInfo_Click() {
         document.getElementById('divAddNewTeacherInfo').style.display = 'none';
         document.getElementById('btnSaveTeacherInfo').style.display = 'none';
@@ -1071,7 +1067,7 @@ lMessage = "You are about to add a new AchievmentTest.<br /><br /> Click Yes to 
             $("#btnDiaMessageNo").hide();
             diaMessage.Open();
         } else {
-            lMessage = "You are about to change Teacher's Input.<br /><br /> Click Yes to continue.";
+            lMessage = "You are about to change Teacher's Input.<br /><br /> Click OK to continue.";
             $("#divErrorMsg").empty();
             $('#divErrorMsg').append(lMessage);
             document.getElementById("divErrorMsg").setAttribute("style", "Height:50px;Width:295px;");
@@ -1085,15 +1081,13 @@ lMessage = "You are about to add a new AchievmentTest.<br /><br /> Click Yes to 
             diaMessage.Open();
         }
     }
-        
     function btnCancelStudentInfo_Click() {
         document.getElementById('divAddNewStudentInfo').style.display = 'none';
         document.getElementById('btnSaveStudentInfo').style.display = 'none';
         document.getElementById('btnCancelStudentInfo').style.display = 'none';
         document.getElementById('<%=btnAddStudentInfo.ClientID%>').style.display = 'inline';
     }
-    
-    function AddStudentInfo_Click() {
+     function AddStudentInfo_Click() {
         document.getElementById('divAddNewStudentInfo').style.display = 'block';
         document.getElementById('btnSaveStudentInfo').style.display = 'inline';
         document.getElementById('btnCancelStudentInfo').style.display = 'inline';

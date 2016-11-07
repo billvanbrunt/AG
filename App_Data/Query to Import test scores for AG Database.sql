@@ -44,7 +44,7 @@ INSERT INTO dbo.Notes
 		   (StudentId
 		   ,Notes)
 	 select StudentID
-			, 'BELOW DATA IS FROM PREVIOUS SYSTEM <br />' +  Comments  
+			,   Comments  
 	 FROM AG.dbo.AL_Main
 	 where Comments <> ''
 	

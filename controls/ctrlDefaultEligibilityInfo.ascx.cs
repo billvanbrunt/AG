@@ -130,7 +130,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
         txtFullName.Text = ds.Tables[0].Rows[0]["FullName"].ToString();
         txtStudentId.Text = vStudentId;
         txtSchoolName.Text = ds.Tables[0].Rows[0]["School"].ToString();
-        txtLastModificationInfo.Text = ds.Tables[0].Rows[0]["LOSInfromationEnteredDate"].ToString() + "&nbsp;&nbsp;&nbsp;<b>By:</b> " + ds.Tables[0].Rows[0]["LOSInformationEnterBy"].ToString();
+        txtLastModificationInfo.Text = ds.Tables[0].Rows[0]["LastModifiedDate"].ToString() + "&nbsp;&nbsp;&nbsp;<b>By:</b> " + ds.Tables[0].Rows[0]["LastModifiedBy"].ToString();
         txtModificationType.Text = ds.Tables[0].Rows[0]["ChangeType"].ToString();
         
         string tempDate = ds.Tables[0].Rows[0]["PlacementDate"].ToString();

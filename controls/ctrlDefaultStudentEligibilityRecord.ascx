@@ -143,13 +143,13 @@
             <tr>
                 <td>Performance Task </td>
                 <td>
-                    <asp:Label ID="txtTestNamePT" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestNamePT2" runat="server" ></asp:Label>
                 </td>
                 <td>
-                    <asp:Label ID="txtTestDatePT" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestDatePT2" runat="server" ></asp:Label>
                 </td>
                 <td>
-                    <asp:Label ID="txtTestScorePT" runat="server" ></asp:Label>
+                    <asp:Label ID="txtTestScorePT2" runat="server" ></asp:Label>
                 </td>
             </tr>
             <tr>
@@ -248,7 +248,6 @@
                 </td>
             </tr>
         </table>
-
     </div>
     <br />
     <div id="divServiceEligibilityOptions"  style="width: 700px;">
@@ -270,6 +269,11 @@
         <br />
         <obout:OboutCheckBox ID="cbSEOREGVS" runat="server"
                              Text="Very Strong (VS) at Academy @ Lincoln (full-time, self-contained)"
+                             TextAlign="Right">
+        </obout:OboutCheckBox>
+         <br />
+        <obout:OboutCheckBox ID="cbSEOREConst" runat="server"
+                             Text="Consultative"
                              TextAlign="Right">
         </obout:OboutCheckBox>
     </div>

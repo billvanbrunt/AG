@@ -106,6 +106,9 @@ public partial class controls_ctrlDefault : System.Web.UI.UserControl
 
         da.Dispose();
         cmd.Cancel();
+        txtLastName.Text = "";
+        txtStudentId.Text = "";
+        txtStudentId.Text = "";
     }
     protected string GetCookieSites()
     {

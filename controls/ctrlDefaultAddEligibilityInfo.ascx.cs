@@ -20,7 +20,7 @@ public partial class controls_ctrlDefaultEligibilityInfo : System.Web.UI.UserCon
     protected void Page_Load(object sender, EventArgs e)
     {
         lStudentId = Request.QueryString["id"];
-
+        txt
         if (!IsPostBack)
         {
             LoadLevelofService();
